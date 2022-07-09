@@ -1,0 +1,99 @@
+
+query FetchFeed($isFollowing: Boolean!, $page: Int!) {
+  Page(page: $page, perPage: 50) {
+    activities(isFollowing: $isFollowing, sort: ID_DESC) {
+      ... on TextActivity {
+       	id
+        type
+        replyCount
+        text
+        likeCount
+        isLiked
+        isPinned
+        createdAt
+        replies {
+          id
+          user {
+            id
+            name
+            avatar {
+              medium
+            }
+          }
+        }
+        likes {
+          id
+          name
+          avatar {
+           medium 
+          }
+        }
+        user {
+          id
+          name
+          options {
+            profileColor
+          }
+          avatar {
+           medium 
+          }
+        } 
+      }
+      ... on ListActivity {
+       	id
+        type
+        replyCount
+        likeCount
+        isLiked
+        isPinned
+        createdAt
+        status
+        progress
+        media {
+          id
+          title {
+            romaji
+            english
+            native
+            userPreferred
+          }
+          description
+          type
+          coverImage {
+            color
+            medium
+            large
+            extraLarge
+          }
+        }
+        replies {
+          id
+          user {
+            id
+            name
+            avatar {
+              medium
+            }
+          }
+        }
+        likes {
+          id
+          name
+          avatar {
+           medium 
+          }
+        }
+        user {
+          id
+          name
+          options {
+            profileColor
+          }
+          avatar {
+           medium 
+          }
+        } 
+      }
+    }
+  }
+}
