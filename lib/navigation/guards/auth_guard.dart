@@ -6,7 +6,7 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    final isAuthenticated = await _credentials.isAuthenticated;
+    final isAuthenticated = _credentials.isAuthenticated;
     log('[AuthGuard] isAuthenticated: $isAuthenticated');
     if (isAuthenticated) {
       resolver.next(true);

@@ -107,6 +107,7 @@ class Resource<T> {
   Resource<NewType> transform<NewType>(NewType Function(T data) transformer) {
     return Resource<NewType>._(
       status,
+      // ignore: null_check_on_nullable_type_parameter
       data == null ? null : transformer(data!),
       error,
     );

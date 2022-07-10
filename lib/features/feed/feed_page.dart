@@ -9,14 +9,28 @@ class FeedPage extends ViewModelWidget<FeedViewModel> with InfiniteScrollMixin {
   FeedPage({super.key});
 
   @override
-  double get infiniteScrollTriggerWindow => 200;
-
-  @override
   Widget build(BuildContext context, FeedViewModel vm) {
     return Scaffold(
       body: CustomScrollView(
         controller: infiniteScroll(vm.onShouldFetchNextPage),
         slivers: [
+          SliverAppBar(
+            title: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
+            floating: true,
+            snap: true,
+            actions: [
+              IconButton(
+                icon: Icon(vm.followingOnly
+                    ? Icons.public_rounded
+                    : Icons.public_off_rounded),
+                onPressed: () => vm.onFollowingOnlyChange(!vm.followingOnly),
+              ),
+              IconButton(
+                icon: const Icon(Icons.logout_rounded),
+                onPressed: vm.onLogoutPress,
+              ),
+            ],
+          ),
           const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
           if (vm.initialResource.isLoading())
             const SliverToBoxAdapter(

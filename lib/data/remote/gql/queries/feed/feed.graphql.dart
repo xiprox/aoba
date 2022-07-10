@@ -159,7 +159,11 @@ const documentNodeQueryFetchFeed = DocumentNode(definitions: [
                           FieldNode(
                               name: NameNode(value: 'text'),
                               alias: null,
-                              arguments: [],
+                              arguments: [
+                                ArgumentNode(
+                                    name: NameNode(value: 'asHtml'),
+                                    value: BooleanValueNode(value: true))
+                              ],
                               directives: [],
                               selectionSet: null),
                           FieldNode(

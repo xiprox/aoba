@@ -29,7 +29,7 @@ class AuthViewModel extends ViewModel {
 
   void onPinSubmit(String? pin) {
     if (pin?.trim().isNotEmpty == true) {
-      _credentials.setAccessToken(pin);
+      _credentials.accessToken = pin;
       onSuccess?.call();
     }
   }

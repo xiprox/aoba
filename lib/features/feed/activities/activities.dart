@@ -1,7 +1,8 @@
 import 'package:aoba/data/remote/gql/queries/feed/feed.graphql.dart';
 import 'package:flutter/material.dart';
 
-import 'list_activities/list_activity_tile.dart';
+import 'list_activity/list_activity_tile.dart';
+import 'text_activity/text_activity_tile.dart';
 
 class Activities extends StatelessWidget {
   final List<Query$FetchFeed$Page$activities?> activities;
@@ -15,14 +16,16 @@ class Activities extends StatelessWidget {
         (context, index) {
           final activity = activities[index];
           if (activity is Query$FetchFeed$Page$activities$$TextActivity) {
-            return ListTile(
-              title: Text(activity.user?.name ?? '?'),
-              subtitle: Text(activity.text ?? '?'),
+            return TextActivityTile(
+              activity: activity,
+              onPress: () {},
+              onUserPress: () {},
             );
           }
           if (activity is Query$FetchFeed$Page$activities$$ListActivity) {
             return ListActivityTile(
               activity: activity,
+              onPress: () {},
               onMediaPress: () {
                 print('woasdad');
               },

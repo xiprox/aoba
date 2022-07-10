@@ -20,9 +20,9 @@ extension ColorExts on Color {
 extension ColorSchemeExts on ColorScheme {
   /// See "Surface tones":
   /// https://m3.material.io/styles/color/the-color-system/color-roles
-  Color get surfaceTone1 => primary.withOpacity(0.05);
-  Color get surfaceTone2 => primary.withOpacity(0.08);
-  Color get surfaceTone3 => primary.withOpacity(0.11);
-  Color get surfaceTone4 => primary.withOpacity(0.12);
-  Color get surfaceTone5 => primary.withOpacity(0.14);
+  Color get surfaceTone1 => primary.withOpacity(0.05).blendOn(background);
+  Color get surfaceTone2 => primary.withOpacity(0.08).blendOn(background);
+  Color get surfaceTone3 => primary.withOpacity(0.11).blendOn(background);
+  Color get surfaceTone4 => primary.withOpacity(0.12).blendOn(background);
+  Color get surfaceTone5 => primary.withOpacity(0.14).blendOn(background);
 }

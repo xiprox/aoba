@@ -6,7 +6,7 @@ query FetchFeed($isFollowing: Boolean!, $page: Int!) {
        	id
         type
         replyCount
-        text
+        text(asHtml: true)
         likeCount
         isLiked
         isPinned

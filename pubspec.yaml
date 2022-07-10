@@ -14,18 +14,18 @@ dependencies:
   # Architecture
   get_it: ^7.2.0
   veee: ^0.9.3
-  worker_manager: ^4.3.3
+  worker_manager: ^4.4.0
   # Network
   graphql: ^5.1.1
   flutter_web_auth: ^0.4.1
   # Data & storage
-  flutter_secure_storage: ^5.0.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   # Widgets & UI
   auto_route: ^4.2.1
   sliver_tools: ^0.2.6
   scroll_builder: ^0.0.1
+  flutter_html: ^2.2.1
   # Util
   stringr: ^1.0.0
   date_time_format: ^2.0.1
