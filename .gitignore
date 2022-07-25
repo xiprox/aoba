@@ -35,6 +35,14 @@ migrate_working_dir/
 # Web related
 lib/generated_plugin_registrant.dart
 
+# macOS
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+# Windows
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugins.cmake
+windows/flutter/generated_plugin_registrant.h
+
 # Symbolication related
 app.*.symbols
 
