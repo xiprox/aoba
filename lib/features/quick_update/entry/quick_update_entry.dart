@@ -22,7 +22,7 @@ class QuickUpdateEntry extends StatelessWidget {
       width: kDesiredWidth,
       child: Stack(
         children: [
-          NetworkImageWithPlaceholder.anime(coverUrl),
+          NetworkImageWithPlaceholder(type: type, url: coverUrl),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(),
