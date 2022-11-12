@@ -15,9 +15,7 @@ class QuickUpdateSheet extends ViewModelWidget<QuickUpdateViewModel> {
 
   @override
   Widget build(BuildContext context, QuickUpdateViewModel vm) {
-    final anime = vm.entries.data?.Page?.anime ?? [];
-    final manga = vm.entries.data?.Page?.manga ?? [];
-    final combined = [...anime, ...manga];
+    final entries = vm.entries.data?.Page?.entries ?? [];
 
     const entryHeight = QuickUpdateEntry.kDesiredHeight;
     const contentHeight = entryHeight;
@@ -40,9 +38,9 @@ class QuickUpdateSheet extends ViewModelWidget<QuickUpdateViewModel> {
               physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               scrollDirection: Axis.horizontal,
-              itemCount: combined.length,
+              itemCount: entries.length,
               itemBuilder: (context, index) {
-                final entry = combined[index];
+                final entry = entries[index];
                 final media = entry?.media;
 
                 if (media == null) return Container();
