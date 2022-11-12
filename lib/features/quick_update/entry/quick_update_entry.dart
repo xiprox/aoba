@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class QuickUpdateEntry extends StatelessWidget {
   static const kDesiredHeight = kDesiredWidth * AspectRatios.mediaCover;
-  static const kDesiredWidth = 128.0;
+  static const kDesiredWidth = 144.0;
 
   final String coverUrl;
   final ImageType type;
