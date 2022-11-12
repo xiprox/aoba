@@ -1,0 +1,2 @@
+schema: "lib/data/remote/gql/schema/schema.graphql"
+documents: "lib/**/*.{graphql}"
