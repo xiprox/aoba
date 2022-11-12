@@ -1,3 +1,4 @@
+import 'package:aoba/consts/consts.dart';
 import 'package:aoba/data/remote/gql/schema/schema.graphql.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,8 @@ class MediaCover extends StatelessWidget {
       key: ValueKey(url),
       url: url,
       type: type == Enum$MediaType.ANIME ? ImageType.anime : ImageType.book,
-      width: 72 * 0.6415620642,
-      height: 72,
+      width: 48,
+      height: 48 * AspectRatios.mediaCover,
     );
   }
 }

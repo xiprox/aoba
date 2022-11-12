@@ -1,3 +1,4 @@
+import 'package:aoba/features/quick_update/quick_update_sheet.dart';
 import 'package:aoba/mixins/infinite_scroll_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
@@ -40,7 +41,9 @@ class FeedPage extends ViewModelWidget<FeedViewModel> with InfiniteScrollMixin {
             SliverToBoxAdapter(child: Text(vm.initialResource.error!.message)),
           if (vm.initialResource.isSuccess())
             Activities(activities: vm.activities),
-          const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
+          const SliverPadding(
+            padding: EdgeInsets.only(bottom: QuickUpdateSheet.kCollapsedHeight),
+          ),
         ],
       ),
     );

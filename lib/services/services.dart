@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:aoba/features/quick_update/data/quick_update_repo.dart';
 import 'package:get_it/get_it.dart';
 
 import 'exported_services.dart';
@@ -44,6 +45,7 @@ class Services {
 
     // Repos
     getIt.registerSingleton<FeedRepo>(FeedRepoImpl());
+    getIt.registerSingleton<QuickUpdateRepo>(QuickUpdateRepoImpl());
 
     getIt.registerSingleton(AppRouter(authGuard: AuthGuard()));
   }
