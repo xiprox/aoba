@@ -17,11 +17,14 @@ class ExpandableSheet extends StatefulWidget {
 
   final Widget child;
 
+  final Color color;
+
   const ExpandableSheet({
     super.key,
     this.minHeight,
     this.maxHeight,
     required this.child,
+    required this.color,
   });
 
   @override
@@ -152,7 +155,7 @@ class ExpandableSheetState extends State<ExpandableSheet>
                         topLeft: Radius.circular(8),
                         topRight: Radius.circular(8),
                       ),
-                      color: context.colors.surfaceVariant,
+                      color: widget.color,
                       elevation: 16,
                       child: widget.child,
                     ),
