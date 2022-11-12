@@ -46,7 +46,6 @@ class FeedViewModel extends ViewModel {
   }
 
   void onShouldFetchNextPage() {
-    print('woahaaaaaaaaaaaaaaa');
     _loadNextPage();
   }
 
