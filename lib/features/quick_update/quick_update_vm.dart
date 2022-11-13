@@ -1,4 +1,5 @@
 import 'package:aoba/arch/show_snack_bar.dart';
+import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/features/quick_update/data/quick_update.graphql.dart';
 import 'package:aoba/services/services.dart';
@@ -8,6 +9,8 @@ import 'package:veee/veee.dart';
 import 'data/quick_update_repo.dart';
 
 class QuickUpdateViewModel extends ViewModel {
+  final _userInfo = get<UserInfo>();
+
   final _repo = get<QuickUpdateRepo>();
 
   final scrollController = ScrollController();
@@ -24,7 +27,7 @@ class QuickUpdateViewModel extends ViewModel {
     entries = Resource.loading(showLoading ? null : entries.data);
     notifyListeners();
     entries = await _repo.getEntries(
-      userId: 6071306,
+      userId: _userInfo.id,
       forceNetwork: forceRefresh,
     );
     notifyListeners();
