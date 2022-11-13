@@ -1,4 +1,4 @@
-import 'package:aoba/data/remote/gql/schema/schema.graphql.dart';
+import 'package:aoba/data/remote/gql/schema/schema.gql.dart';
 import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/features/quick_update/quick_update_vm.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';

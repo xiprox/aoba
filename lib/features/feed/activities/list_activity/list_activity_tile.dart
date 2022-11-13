@@ -1,6 +1,6 @@
 import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/features/feed/activities/activity_tile_base.dart';
-import 'package:aoba/features/feed/feed.graphql.dart';
+import 'package:aoba/features/feed/feed.gql.dart';
 import 'package:flextensions/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 

@@ -3,7 +3,7 @@ import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/services/services.dart';
 import 'package:veee/veee.dart';
 
-import 'feed.graphql.dart';
+import 'feed.gql.dart';
 
 class FeedViewModel extends ViewModel {
   final _repo = get<FeedRepo>();

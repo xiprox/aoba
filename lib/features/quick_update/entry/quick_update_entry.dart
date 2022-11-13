@@ -1,5 +1,5 @@
 import 'package:aoba/consts/consts.dart';
-import 'package:aoba/data/remote/gql/schema/schema.graphql.dart';
+import 'package:aoba/data/remote/gql/schema/schema.gql.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';

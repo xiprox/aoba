@@ -3,7 +3,7 @@ import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
 import 'package:graphql/client.dart';
 
-import 'quick_update.graphql.dart';
+import 'quick_update.gql.dart';
 
 abstract class QuickUpdateRepo {
   Future<Resource<Query$FetchQuickUpdate>> getEntries({

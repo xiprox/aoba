@@ -1,7 +1,7 @@
 import 'package:aoba/arch/show_snack_bar.dart';
 import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
-import 'package:aoba/features/quick_update/data/quick_update.graphql.dart';
+import 'package:aoba/features/quick_update/data/quick_update.gql.dart';
 import 'package:aoba/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:veee/veee.dart';

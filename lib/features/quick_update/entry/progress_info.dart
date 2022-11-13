@@ -1,4 +1,4 @@
-import 'package:aoba/data/remote/gql/schema/schema.graphql.dart';
+import 'package:aoba/data/remote/gql/schema/schema.gql.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
