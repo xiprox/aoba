@@ -13,7 +13,10 @@ class UserInfoRepoImpl extends GraphqlRepo implements UserInfoRepo {
   @override
   Future<Resource<Query$FetchBasicUserInfo>> getBasicUserInfo() async {
     return GqlRequest.query(
-      QueryOptions(document: documentNodeQueryFetchBasicUserInfo),
+      QueryOptions(
+        document: documentNodeQueryFetchBasicUserInfo,
+        fetchPolicy: FetchPolicy.networkOnly,
+      ),
       accessToken: accessToken,
       fromJson: Query$FetchBasicUserInfo.fromJson,
     );
