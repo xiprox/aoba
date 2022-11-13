@@ -24,8 +24,8 @@ class AuthViewModel extends ViewModel {
   final _userInfoRepo = get<UserInfoRepo>();
 
   void onAuthPress() {
-    final clientId =
-        Platform.isMacOS || Platform.isWindows ? _kClientIdPin : _kClientId;
+    final clientId = _kClientIdPin;
+    // Platform.isMacOS || Platform.isWindows ? _kClientIdPin : _kClientId;
     launchUrlString(
       'https://anilist.co/api/v2/oauth/authorize'
       '?client_id=$clientId'
