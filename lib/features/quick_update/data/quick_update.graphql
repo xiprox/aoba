@@ -31,3 +31,11 @@ query FetchQuickUpdate($userId: Int!) {
     }
   }
 }
+
+mutation UpdateEntry($mediaId: Int, $progress: Int) {
+    SaveMediaListEntry(mediaId: $mediaId, progress: $progress) {
+        id
+        mediaId
+        progress
+    }
+}

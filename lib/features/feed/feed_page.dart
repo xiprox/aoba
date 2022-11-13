@@ -42,7 +42,9 @@ class FeedPage extends ViewModelWidget<FeedViewModel> with InfiniteScrollMixin {
           if (vm.initialResource.isSuccess())
             Activities(activities: vm.activities),
           const SliverPadding(
-            padding: EdgeInsets.only(bottom: QuickUpdateSheet.kCollapsedHeight),
+            padding: EdgeInsets.only(
+              bottom: QuickUpdateSheet.kCollapsedHeight + 4,
+            ),
           ),
         ],
       ),

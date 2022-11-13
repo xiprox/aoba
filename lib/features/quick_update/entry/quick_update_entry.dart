@@ -1,6 +1,5 @@
 import 'package:aoba/consts/consts.dart';
 import 'package:aoba/data/remote/gql/schema/schema.graphql.dart';
-import 'package:aoba/widgets/gradient_sheet/gradient_sheet.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +25,8 @@ class QuickUpdateEntry extends StatelessWidget {
   // Progress info
   final int? progress;
 
+  final Function()? onIncrementPress;
+
   const QuickUpdateEntry({
     super.key,
     required this.coverUrl,
@@ -36,6 +37,7 @@ class QuickUpdateEntry extends StatelessWidget {
     required this.timeUntilAiring,
     required this.airingEpisode,
     required this.progress,
+    this.onIncrementPress,
   });
 
   bool get hasAiringInfo =>
@@ -84,6 +86,7 @@ class QuickUpdateEntry extends StatelessWidget {
                           colorScheme: colorScheme,
                           progress: progress,
                           mediaType: mediaType,
+                          onIncrementPress: onIncrementPress,
                         ),
                 ),
               ),

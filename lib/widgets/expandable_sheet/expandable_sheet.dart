@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:aoba/exts/build_context_exts.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
@@ -10,7 +7,7 @@ const _kDefaultDuration = Duration(milliseconds: 300);
 /// A drag-to-expand sheet container.
 class ExpandableSheet extends StatefulWidget {
   /// Height of the [ExpandableSheet] when it is collapsed.
-  final double? minHeight;
+  final double minHeight;
 
   /// Maximum height to which this [ExpandableSheet] can expand.
   final double? maxHeight;
@@ -21,7 +18,7 @@ class ExpandableSheet extends StatefulWidget {
 
   const ExpandableSheet({
     super.key,
-    this.minHeight,
+    this.minHeight = 80,
     this.maxHeight,
     required this.child,
     required this.color,
@@ -122,7 +119,7 @@ class ExpandableSheetState extends State<ExpandableSheet>
     return LayoutBuilder(
       builder: (context, constraints) {
         final availableHeight = constraints.maxHeight;
-        final minHeight = widget.minHeight ?? 80;
+        final minHeight = widget.minHeight;
         final maxHeight = widget.maxHeight ?? availableHeight * 0.8;
         return AnimatedBuilder(
           animation: _controller,

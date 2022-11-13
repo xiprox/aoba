@@ -1,74 +1,63 @@
-import 'package:aoba/data/remote/gql/schema/schema.graphql.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/material_exts.dart';
 import 'package:aoba/features/quick_update/quick_update_vm.dart';
 import 'package:aoba/widgets/expandable_sheet/expandable_sheet.dart';
-import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
-import 'package:flextensions/flextensions.dart';
+import 'package:aoba/widgets/resource_builder/resource_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
+import 'content.dart';
+import 'loading_state.dart';
 import 'entry/quick_update_entry.dart';
+import 'error_state.dart';
+import 'header.dart';
 
 class QuickUpdateSheet extends ViewModelWidget<QuickUpdateViewModel> {
   const QuickUpdateSheet({Key? key}) : super(key: key);
 
-  static const kCollapsedHeight = 56.0;
+  static const kCollapsedHeight = 80.0;
+
+  @override
+  void handleOrder(
+    BuildContext context,
+    ViewModelOrder order,
+    QuickUpdateViewModel vm,
+  ) {
+    super.handleOrder(context, order, vm);
+  }
 
   @override
   Widget build(BuildContext context, QuickUpdateViewModel vm) {
     final colors = context.colors;
 
-    final entries = vm.entries.data?.Page?.entries ?? [];
-
     const entryHeight = QuickUpdateEntry.kDesiredHeight;
     const contentHeight = entryHeight;
 
     return ExpandableSheet(
-      maxHeight: vm.entries.isLoading() ? 80 : contentHeight - 4,
+      minHeight: kCollapsedHeight,
+      maxHeight: contentHeight - 4,
       color: colors.surfaceTone3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              'Quick Update',
-              style: TextStyle(
-                color: colors.onSurface,
-                fontSize: 18,
-              ),
-            ),
-          ),
+          Header(onRefreshPress: vm.onRefreshPress),
           SizedBox(
             height: contentHeight,
-            child: ListView.separated(
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              scrollDirection: Axis.horizontal,
-              itemCount: entries.length,
-              itemBuilder: (context, index) {
-                final entry = entries[index];
-                final media = entry?.media;
-
-                if (media == null) return Container();
-
-                return QuickUpdateEntry(
-                  coverUrl: media.coverImage?.large ?? '',
-                  type: media.type == Enum$MediaType.ANIME
-                      ? ImageType.anime
-                      : ImageType.book,
-                  color: media.coverImage?.color?.toColor(),
-                  mediaType: media.type ?? Enum$MediaType.$unknown,
-                  airingAt: media.nextAiringEpisode?.airingAt,
-                  timeUntilAiring: media.nextAiringEpisode?.timeUntilAiring,
-                  airingEpisode: media.nextAiringEpisode?.episode,
-                  progress: entry?.progress,
-                );
-              },
-              separatorBuilder: ((context, index) {
-                return const SizedBox(width: 8);
-              }),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 0),
+              switchInCurve: Curves.fastOutSlowIn,
+              switchOutCurve: Curves.fastOutSlowIn.flipped,
+              child: ResourceBuilder(
+                // TODO: fix
+                key: ValueKey(vm.entries.status),
+                resource: vm.entries,
+                emptyBuilder: (_) => const LoadingState(),
+                loadingBuilder: (_, data) {
+                  return data == null ? const LoadingState() : const Content();
+                },
+                errorBuilder: (_, error, __) => ErrorState(error: error),
+                contentBuilder: (_, __) => const Content(),
+              ),
             ),
           ),
         ],

@@ -8,12 +8,14 @@ class ProgressInfo extends StatelessWidget {
   final ColorScheme colorScheme;
   final int? progress;
   final Enum$MediaType mediaType;
+  final Function()? onIncrementPress;
 
   const ProgressInfo({
     super.key,
     required this.colorScheme,
     this.progress,
     required this.mediaType,
+    this.onIncrementPress,
   });
 
   @override
@@ -41,12 +43,15 @@ class ProgressInfo extends StatelessWidget {
           ),
           Positioned.fill(
             child: InkResponse(
-              onTap: () {
-                HapticFeedback.lightImpact();
-              },
+              onTap: onIncrementPress == null
+                  ? null
+                  : () {
+                      onIncrementPress?.call();
+                      HapticFeedback.lightImpact();
+                    },
               containedInkWell: false,
               focusColor: inkColor,
-              // splashColor: Colors.yellow,
+              splashColor: inkColor,
               hoverColor: hoverColor,
               highlightColor: inkColor,
               radius: 100,

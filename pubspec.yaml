@@ -26,6 +26,7 @@ dependencies:
   sliver_tools: ^0.2.8
   scroll_builder: ^0.0.1
   flutter_html: ^3.0.0-alpha.6
+  shimmer: ^2.0.0
   # Util
   stringr: ^1.0.0
   date_time_format: ^2.0.1
