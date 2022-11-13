@@ -49,4 +49,5 @@ app.*.map.json
 # Codegen
 *.g.dart
 *.gr.dart
+*.gql.dart
 *.graphql.dart
