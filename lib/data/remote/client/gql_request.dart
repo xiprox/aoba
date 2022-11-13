@@ -29,6 +29,40 @@ class GqlRequest {
     }
   }
 
+  static Future<Resource<T>> mutation<T>(
+    MutationOptions options, {
+    required String? accessToken,
+    required T Function(Map<String, dynamic> data) fromJson,
+  }) async {
+    final response = await Executor().execute(
+      fun2: _mutation,
+      arg1: options,
+      arg2: accessToken,
+    );
+    if (response.data != null) {
+      final deserialized = await Executor().execute(
+        fun2: _deserialize<T>,
+        arg1: fromJson,
+        arg2: response.data!,
+      );
+      return Resource.success(deserialized);
+    } else if (response.exception != null) {
+      return Resource.exception(response.exception!);
+    } else {
+      return Resource.error(response.toString());
+    }
+  }
+
+  static Future<QueryResult> _mutation<T>(
+    MutationOptions options,
+    String? accessToken,
+    TypeSendPort port,
+  ) async {
+    if (!IsolateInit.initialized) await IsolateInit.init(isRootIsolate: false);
+    get<Credentials>().as<CredentialsInIsolate>().accessToken = accessToken;
+    return client.client.mutate(options);
+  }
+
   static Future<QueryResult> _query<T>(
     QueryOptions options,
     String? accessToken,
