@@ -14,9 +14,10 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colors,
       backgroundColor: colors.surfaceTone1,
-      scaffoldBackgroundColor: colors.surfaceTone1,
-      cardTheme: const CardTheme(
+      scaffoldBackgroundColor: colors.background,
+      cardTheme: CardTheme(
         elevation: 0,
+        color: colors.surfaceTone1,
       ),
       splashFactory: InkSparkle.splashFactory,
     );
