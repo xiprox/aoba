@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:aoba/data/local/user_info.dart';
+import 'package:aoba/data/repo/user_info/user_info_repo.dart';
 import 'package:aoba/features/quick_update/data/quick_update_repo.dart';
 import 'package:get_it/get_it.dart';
 
@@ -37,6 +39,10 @@ class Services {
       final credentials = CredentialsImpl();
       await credentials.init();
       getIt.registerSingleton<Credentials>(credentials);
+
+      final userInfo = UserInfoImpl();
+      await userInfo.init();
+      getIt.registerSingleton<UserInfo>(userInfo);
     } else {
       getIt.registerSingleton<Credentials>(CredentialsInIsolate());
     }
@@ -44,6 +50,7 @@ class Services {
     getIt.registerSingleton<Client>(client);
 
     // Repos
+    getIt.registerSingleton<UserInfoRepo>(UserInfoRepoImpl());
     getIt.registerSingleton<FeedRepo>(FeedRepoImpl());
     getIt.registerSingleton<QuickUpdateRepo>(QuickUpdateRepoImpl());
 

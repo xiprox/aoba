@@ -1,0 +1,20 @@
+
+
+query FetchBasicUserInfo {
+    Viewer{
+        id
+        name
+        about
+        avatar {
+            medium
+            large
+        }
+        bannerImage
+        donatorTier
+        donatorBadge
+        options {
+            profileColor 
+            timezone
+        }
+    }
+}
