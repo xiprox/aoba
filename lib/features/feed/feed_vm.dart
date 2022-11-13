@@ -1,8 +1,9 @@
 import 'package:aoba/arch/show_snack_bar.dart';
 import 'package:aoba/data/model/resource.dart';
-import 'package:aoba/data/remote/gql/queries/feed/feed.graphql.dart';
 import 'package:aoba/services/services.dart';
 import 'package:veee/veee.dart';
+
+import 'feed.graphql.dart';
 
 class FeedViewModel extends ViewModel {
   final _repo = get<FeedRepo>();

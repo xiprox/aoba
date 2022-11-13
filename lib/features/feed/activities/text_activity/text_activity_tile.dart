@@ -1,7 +1,7 @@
-import 'package:aoba/data/remote/gql/queries/feed/feed.graphql.dart';
 import 'package:aoba/features/feed/activities/activity_tile_base.dart';
 import 'package:aoba/features/feed/activities/common/timestamp.dart';
 import 'package:aoba/features/feed/activities/common/user.dart';
+import 'package:aoba/features/feed/feed.graphql.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher_string.dart';

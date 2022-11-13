@@ -1,4 +1,4 @@
-import 'package:aoba/data/remote/gql/queries/feed/feed.graphql.dart';
+import 'package:aoba/features/feed/feed.graphql.dart';
 import 'package:flutter/material.dart';
 
 import 'list_activity/list_activity_tile.dart';

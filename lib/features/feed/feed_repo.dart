@@ -1,8 +1,9 @@
 import 'package:aoba/arch/graphql_repo.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
-import 'package:aoba/data/remote/gql/queries/feed/feed.graphql.dart';
 import 'package:graphql/client.dart';
+
+import 'feed.graphql.dart';
 
 abstract class FeedRepo {
   Future<Resource<Query$FetchFeed>> getFeed({
