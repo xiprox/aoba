@@ -1,4 +1,5 @@
 import 'package:aoba/arch/show_snack_bar.dart';
+import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/services/services.dart';
 import 'package:veee/veee.dart';
@@ -65,6 +66,7 @@ class FeedViewModel extends ViewModel {
 
   void onLogoutPress() {
     get<Credentials>().clear();
+    get<UserInfo>().clear();
     get<AppRouter>().popUntilRoot();
     get<AppRouter>().replace(const HomeRoute());
   }

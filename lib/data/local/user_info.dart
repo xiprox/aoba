@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aoba/data/repo/user_info/user_info.gql.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class _Keys {
@@ -44,6 +45,10 @@ abstract class UserInfo {
 
   String? get profileColor;
   set profileColor(String? value);
+
+  Stream<String?> get profileColorStream;
+
+  void saveFromBasicUserInfo(Query$FetchBasicUserInfo$Viewer info);
 }
 
 class UserInfoImpl implements UserInfo {
@@ -107,4 +112,21 @@ class UserInfoImpl implements UserInfo {
   String? get profileColor => _box.get(_Keys.profileColor);
   @override
   set profileColor(String? value) => _box.put(_Keys.profileColor, value);
+
+  @override
+  Stream<String?> get profileColorStream =>
+      _box.watch(key: _Keys.profileColor).map((event) => event.value);
+
+  @override
+  void saveFromBasicUserInfo(Query$FetchBasicUserInfo$Viewer info) {
+    id = info.id;
+    name = info.name;
+    avatarLarge = info.avatar?.large;
+    avatarMedium = info.avatar?.medium;
+    banner = info.bannerImage;
+    donatorTier = info.donatorTier;
+    donatorBadge = info.donatorBadge;
+    timezone = info.options?.timezone;
+    profileColor = info.options?.profileColor;
+  }
 }

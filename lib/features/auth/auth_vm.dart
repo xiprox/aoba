@@ -42,18 +42,8 @@ class AuthViewModel extends ViewModel {
     _credentials.accessToken = pin;
 
     final userData = await _userInfoRepo.getBasicUserInfo();
-    print(userData);
     if (userData.isSuccess() && userData.data?.Viewer != null) {
-      final data = userData.data!.Viewer!;
-      _userInfo.id = data.id;
-      _userInfo.name = data.name;
-      _userInfo.avatarLarge = data.avatar?.large;
-      _userInfo.avatarMedium = data.avatar?.medium;
-      _userInfo.banner = data.bannerImage;
-      _userInfo.donatorTier = data.donatorTier;
-      _userInfo.donatorBadge = data.donatorBadge;
-      _userInfo.timezone = data.options?.timezone;
-      _userInfo.profileColor = data.options?.profileColor;
+      _userInfo.saveFromBasicUserInfo(userData.data!.Viewer!);
       onSuccess?.call();
     } else {
       order(ShowSnackBar(userData.error?.message ?? 'Error getting user data'));

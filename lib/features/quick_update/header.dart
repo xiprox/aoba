@@ -29,7 +29,6 @@ class Header extends StatelessWidget {
         const SizedBox(width: 8),
         IconButton(
           onPressed: onRefreshPress,
-          color: colors.secondary,
           icon: const Icon(Icons.refresh_rounded),
         ),
         const SizedBox(width: 8),

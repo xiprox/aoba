@@ -2,12 +2,12 @@ import 'package:aoba/exts/material_exts.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static ThemeData light() => make(Brightness.light);
-  static ThemeData dark() => make(Brightness.dark);
+  static ThemeData light(Color? seed) => make(seed, Brightness.light);
+  static ThemeData dark(Color? seed) => make(seed, Brightness.dark);
 
-  static ThemeData make(Brightness brightness) {
+  static ThemeData make(Color? seed, Brightness brightness) {
     final colors = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF35ABF0),
+      seedColor: seed ?? const Color(0xFF35ABF0),
       brightness: brightness,
     );
     return ThemeData(
@@ -19,6 +19,10 @@ class AppTheme {
         elevation: 0,
         color: colors.surfaceTone1,
       ),
+      splashColor: colors.primary.withOpacity(0.05),
+      focusColor: colors.primary.withOpacity(0.05),
+      hoverColor: colors.primary.withOpacity(0.05),
+      highlightColor: colors.primary.withOpacity(0.05),
       splashFactory: InkSparkle.splashFactory,
     );
   }

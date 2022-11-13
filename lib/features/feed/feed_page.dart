@@ -1,3 +1,4 @@
+import 'package:aoba/features/avatar/avatar_wrapper.dart';
 import 'package:aoba/features/quick_update/quick_update_sheet.dart';
 import 'package:aoba/mixins/infinite_scroll_mixin.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class FeedPage extends ViewModelWidget<FeedViewModel> with InfiniteScrollMixin {
         controller: infiniteScroll(vm.onShouldFetchNextPage),
         slivers: [
           SliverAppBar(
+            leading: const AvatarWrapper(),
+            titleSpacing: 0,
             title: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
             floating: true,
             snap: true,
