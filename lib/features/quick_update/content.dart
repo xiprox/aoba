@@ -1,4 +1,4 @@
-import 'package:aoba/data/remote/gql/schema/schema.gql.dart';
+import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/features/quick_update/quick_update_vm.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
@@ -27,11 +27,10 @@ class Content extends ViewModelWidget<QuickUpdateViewModel> {
 
         return QuickUpdateEntry(
           coverUrl: media.coverImage?.large ?? '',
-          type: media.type == Enum$MediaType.ANIME
-              ? ImageType.anime
-              : ImageType.book,
+          type:
+              media.type == MediaType.ANIME ? ImageType.anime : ImageType.book,
           color: media.coverImage?.color?.toColor(),
-          mediaType: media.type ?? Enum$MediaType.$unknown,
+          mediaType: media.type ?? MediaType.$unknown,
           airingAt: media.nextAiringEpisode?.airingAt,
           timeUntilAiring: media.nextAiringEpisode?.timeUntilAiring,
           airingEpisode: media.nextAiringEpisode?.episode,

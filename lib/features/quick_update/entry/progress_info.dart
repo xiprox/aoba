@@ -1,4 +1,4 @@
-import 'package:aoba/data/remote/gql/schema/schema.gql.dart';
+import 'package:aoba/data/model/aliases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,7 +7,7 @@ import 'info_box.dart';
 class ProgressInfo extends StatelessWidget {
   final ColorScheme colorScheme;
   final int? progress;
-  final Enum$MediaType mediaType;
+  final MediaType mediaType;
   final Function()? onIncrementPress;
 
   const ProgressInfo({
@@ -32,7 +32,7 @@ class ProgressInfo extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsetsDirectional.only(start: 8),
               child: Text(
-                'On ${mediaType == Enum$MediaType.ANIME ? 'ep' : 'ch'} '
+                'On ${mediaType == MediaType.ANIME ? 'ep' : 'ch'} '
                 '${progress ?? '?'}',
                 style: TextStyle(
                   color: colorScheme.onSecondaryContainer,
