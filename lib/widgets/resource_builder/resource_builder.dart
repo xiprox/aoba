@@ -40,7 +40,7 @@ class ResourceBuilder<T> extends StatelessWidget {
       } else if (resource!.isEmpty()) {
         return _buildEmpty(context);
       } else if (resource!.data != null) {
-        return _buildContent(context, resource!.data!);
+        return _buildContent(context, resource!.data as T);
       } else {
         return Container();
       }

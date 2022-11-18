@@ -26,9 +26,7 @@ class Activities extends StatelessWidget {
             return ListActivityTile(
               activity: activity,
               onPress: () {},
-              onMediaPress: () {
-                print('woasdad');
-              },
+              onMediaPress: () {},
               onUserPress: () {},
             );
           }

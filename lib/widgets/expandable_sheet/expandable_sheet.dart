@@ -32,8 +32,6 @@ class ExpandableSheetState extends State<ExpandableSheet>
     with TickerProviderStateMixin {
   late AnimationController _controller;
 
-  final _scrollController = ScrollController();
-
   double yPos = 0;
 
   bool contentScrollable = false;
@@ -50,10 +48,6 @@ class ExpandableSheetState extends State<ExpandableSheet>
       } else if (_controller.value < 0.2 && contentScrollable) {
         setState(() => contentScrollable = false);
       }
-    });
-
-    _scrollController.addListener(() {
-      // TODO: Implement show/hide shadow on scroll
     });
   }
 
