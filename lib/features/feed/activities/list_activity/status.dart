@@ -18,8 +18,10 @@ class Status extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return Text.rich(
       TextSpan(
+        style: TextStyle(color: colors.onSurface),
         children: [
           TextSpan(text: status?.capitalize() ?? '?'),
           const TextSpan(text: ' '),
