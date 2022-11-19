@@ -56,6 +56,7 @@ dev_dependencies:
   msix: ^3.7.0
 
 dependency_overrides:
+  material_color_utilities: ^0.2.0
 
 flutter:
   uses-material-design: true

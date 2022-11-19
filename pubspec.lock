@@ -508,12 +508,12 @@ packages:
     source: hosted
     version: "0.12.12"
   material_color_utilities:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.5"
+    version: "0.2.0"
   meta:
     dependency: transitive
     description:
