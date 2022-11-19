@@ -16,7 +16,7 @@ class Timestamp extends StatelessWidget {
         prependIfBefore: 'in',
       ),
       style: TextStyle(
-        color: context.colors.onSurfaceVariant.withOpacity(0.5),
+        color: context.colors.onSurface.withOpacity(0.4),
       ),
     );
   }
