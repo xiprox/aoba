@@ -14,8 +14,7 @@ class RedirectPage extends ViewModelWidget<RedirectViewModel> {
     RedirectViewModel vm,
   ) {
     if (order is MoveOn) {
-      context.router.popUntilRoot();
-      context.router.replace(const HomeRoute());
+      context.router.replaceAll([const HomeRoute()]);
     }
   }
 
