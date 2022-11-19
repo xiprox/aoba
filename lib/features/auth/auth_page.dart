@@ -53,7 +53,7 @@ class AuthPage extends ViewModelWidget<AuthViewModel> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    'Aoba is a simple client app for AniList that lets you see '
+                    'Aoba is a simple app for AniList that lets you see '
                     'activity from your friends and quickly update your list.',
                     style: TextStyle(color: colors.onSecondaryContainer),
                   ),
