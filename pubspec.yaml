@@ -22,6 +22,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   # Widgets & UI
+  flutter_svg: ^1.1.6
   auto_route: ^5.0.2
   sliver_tools: ^0.2.8
   scroll_builder: ^0.0.1
@@ -57,3 +58,6 @@ dependency_overrides:
 
 flutter:
   uses-material-design: true
+
+  assets:
+      - assets/images/

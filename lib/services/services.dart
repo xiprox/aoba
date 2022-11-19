@@ -5,6 +5,7 @@ import 'package:aoba/data/repo/user_info/user_info_repo.dart';
 import 'package:aoba/features/quick_update/data/quick_update_repo.dart';
 import 'package:get_it/get_it.dart';
 
+import 'auth_service.dart';
 import 'exported_services.dart';
 export 'exported_services.dart';
 
@@ -46,6 +47,8 @@ class Services {
     } else {
       getIt.registerSingleton<Credentials>(CredentialsInIsolate());
     }
+
+    getIt.registerLazySingleton<AuthService>(() => AuthServiceImpl());
 
     getIt.registerSingleton<Client>(client);
 

@@ -1,4 +1,5 @@
 import 'package:aoba/data/local/user_info.dart';
+import 'package:aoba/navigation/custom/custom_route_info_parser.dart';
 import 'package:aoba/services/services.dart';
 import 'package:aoba/theme/theme.dart';
 import 'package:aoba/utils/anilist_utils.dart';
@@ -21,7 +22,9 @@ class App extends StatelessWidget {
           theme: AppTheme.light(profileColor),
           darkTheme: AppTheme.dark(profileColor),
           routerDelegate: router.delegate(),
-          routeInformationParser: router.defaultRouteParser(),
+          routeInformationParser: CustomRouteInfoParser(
+            router.defaultRouteParser(),
+          ),
         );
       },
     );

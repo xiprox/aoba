@@ -64,9 +64,9 @@ class FeedViewModel extends ViewModel {
     _loadInitial();
   }
 
-  void onLogoutPress() {
-    get<Credentials>().clear();
-    get<UserInfo>().clear();
+  void onLogoutPress() async {
+    await get<Credentials>().clear();
+    await get<UserInfo>().clear();
     get<AppRouter>().popUntilRoot();
     get<AppRouter>().replace(const HomeRoute());
   }
