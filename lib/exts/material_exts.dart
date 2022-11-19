@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:material_color_utilities/material_color_utilities.dart';
 
 extension ColorExts on Color {
   Color blendOn(Color background) {
@@ -14,6 +15,10 @@ extension ColorExts on Color {
       min(green * factor, 255).round(),
       min(blue * factor, 255).round(),
     );
+  }
+
+  Color harmonize(Color source) {
+    return Color(Blend.harmonize(value, source.value));
   }
 }
 
