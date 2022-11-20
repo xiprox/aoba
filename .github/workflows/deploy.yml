@@ -44,3 +44,4 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_DISTRIBUTION_CREDENTIALS }}
           groups: internal
           file: build/app/outputs/flutter-apk/app-release.apk
+          debug: true
