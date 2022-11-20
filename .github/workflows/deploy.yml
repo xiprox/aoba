@@ -43,5 +43,5 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_DISTRIBUTION_CREDENTIALS }}
           groups: internal
-          file: build/app/outputs/flutter-apk/app-release.apk
+          file: /home/runner/work/aoba/aoba/build/app/outputs/flutter-apk/app-release.apk
           debug: true
