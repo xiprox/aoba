@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-release.apk
-          path: ./build/app/outputs/flutter-apk/apk-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Deploy to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
@@ -43,4 +43,4 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: internal
-          file: app/build/outputs/apk/release/app-release-unsigned.apk
+          file: build/app/outputs/flutter-apk/app-release.apk
