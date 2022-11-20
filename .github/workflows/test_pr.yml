@@ -1,8 +1,6 @@
-name: Deploy
+name: Test & Deploy PR
 
-on:
-  push:
-    branches: dev
+on: [pull_request]
 
 jobs:
   job:
@@ -29,18 +27,23 @@ jobs:
         run: flutter test -j ${{ steps.cpu-cores.outputs.count }}
 
       - name: Build
-        run: flutter build apk --release --build-number $GITHUB_RUN_NUMBER
+        run: flutter build web --release
 
-      - name: Upload artifact
+      - name: Compress build
+        run: zip -r $GITHUB_WORKSPACE/aoba_web.zip .
+        working-directory: build/web
+
+      - name: Upload build artifacts
+        id: upload_artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: aoba_web.zip
+          path: ./aoba_web.zip
 
-      - name: Deploy to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.FIREBASE_DISTRIBUTION_CREDENTIALS }}
-          groups: internal
-          file: build/app/outputs/flutter-apk/app-release.apk
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_HOSTING_CREDENTIALS }}
+          expires: 30d
+          projectId: aoba-app
