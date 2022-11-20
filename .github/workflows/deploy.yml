@@ -29,7 +29,7 @@ jobs:
         run: flutter test -j ${{ steps.cpu-cores.outputs.count }}
 
       - name: Build
-        run: flutter build apk --release --build-number $GITHUB_RUN_ID
+        run: flutter build apk --release --build-number $GITHUB_RUN_NUMBER
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
