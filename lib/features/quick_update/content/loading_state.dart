@@ -1,5 +1,5 @@
 import 'package:aoba/exts/build_context_exts.dart';
-import 'package:aoba/features/quick_update/entry/quick_update_entry.dart';
+import 'package:aoba/features/quick_update/content/entry/quick_update_entry.dart';
 import 'package:aoba/widgets/shimmer/shimmer_rect.dart';
 import 'package:flutter/material.dart';
 

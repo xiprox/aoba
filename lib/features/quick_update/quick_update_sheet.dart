@@ -6,11 +6,11 @@ import 'package:aoba/widgets/resource_builder/resource_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
-import 'content.dart';
-import 'loading_state.dart';
-import 'entry/quick_update_entry.dart';
-import 'error_state.dart';
-import 'header.dart';
+import 'content/content.dart';
+import 'content/entry/quick_update_entry.dart';
+import 'content/error_state.dart';
+import 'content/header.dart';
+import 'content/loading_state.dart';
 
 class QuickUpdateSheet extends ViewModelWidget<QuickUpdateViewModel> {
   const QuickUpdateSheet({Key? key}) : super(key: key);
