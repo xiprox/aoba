@@ -4,8 +4,7 @@ import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_p
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
-import 'airing_info.dart';
-import 'progress_info.dart';
+import 'info.dart';
 
 class QuickUpdateEntry extends StatelessWidget {
   static const kDesiredHeight = kDesiredWidth * AspectRatios.mediaCover;
@@ -40,9 +39,6 @@ class QuickUpdateEntry extends StatelessWidget {
     this.onIncrementPress,
   });
 
-  bool get hasAiringInfo =>
-      airingAt != null && timeUntilAiring != null && airingEpisode != null;
-
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(8);
@@ -75,19 +71,15 @@ class QuickUpdateEntry extends StatelessWidget {
                   splashColor: inkColor,
                   hoverColor: hoverColor,
                   highlightColor: inkColor,
-                  child: hasAiringInfo
-                      ? AiringInfo(
-                          colorScheme: colorScheme,
-                          airingAt: airingAt,
-                          timeUntilAiring: timeUntilAiring,
-                          episode: airingEpisode,
-                        )
-                      : ProgressInfo(
-                          colorScheme: colorScheme,
-                          progress: progress,
-                          mediaType: mediaType,
-                          onIncrementPress: onIncrementPress,
-                        ),
+                  child: Info(
+                    colorScheme: colorScheme,
+                    progress: progress,
+                    mediaType: mediaType,
+                    airingAt: airingAt,
+                    timeUntilAiring: timeUntilAiring,
+                    airingEpisode: airingEpisode,
+                    onIncrementPress: onIncrementPress,
+                  ),
                 ),
               ),
             ),
