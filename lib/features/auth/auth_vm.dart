@@ -8,6 +8,8 @@ import 'package:veee/veee.dart';
 const _kClientId = 8787;
 const _kClientIdPin = 8798;
 
+final kIsPinAuthMethod = Platform.isWindows || Platform.isMacOS;
+
 class MoveOn extends ViewModelOrder {
   const MoveOn();
 }

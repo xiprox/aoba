@@ -2,10 +2,10 @@ import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/widgets/smoorth_rectangle_border/smoorth_rectangle_border.dart';
 import 'package:flutter/material.dart';
 
-class PinEntry extends StatelessWidget {
+class PinInput extends StatelessWidget {
   final Function(String?) onSubmit;
 
-  const PinEntry({super.key, required this.onSubmit});
+  const PinInput({super.key, required this.onSubmit});
 
   @override
   Widget build(BuildContext context) {
