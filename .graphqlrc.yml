@@ -1,2 +1,2 @@
-schema: "lib/data/remote/gql/schema/schema.graphql"
+schema: "lib/data/remote/gql/schema/schema.gql"
 documents: "lib/**/*.{gql}"
