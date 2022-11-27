@@ -1,4 +1,4 @@
-name: Deploy
+name: Test & Deploy
 
 on:
   push:
@@ -28,7 +28,25 @@ jobs:
       - name: Run tests
         run: flutter test -j ${{ steps.cpu-cores.outputs.count }}
 
-      - name: Build
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+          bundler-cache: true
+
+      - name: Prepare Google Play credentials for Fastlane
+        run: echo -n "${{ secrets.GOOGLE_PLAY_JSON_KEY }}" | base64 --decode > ./android/fastlane/key.json
+
+      - name: Prepare key.properties
+        run: echo -n "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
+
+      - name: Prepare upload.keystore
+        run: echo -n "${{ secrets.UPLOAD_KEYSTORE }}" | base64 --decode > ./android/upload.keystore
+
+      - name: Build AAB & Deploy
+        run: cd android && bundle install && bundle exec fastlane internal build_number:$GITHUB_RUN_NUMBER && cd ..
+
+      - name: Build APK
         run: flutter build apk --release --build-number $GITHUB_RUN_NUMBER
 
       - name: Upload artifact
@@ -36,12 +54,3 @@ jobs:
         with:
           name: app-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
-
-      - name: Deploy to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          serviceCredentialsFileContent: ${{ secrets.FIREBASE_DISTRIBUTION_CREDENTIALS }}
-          groups: internal
-          file: /home/runner/work/aoba/aoba/build/app/outputs/flutter-apk/app-release.apk
-          debug: true

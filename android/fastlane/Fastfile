@@ -1,0 +1,21 @@
+fastlane_version "2.198.1"
+
+default_platform :android
+
+platform :android do
+    
+    private_lane :build do |options|
+        build_number = options[:build_number]
+        sh("flutter build appbundle --release --build-number #{build_number}")
+    end
+
+    lane :internal do |options|
+        build_number = options[:build_number]
+        build(build_number: build_number)
+        upload_to_play_store(
+            track: 'internal',
+            aab: '../build/app/outputs/bundle/release/app-release.aab',
+            package_name: 'dev.ihsan.aoba'
+        )
+    end
+end
