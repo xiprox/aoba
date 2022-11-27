@@ -15,6 +15,13 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
 
+      - name: Prepare required secret files
+        run: |
+          echo -n "${{ secrets.GOOGLE_PLAY_JSON_KEY }}" | base64 --decode > ./android/fastlane/key.json
+          echo -n "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
+          echo -n "${{ secrets.UPLOAD_KEYSTORE }}" | base64 --decode > ./android/upload.keystore
+          echo -n "${{ secrets.ANILIST_CONSTS_DART }}" | base64 --decode > ./lib/consts/anilist_consts.dart
+
       - name: Get dependencies
         run: flutter pub get
 
@@ -33,15 +40,6 @@ jobs:
         with:
           ruby-version: '2.6'
           bundler-cache: true
-
-      - name: Prepare Google Play credentials for Fastlane
-        run: echo -n "${{ secrets.GOOGLE_PLAY_JSON_KEY }}" | base64 --decode > ./android/fastlane/key.json
-
-      - name: Prepare key.properties
-        run: echo -n "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > ./android/key.properties
-
-      - name: Prepare upload.keystore
-        run: echo -n "${{ secrets.UPLOAD_KEYSTORE }}" | base64 --decode > ./android/upload.keystore
 
       - name: Build AAB & Deploy
         run: cd android && bundle install && bundle exec fastlane internal build_number:$GITHUB_RUN_NUMBER && cd ..

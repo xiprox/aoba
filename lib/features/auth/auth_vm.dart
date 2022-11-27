@@ -1,12 +1,10 @@
 import 'dart:io';
 
 import 'package:aoba/arch/show_snack_bar.dart';
+import 'package:aoba/consts/anilist_consts.dart';
 import 'package:aoba/services/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veee/veee.dart';
-
-const _kClientId = 8787;
-const _kClientIdPin = 8798;
 
 final kIsPinAuthMethod = Platform.isWindows || Platform.isMacOS;
 
@@ -30,7 +28,7 @@ class AuthViewModel extends ViewModel {
     }
 
     final clientId =
-        Platform.isMacOS || Platform.isWindows ? _kClientIdPin : _kClientId;
+        kIsPinAuthMethod ? AnilistConsts.clientIdPin : AnilistConsts.clientId;
     launchUrl(
       Uri.parse(
         'https://anilist.co/api/v2/oauth/authorize'
