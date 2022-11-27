@@ -4,7 +4,7 @@ import 'package:aoba/mixins/infinite_scroll_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
-import 'activities/activities.dart';
+import 'content/activities/activities.dart';
 import 'feed_vm.dart';
 
 class FeedPage extends ViewModelWidget<FeedViewModel> with InfiniteScrollMixin {

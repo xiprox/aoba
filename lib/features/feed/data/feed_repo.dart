@@ -5,8 +5,13 @@ import 'package:graphql/client.dart';
 
 import 'feed.gql.dart';
 
+typedef Feed = Query$FetchFeed;
+typedef Activity = Query$FetchFeed$Page$activities;
+typedef ListActivity = Query$FetchFeed$Page$activities$$ListActivity;
+typedef TextActivity = Query$FetchFeed$Page$activities$$TextActivity;
+
 abstract class FeedRepo {
-  Future<Resource<Query$FetchFeed>> getFeed({
+  Future<Resource<Feed>> getFeed({
     required int page,
     required bool followingOnly,
   });
@@ -14,7 +19,7 @@ abstract class FeedRepo {
 
 class FeedRepoImpl extends GraphqlRepo implements FeedRepo {
   @override
-  Future<Resource<Query$FetchFeed>> getFeed({
+  Future<Resource<Feed>> getFeed({
     required int page,
     required bool followingOnly,
   }) async {
@@ -27,7 +32,7 @@ class FeedRepoImpl extends GraphqlRepo implements FeedRepo {
         },
       ),
       accessToken: accessToken,
-      fromJson: Query$FetchFeed.fromJson,
+      fromJson: Feed.fromJson,
     );
   }
 }

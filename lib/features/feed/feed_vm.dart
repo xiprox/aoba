@@ -4,14 +4,12 @@ import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/services/services.dart';
 import 'package:veee/veee.dart';
 
-import 'feed.gql.dart';
-
 class FeedViewModel extends ViewModel {
   final _repo = get<FeedRepo>();
 
-  Resource<Query$FetchFeed> initialResource = Resource.loading();
+  Resource<Feed> initialResource = Resource.loading();
 
-  final activities = <Query$FetchFeed$Page$activities?>[];
+  final activities = <Activity?>[];
 
   int _page = 1;
 

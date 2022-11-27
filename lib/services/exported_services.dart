@@ -7,6 +7,6 @@ export 'package:aoba/data/local/credentials.dart';
 export 'package:aoba/data/remote/client/client.dart';
 
 // Repos
-export 'package:aoba/features/feed/feed_repo.dart';
+export 'package:aoba/features/feed/data/feed_repo.dart';
 
 export 'logger.dart';

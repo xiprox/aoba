@@ -1,13 +1,13 @@
-import 'package:aoba/features/feed/activities/activity_tile_base.dart';
-import 'package:aoba/features/feed/activities/common/timestamp.dart';
-import 'package:aoba/features/feed/activities/common/user.dart';
-import 'package:aoba/features/feed/feed.gql.dart';
+import 'package:aoba/features/feed/content/activities/activity_tile_base.dart';
+import 'package:aoba/features/feed/content/activities/common/timestamp.dart';
+import 'package:aoba/features/feed/content/activities/common/user.dart';
+import 'package:aoba/features/feed/data/feed_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class TextActivityTile extends StatelessWidget {
-  final Query$FetchFeed$Page$activities$$TextActivity activity;
+  final TextActivity activity;
 
   final Function()? onPress;
   final Function()? onUserPress;

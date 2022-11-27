@@ -1,6 +1,6 @@
 import 'package:aoba/exts/string_exts.dart';
-import 'package:aoba/features/feed/activities/activity_tile_base.dart';
-import 'package:aoba/features/feed/feed.gql.dart';
+import 'package:aoba/features/feed/content/activities/activity_tile_base.dart';
+import 'package:aoba/features/feed/data/feed_repo.dart';
 import 'package:flextensions/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ import '../common/timestamp.dart';
 import '../common/user.dart';
 
 class ListActivityTile extends StatelessWidget {
-  final Query$FetchFeed$Page$activities$$ListActivity activity;
+  final ListActivity activity;
 
   final Function()? onPress;
   final Function()? onUserPress;

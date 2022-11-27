@@ -1,11 +1,11 @@
-import 'package:aoba/features/feed/feed.gql.dart';
+import 'package:aoba/features/feed/data/feed_repo.dart';
 import 'package:flutter/material.dart';
 
 import 'list_activity/list_activity_tile.dart';
 import 'text_activity/text_activity_tile.dart';
 
 class Activities extends StatelessWidget {
-  final List<Query$FetchFeed$Page$activities?> activities;
+  final List<Activity?> activities;
 
   const Activities({super.key, required this.activities});
 
@@ -15,14 +15,14 @@ class Activities extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           final activity = activities[index];
-          if (activity is Query$FetchFeed$Page$activities$$TextActivity) {
+          if (activity is TextActivity) {
             return TextActivityTile(
               activity: activity,
               onPress: () {},
               onUserPress: () {},
             );
           }
-          if (activity is Query$FetchFeed$Page$activities$$ListActivity) {
+          if (activity is ListActivity) {
             return ListActivityTile(
               activity: activity,
               onPress: () {},
