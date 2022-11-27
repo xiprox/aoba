@@ -40,7 +40,9 @@ class AuthForm extends ViewModelWidget<AuthViewModel> {
             ),
           ),
           const SizedBox(height: 16),
-          LoginButton(onPress: vm.onAuthPress),
+          Row(
+            children: [LoginButton(onPress: vm.onAuthPress)],
+          ),
           const SizedBox(height: 24),
           if (kIsPinAuthMethod && vm.showPinInputField)
             PinInput(onSubmit: vm.onPinSubmit),
