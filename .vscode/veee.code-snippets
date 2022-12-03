@@ -1,0 +1,51 @@
+{
+    "ViewModel": {
+        "prefix": ["vm"],
+        "body": [
+            "import 'package:veee/veee.dart';",
+            "",
+            "class ${TM_FILENAME_BASE/(.+)_(vm|view_model)/${1:/pascalcase}/}ViewModel extends ViewModel {}"
+        ]
+    },
+    
+    "ViewModelWidget": {
+        "prefix": ["vmw"],
+        "body": [
+            "import 'package:veee/veee.dart';",
+            "import 'package:flutter/material.dart';",
+            "",
+            "import '${TM_FILENAME_BASE/page|sheet|tile|item/vm/}.dart';",
+            "",
+            "class ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}} extends ViewModelWidget<${2:${TM_FILENAME_BASE/(.+)_(page|sheet|item|tile)/${1:/pascalcase}/}}ViewModel> {",
+            "  const ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}({super.key});",
+            "",
+            "  @override",
+            "  Widget build(BuildContext context, ${2:${TM_FILENAME_BASE/(.+)_(page|sheet|item|tile)/${1:/pascalcase}/}}ViewModel vm) {",
+            "    return Container();",
+            "  }",
+            "}"
+        ]
+    },
+
+    "ViewModelWidgetWrapper": {
+        "prefix": ["vmww"],
+        "body": [
+            "import 'package:veee/veee.dart';",
+            "import 'package:flutter/material.dart';",
+            "",
+            "import '${TM_FILENAME_BASE/wrapper/vm/}.dart';",
+            "",
+            "class ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}} extends StatelessWidget {",
+            "  const ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}({super.key});",
+            "",
+            "  @override",
+            "  Widget build(BuildContext context) {",
+            "    return ViewModelProvider<${2:${TM_FILENAME_BASE/(.+)_(wrapper)/${1:/pascalcase}/}}ViewModel>(",
+            "      create: (_) => ${2:${TM_FILENAME_BASE/(.+)_(wrapper)/${1:/pascalcase}/}}ViewModel(),",
+            "      child: const $3(),",
+            "    );",
+            "  }",
+            "}"
+        ]
+    },
+}
