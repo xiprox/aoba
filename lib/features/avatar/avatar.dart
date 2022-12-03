@@ -5,7 +5,9 @@ import 'package:veee/veee.dart';
 import 'avatar_vm.dart';
 
 class Avatar extends ViewModelWidget<AvatarViewModel> {
-  const Avatar({super.key});
+  final Function()? onPress;
+
+  const Avatar({super.key, this.onPress});
 
   @override
   Widget build(BuildContext context, AvatarViewModel vm) {
@@ -26,7 +28,7 @@ class Avatar extends ViewModelWidget<AvatarViewModel> {
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(100),
               child: InkWell(
-                onTap: () {},
+                onTap: onPress,
                 borderRadius: BorderRadius.circular(100),
                 child: Container(),
               ),

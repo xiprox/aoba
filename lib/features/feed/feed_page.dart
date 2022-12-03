@@ -1,5 +1,6 @@
 import 'package:aoba/features/avatar/avatar_wrapper.dart';
 import 'package:aoba/features/quick_update/quick_update_sheet.dart';
+import 'package:aoba/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
@@ -10,13 +11,24 @@ class FeedPage extends ViewModelWidget<FeedViewModel> {
   const FeedPage({super.key});
 
   @override
+  void handleOrder(
+    BuildContext context,
+    ViewModelOrder order,
+    FeedViewModel vm,
+  ) {
+    if (order is OpenProfile) {
+      context.router.navigate(ProfileRoute(userId: order.userId));
+    }
+  }
+
+  @override
   Widget build(BuildContext context, FeedViewModel vm) {
     return Scaffold(
       body: CustomScrollView(
         controller: vm.scrollController,
         slivers: [
           SliverAppBar(
-            leading: const AvatarWrapper(),
+            leading: AvatarWrapper(onPress: vm.onProfilePress),
             titleSpacing: 0,
             title: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
             floating: true,
@@ -42,7 +54,10 @@ class FeedPage extends ViewModelWidget<FeedViewModel> {
           if (vm.activities.isError())
             SliverToBoxAdapter(child: Text(vm.activities.error!.message)),
           if (vm.activities.isSuccess())
-            Activities(activities: vm.activities.data!),
+            Activities(
+              activities: vm.activities.data!,
+              onUserPress: vm.onUserPress,
+            ),
           const SliverPadding(
             padding: EdgeInsets.only(
               bottom: QuickUpdateSheet.kCollapsedHeight + 4,

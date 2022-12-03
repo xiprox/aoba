@@ -1,12 +1,29 @@
 
-query FetchFeed($isFollowing: Boolean!, $page: Int!) {
+query FetchFeed($userId: Int!, $page: Int!) {
   Page(page: $page, perPage: 50) {
-    activities(isFollowing: $isFollowing, sort: ID_DESC) {
+    activities(userId: $userId, sort: [PINNED,ID_DESC]) {
+      ... on MessageActivity {
+        id
+        type
+        isPrivate
+        message
+        messenger {
+          id
+          name
+          options {
+            profileColor
+          }
+          avatar {
+            medium
+          }
+        }
+      }
       ... on TextActivity {
        	id
         type
         text(asHtml: true)
         createdAt
+        isPinned
         user {
           id
           name
@@ -24,6 +41,7 @@ query FetchFeed($isFollowing: Boolean!, $page: Int!) {
         createdAt
         status
         progress
+        isPinned
         media {
           id
           title {
@@ -48,6 +66,19 @@ query FetchFeed($isFollowing: Boolean!, $page: Int!) {
           }
         } 
       }
+    }
+  }
+}
+
+query FetchInfo($userId: Int) {
+  User(id: $userId) {
+    id
+    name
+    avatar {
+      medium
+    }
+    options {
+      profileColor
     }
   }
 }

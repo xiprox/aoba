@@ -5,13 +5,15 @@ import 'avatar.dart';
 import 'avatar_vm.dart';
 
 class AvatarWrapper extends StatelessWidget {
-  const AvatarWrapper({super.key});
+  final Function()? onPress;
+
+  const AvatarWrapper({super.key, this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider(
       create: (_) => AvatarViewModel(),
-      child: const Avatar(),
+      child: Avatar(onPress: onPress),
     );
   }
 }

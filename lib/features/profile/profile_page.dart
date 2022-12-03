@@ -1,0 +1,35 @@
+import 'package:veee/veee.dart';
+import 'package:flutter/material.dart';
+
+import 'content/activities.dart';
+import 'profile_vm.dart';
+
+class ProfilePage extends ViewModelWidget<ProfileViewModel> {
+  const ProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel vm) {
+    return Scaffold(
+      body: CustomScrollView(
+        controller: vm.scrollController,
+        slivers: [
+          SliverAppBar(
+            titleSpacing: 0,
+            title: Text(vm.info.data?.name ?? ''),
+            // floating: true,
+            // snap: true,
+          ),
+          const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
+          if (vm.activities.isLoading())
+            const SliverToBoxAdapter(
+              child: Center(child: CircularProgressIndicator()),
+            ),
+          if (vm.activities.isError())
+            SliverToBoxAdapter(child: Text(vm.activities.error!.message)),
+          if (vm.activities.isSuccess())
+            Activities(activities: vm.activities.data!),
+        ],
+      ),
+    );
+  }
+}

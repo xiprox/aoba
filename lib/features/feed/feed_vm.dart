@@ -6,6 +6,13 @@ import 'package:aoba/mixins/paginated_fetch_mixin.dart';
 import 'package:aoba/services/services.dart';
 import 'package:veee/veee.dart';
 
+import 'data/feed_repo.dart';
+
+class OpenProfile extends ViewModelOrder {
+  final int? userId;
+  const OpenProfile([this.userId]);
+}
+
 class FeedViewModel extends ViewModel
     with InfiniteScrollMixin, PaginatedDataMixin<Activity?> {
   final _repo = get<FeedRepo>();
@@ -38,6 +45,14 @@ class FeedViewModel extends ViewModel
     if (value == followingOnly) return;
     followingOnly = value;
     fetchFromTheStart();
+  }
+
+  void onProfilePress() {
+    order(const OpenProfile());
+  }
+
+  void onUserPress(int id) {
+    order(OpenProfile(id));
   }
 
   void onLogoutPress() async {

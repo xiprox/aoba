@@ -15,11 +15,13 @@ mixin PaginatedDataMixin<T> on InfiniteScrollMixin {
 
   void fetchFromTheStart() async {
     _page = 1;
-    await scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.fastOutSlowIn,
-    );
+    if (scrollController.hasClients) {
+      await scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.fastOutSlowIn,
+      );
+    }
     _fetchFirstPage();
   }
 

@@ -1,26 +1,14 @@
 import 'package:aoba/exts/string_exts.dart';
-import 'package:aoba/features/feed/data/feed_repo.dart';
+import 'package:aoba/features/profile/data/profile_repo.dart';
 import 'package:aoba/utils/anilist_utils.dart';
+import 'package:aoba/widgets/feed/activity/list_activity/list_activity_tile.dart';
+import 'package:aoba/widgets/feed/activity/text_activity/text_activity_tile.dart';
 import 'package:flutter/material.dart';
-
-import '../../../widgets/feed/activity/list_activity/list_activity_tile.dart';
-import '../../../widgets/feed/activity/text_activity/text_activity_tile.dart';
 
 class Activities extends StatelessWidget {
   final List<Activity?> activities;
-  final Function(int id)? onUserPress;
 
-  const Activities({
-    super.key,
-    required this.activities,
-    this.onUserPress,
-  });
-
-  void _onUserPress(int? id) {
-    if (id != null) {
-      onUserPress?.call(id);
-    }
-  }
+  const Activities({super.key, required this.activities});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +26,7 @@ class Activities extends StatelessWidget {
               content: activity.text,
               createdAt: activity.createdAt,
               onPress: () {},
-              onUserPress: () => _onUserPress(activity.user?.id),
+              onUserPress: () {},
             );
           }
           if (activity is ListActivity) {
@@ -58,7 +46,7 @@ class Activities extends StatelessWidget {
               createdAt: activity.createdAt,
               onPress: () {},
               onMediaPress: () {},
-              onUserPress: () => _onUserPress(activity.user?.id),
+              onUserPress: () {},
             );
           }
           return null;
