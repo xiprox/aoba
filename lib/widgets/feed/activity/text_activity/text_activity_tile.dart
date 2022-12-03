@@ -1,27 +1,33 @@
-import 'package:aoba/features/feed/content/activities/activity_tile_base.dart';
-import 'package:aoba/features/feed/content/activities/common/timestamp.dart';
-import 'package:aoba/features/feed/content/activities/common/user.dart';
-import 'package:aoba/features/feed/data/feed_repo.dart';
+import 'package:aoba/widgets/feed/activity/activity_tile_base.dart';
+import 'package:aoba/widgets/feed/activity/common/timestamp.dart';
+import 'package:aoba/widgets/feed/activity/common/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class TextActivityTile extends StatelessWidget {
-  final TextActivity activity;
+  final String? username;
+  final String? userAvatarUrl;
+  final Color? userColor;
+  final String? content;
+  final int createdAt;
 
   final Function()? onPress;
   final Function()? onUserPress;
 
   const TextActivityTile({
     super.key,
-    required this.activity,
+    this.username,
+    this.userAvatarUrl,
+    this.userColor,
+    this.content,
+    this.createdAt = 0,
     this.onPress,
     this.onUserPress,
   });
 
   @override
   Widget build(BuildContext context) {
-    final user = activity.user;
     return ActivityTileBase(
       onPress: onPress,
       child: Row(
@@ -34,17 +40,17 @@ class TextActivityTile extends StatelessWidget {
                   children: [
                     const SizedBox(width: 4),
                     User(
-                      username: user?.name,
-                      avatarUrl: user?.avatar?.medium,
-                      profileColor: user?.options?.profileColor,
+                      username: username,
+                      avatarUrl: userAvatarUrl,
+                      color: userColor,
                       onPress: onUserPress,
                     ),
                     const SizedBox(width: 4),
-                    Timestamp(timestamp: activity.createdAt * 1000 * 1000),
+                    Timestamp(timestamp: createdAt * 1000 * 1000),
                   ],
                 ),
                 Html(
-                  data: activity.text,
+                  data: content,
                   onLinkTap: (link, _, __, ___) => launchUrlString(link ?? '#'),
                 ),
                 const SizedBox(height: 8),
