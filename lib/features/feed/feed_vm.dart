@@ -1,65 +1,43 @@
 import 'package:aoba/arch/show_snack_bar.dart';
 import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
+import 'package:aoba/mixins/infinite_scroll_mixin.dart';
+import 'package:aoba/mixins/paginated_fetch_mixin.dart';
 import 'package:aoba/services/services.dart';
 import 'package:veee/veee.dart';
 
-class FeedViewModel extends ViewModel {
+class FeedViewModel extends ViewModel
+    with InfiniteScrollMixin, PaginatedDataMixin<Activity?> {
   final _repo = get<FeedRepo>();
 
-  Resource<Feed> initialResource = Resource.loading();
-
-  final activities = <Activity?>[];
-
-  int _page = 1;
+  Resource<List<Activity?>> get activities => paginatedResource;
 
   bool followingOnly = true;
 
   @override
   void onCreate() {
     super.onCreate();
-    _loadInitial();
+    fetchFromTheStart();
   }
 
-  void _loadInitial() async {
-    initialResource = await _repo.getFeed(
-      page: _page,
-      followingOnly: followingOnly,
-    );
-    activities.clear();
-    activities.addAll(initialResource.data?.Page?.activities ?? []);
-    notifyListeners();
-  }
-
-  void _loadNextPage() async {
-    _page++;
+  @override
+  Future<Resource<List<Activity?>>> fetchPage(int page) async {
     final resource = await _repo.getFeed(
-      page: _page,
+      page: page,
       followingOnly: followingOnly,
     );
-    if (resource.isSuccess()) {
-      activities.addAll(resource.data?.Page?.activities ?? []);
-      notifyListeners();
-    } else if (resource.isError()) {
-      order(ShowSnackBar(resource.error!.message));
-    }
+    return resource.transform((data) => data.Page?.activities ?? []);
   }
 
-  void onShouldFetchNextPage() {
-    _loadNextPage();
+  @override
+  void onFetchPageFailed(ErrorInfo? error) {
+    order(ShowSnackBar(error?.message ?? ''));
   }
 
   void onFollowingOnlyChange(bool value) async {
     if (value == followingOnly) return;
-
-    _page = 1;
     followingOnly = value;
-    activities.clear();
-
-    initialResource = Resource.loading();
-    notifyListeners();
-
-    _loadInitial();
+    fetchFromTheStart();
   }
 
   void onLogoutPress() async {

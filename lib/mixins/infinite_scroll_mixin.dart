@@ -1,23 +1,32 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart' show ScrollController;
+import 'package:veee/veee.dart';
 
-mixin InfiniteScrollMixin {
-  final _controller = ScrollController();
+mixin InfiniteScrollMixin on ViewModel {
+  final scrollController = ScrollController();
 
-  /// How far from the max scroll extend should we fetch the next page.
+  /// How far from the end should we fetch the next page.
   final infiniteScrollTriggerWindow = 400.0;
 
-  ScrollController infiniteScroll(Function onShouldFetchNextPage) {
+  @override
+  void onCreate() {
+    super.onCreate();
+    _infiniteScroll();
+  }
+
+  void _infiniteScroll() {
     bool free = true;
-    _controller.addListener(() {
-      final position = _controller.position;
+    scrollController.addListener(() {
+      final position = scrollController.position;
       final threshold = position.maxScrollExtent - infiniteScrollTriggerWindow;
       if (free && position.pixels >= threshold) {
         free = false;
-        onShouldFetchNextPage();
+        onScrollEndReached();
       } else if (position.pixels < threshold) {
         free = true;
       }
     });
-    return _controller;
   }
+
+  /// Called when the user reaches the end of the scrollable area.
+  void onScrollEndReached() {}
 }
