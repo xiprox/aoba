@@ -59,7 +59,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
   final double smoothness;
 
   @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(0);
+  EdgeInsetsGeometry get dimensions => const EdgeInsets.all(0);
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
@@ -254,11 +254,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
 
   @override
   int get hashCode {
-    return hashValues(
-      smoothness,
-      borderRadius,
-      side,
-    );
+    return smoothness.hashCode ^ borderRadius.hashCode ^ side.hashCode;
   }
 
   @override
