@@ -44,11 +44,3 @@ jobs:
       - name: Build AAB & Deploy
         run: cd android && bundle install && bundle exec fastlane internal build_number:$GITHUB_RUN_NUMBER && cd ..
 
-      - name: Build APK
-        run: flutter build apk --release --build-number $GITHUB_RUN_NUMBER
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
