@@ -1,3 +1,4 @@
+import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/widgets/feed/activity/activity_tile_base.dart';
 import 'package:aoba/widgets/feed/activity/common/timestamp.dart';
 import 'package:aoba/widgets/feed/activity/common/user.dart';
@@ -28,6 +29,7 @@ class TextActivityTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
     return ActivityTileBase(
       onPress: onPress,
       child: Row(
@@ -52,6 +54,12 @@ class TextActivityTile extends StatelessWidget {
                 Html(
                   data: content,
                   onLinkTap: (link, _, __, ___) => launchUrlString(link ?? '#'),
+                  style: {
+                    'body': Style(
+                      fontSize: FontSize(14),
+                      color: colors.onSurface,
+                    ),
+                  },
                 ),
                 const SizedBox(height: 8),
               ],
