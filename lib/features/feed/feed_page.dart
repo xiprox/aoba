@@ -20,7 +20,9 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
   ) {
     super.handleOrder(context, order, vm);
     if (order is OpenProfile) {
-      context.router.navigate(ProfileRoute(userId: order.userId));
+      context.router.navigate(
+        ProfileRoute(userId: order.userId, color: order.color),
+      );
     }
   }
 

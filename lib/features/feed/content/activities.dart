@@ -1,6 +1,5 @@
 import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/features/feed/data/feed_repo.dart';
-import 'package:aoba/utils/anilist_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/feed/activity/list_activity/list_activity_tile.dart';
@@ -8,7 +7,7 @@ import '../../../widgets/feed/activity/text_activity/text_activity_tile.dart';
 
 class Activities extends StatelessWidget {
   final List<Activity?> activities;
-  final Function(int id)? onUserPress;
+  final Function(int id, Color? color)? onUserPress;
 
   const Activities({
     super.key,
@@ -16,9 +15,9 @@ class Activities extends StatelessWidget {
     this.onUserPress,
   });
 
-  void _onUserPress(int? id) {
+  void _onUserPress(int? id, Color? color) {
     if (id != null) {
-      onUserPress?.call(id);
+      onUserPress?.call(id, color);
     }
   }
 
@@ -29,26 +28,26 @@ class Activities extends StatelessWidget {
         (context, index) {
           final activity = activities[index];
           if (activity is TextActivity) {
+            final user = activity.user;
+            final userColor = user?.options?.profileColor?.fromAniListColor();
             return TextActivityTile(
-              username: activity.user?.name,
-              userAvatarUrl: activity.user?.avatar?.medium,
-              userColor: AniListUtils().colorFromProfileColor(
-                activity.user?.options?.profileColor,
-              ),
+              username: user?.name,
+              userAvatarUrl: user?.avatar?.medium,
+              userColor: userColor,
               content: activity.text,
               createdAt: activity.createdAt,
               onPress: () {},
-              onUserPress: () => _onUserPress(activity.user?.id),
+              onUserPress: () => _onUserPress(user?.id, userColor),
             );
           }
           if (activity is ListActivity) {
             final media = activity.media;
+            final user = activity.user;
+            final userColor = user?.options?.profileColor?.fromAniListColor();
             return ListActivityTile(
-              username: activity.user?.name,
-              userAvatarUrl: activity.user?.avatar?.medium,
-              userColor: AniListUtils().colorFromProfileColor(
-                activity.user?.options?.profileColor,
-              ),
+              username: user?.name,
+              userAvatarUrl: user?.avatar?.medium,
+              userColor: userColor,
               status: activity.status,
               progress: activity.progress,
               mediaTitle: media?.title?.userPreferred,
@@ -58,7 +57,7 @@ class Activities extends StatelessWidget {
               createdAt: activity.createdAt,
               onPress: () {},
               onMediaPress: () {},
-              onUserPress: () => _onUserPress(activity.user?.id),
+              onUserPress: () => _onUserPress(user?.id, userColor),
             );
           }
           return null;

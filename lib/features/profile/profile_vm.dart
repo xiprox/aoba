@@ -1,17 +1,22 @@
+import 'package:veee/veee.dart';
+import 'package:flutter/material.dart' show Color;
 import 'package:aoba/arch/show_snack_bar.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/mixins/infinite_scroll_mixin.dart';
 import 'package:aoba/mixins/paginated_fetch_mixin.dart';
 import 'package:aoba/services/services.dart';
-import 'package:veee/veee.dart';
 
 import 'data/profile_repo.dart';
 
 class ProfileViewModel extends ViewModel
     with InfiniteScrollMixin, PaginatedDataMixin<Activity?> {
   final int userId;
+  final Color? color;
 
-  ProfileViewModel({required this.userId});
+  ProfileViewModel({
+    required this.userId,
+    this.color,
+  });
 
   final _repo = get<ProfileRepo>();
 
