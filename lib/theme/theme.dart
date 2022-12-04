@@ -1,7 +1,8 @@
 import 'package:aoba/exts/material_exts.dart';
+import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
-const _kDefaultSeedColor = Color(0xFF5cb648);
+const _kDefaultSeedColor = Color.fromRGBO(92, 182, 72, 1);
 
 class AppTheme {
   static ThemeData light(Color? seed) => make(seed, Brightness.light);
@@ -28,5 +29,18 @@ class AppTheme {
       highlightColor: colors.primary.withOpacity(0.05),
       splashFactory: InkRipple.splashFactory,
     );
+  }
+
+  /// Returns a version of the app theme with the given [seed] color based
+  /// on the brightness of the theme at [context]. If [color] is null, returns
+  /// the existing theme at [context].
+  static ThemeData override(BuildContext context, Color? color) {
+    final theme = context.theme;
+    final brightness = theme.brightness;
+    if (color == null) {
+      return theme;
+    } else {
+      return brightness == Brightness.light ? light(color) : dark(color);
+    }
   }
 }
