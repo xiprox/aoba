@@ -1,4 +1,4 @@
-import 'package:aoba/arch/show_snack_bar.dart';
+import 'package:aoba/consts/consts.dart';
 import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/features/quick_update/data/quick_update.gql.dart';
@@ -16,6 +16,13 @@ class QuickUpdateViewModel extends ViewModel {
   final scrollController = ScrollController();
 
   Resource<Query$FetchQuickUpdate> entries = Resource.loading();
+
+  Map<int, Resource<QuickUpdateResult>> updatedEntries = {};
+
+  List<ErrorInfo> get updateErrors => updatedEntries.values
+      .where((entry) => entry.error != null)
+      .map((entry) => entry.error!)
+      .toList();
 
   @override
   void onCreate() {
@@ -36,14 +43,44 @@ class QuickUpdateViewModel extends ViewModel {
   void onRefreshPress() => _fetch(showLoading: true, forceRefresh: true);
 
   void onIncrementEntryPress(int mediaId, int progress) async {
+    final existingData = updatedEntries[mediaId]?.data;
+
+    updatedEntries[mediaId] = Resource.loading(existingData);
+    notifyListeners();
+
     final result = await _repo.updateEntry(
       mediaId: mediaId,
       progress: progress,
     );
-    if (result.isSuccess()) {
-      _fetch(showLoading: false);
+
+    if (!result.isError()) {
+      updatedEntries[mediaId] = result;
+      notifyListeners();
     } else {
-      order(ShowSnackBar(result.error?.message ?? 'Unknown error'));
+      updatedEntries[mediaId] = Resource(
+        result.status,
+        existingData,
+        result.error,
+      );
+      notifyListeners();
+      await Future.delayed(kErrorDisplayDuration);
+      if (existingData != null) {
+        updatedEntries[mediaId] = Resource.success(existingData);
+        notifyListeners();
+      } else {
+        final fetchedEntry = entries.data?.Page?.entries?.firstWhere(
+          (entry) => entry?.media?.id == mediaId,
+          orElse: () => null,
+        );
+        final data = QuickUpdateResult(
+          $__typename: '',
+          id: 0,
+          mediaId: mediaId,
+          progress: fetchedEntry?.progress,
+        );
+        updatedEntries[mediaId] = Resource.success(data);
+        notifyListeners();
+      }
     }
   }
 }

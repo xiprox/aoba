@@ -1,27 +1,32 @@
 import 'package:aoba/data/model/aliases.dart';
+import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/duration_exts.dart';
+import 'package:aoba/widgets/action_loading_error/action_loading_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'info_box.dart';
 
 class Info extends StatelessWidget {
-  final ColorScheme colorScheme;
   final int? progress;
   final MediaType mediaType;
   final int? airingAt;
   final int? timeUntilAiring;
   final int? airingEpisode;
+
+  final String? error;
+  final bool loading;
   final Function()? onIncrementPress;
 
   const Info({
     super.key,
-    required this.colorScheme,
     this.progress,
     required this.mediaType,
     this.airingAt,
     this.timeUntilAiring,
     this.airingEpisode,
+    this.error,
+    this.loading = false,
     this.onIncrementPress,
   });
 
@@ -30,14 +35,15 @@ class Info extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inkColor = colorScheme.primary.withOpacity(0.2);
-    final hoverColor = colorScheme.primary.withOpacity(0.1);
+    final colors = context.colors;
+    final inkColor = colors.primary.withOpacity(0.2);
+    final hoverColor = colors.primary.withOpacity(0.1);
 
     final countdown =
         Duration(seconds: timeUntilAiring ?? 0).toAiringCountdown();
 
     return InfoBox(
-      color: colorScheme.secondaryContainer,
+      color: colors.secondaryContainer,
       child: Stack(
         children: [
           Align(
@@ -53,7 +59,7 @@ class Info extends StatelessWidget {
                     '${progress ?? '?'}',
                     style: TextStyle(
                       height: 1,
-                      color: colorScheme.onSecondaryContainer,
+                      color: colors.onSecondaryContainer,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -61,8 +67,7 @@ class Info extends StatelessWidget {
                     Text(
                       'Next: $countdown',
                       style: TextStyle(
-                        color:
-                            colorScheme.onSecondaryContainer.withOpacity(0.6),
+                        color: colors.onSecondaryContainer.withOpacity(0.6),
                         fontSize: 12,
                       ),
                     ),
@@ -89,11 +94,16 @@ class Info extends StatelessWidget {
                 alignment: AlignmentDirectional.centerEnd,
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(end: 8),
-                  child: Text(
-                    '+1',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: colorScheme.primary,
+                  child: ActionLoadingError(
+                    loading: loading,
+                    error: error,
+                    size: const Size(26, 26),
+                    action: Text(
+                      '+1',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: colors.primary,
+                      ),
                     ),
                   ),
                 ),

@@ -25,6 +25,13 @@ class Content extends ViewModelWidget<QuickUpdateViewModel> {
 
         if (media == null) return Container();
 
+        final updateResult = vm.updatedEntries[media.id];
+        final loading = updateResult?.isLoading() == true;
+        final error = updateResult?.error;
+
+        // Use the updated progress if it exists.
+        final progress = updateResult?.data?.progress ?? entry?.progress;
+
         return QuickUpdateEntry(
           coverUrl: media.coverImage?.large ?? '',
           type:
@@ -34,9 +41,11 @@ class Content extends ViewModelWidget<QuickUpdateViewModel> {
           airingAt: media.nextAiringEpisode?.airingAt,
           timeUntilAiring: media.nextAiringEpisode?.timeUntilAiring,
           airingEpisode: media.nextAiringEpisode?.episode,
-          progress: entry?.progress,
+          progress: progress,
+          error: error?.message,
+          loading: loading,
           onIncrementPress: () {
-            final newProgress = (entry?.progress ?? 0) + 1;
+            final newProgress = (progress ?? 0) + 1;
             vm.onIncrementEntryPress(media.id, newProgress);
           },
         );

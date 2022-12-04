@@ -5,12 +5,15 @@ import 'package:graphql/client.dart';
 
 import 'quick_update.gql.dart';
 
+typedef QuickUpdateResult = Mutation$UpdateEntry$SaveMediaListEntry;
+
 abstract class QuickUpdateRepo {
   Future<Resource<Query$FetchQuickUpdate>> getEntries({
     required int userId,
     bool forceNetwork,
   });
-  Future<Resource> updateEntry({required int mediaId, required int progress});
+  Future<Resource<QuickUpdateResult>> updateEntry(
+      {required int mediaId, required int progress});
 }
 
 class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
@@ -33,7 +36,8 @@ class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
   }
 
   @override
-  Future<Resource> updateEntry({required int mediaId, required int progress}) {
+  Future<Resource<QuickUpdateResult>> updateEntry(
+      {required int mediaId, required int progress}) {
     return GqlRequest.mutation(
       MutationOptions(
         document: documentNodeMutationUpdateEntry,
@@ -43,7 +47,8 @@ class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
         },
       ),
       accessToken: accessToken,
-      fromJson: Mutation$UpdateEntry.fromJson,
+      fromJson: (json) =>
+          QuickUpdateResult.fromJson(json['SaveMediaListEntry']),
     );
   }
 }

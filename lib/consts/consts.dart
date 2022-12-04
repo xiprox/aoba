@@ -1,3 +1,2 @@
-class AspectRatios {
-  static const mediaCover = 3 / 2;
-}
+/// How long a temporary error message lasts on screen.
+const kErrorDisplayDuration = Duration(seconds: 3);
