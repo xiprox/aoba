@@ -43,6 +43,12 @@ class QuickUpdateViewModel extends ViewModel {
   void onRefreshPress() => _fetch(showLoading: true, forceRefresh: true);
 
   void onIncrementEntryPress(int mediaId, int progress) async {
+    final fetchedEntry = entries.data?.Page?.entries?.firstWhere(
+      (entry) => entry?.media?.id == mediaId,
+      orElse: () => null,
+    );
+    final media = fetchedEntry?.media;
+
     final existingData = updatedEntries[mediaId]?.data;
 
     updatedEntries[mediaId] = Resource.loading(existingData);
@@ -55,7 +61,15 @@ class QuickUpdateViewModel extends ViewModel {
 
     if (!result.isError()) {
       updatedEntries[mediaId] = result;
-      notifyListeners();
+
+      // If we completed the entry, refetch the list to remove it.
+      final maxProgress = media?.episodes ?? media?.chapters ?? 1000000;
+      if (progress >= maxProgress) {
+        updatedEntries.remove(mediaId);
+        _fetch(showLoading: false, forceRefresh: true);
+      } else {
+        notifyListeners();
+      }
     } else {
       updatedEntries[mediaId] = Resource(
         result.status,
@@ -64,23 +78,14 @@ class QuickUpdateViewModel extends ViewModel {
       );
       notifyListeners();
       await Future.delayed(kErrorDisplayDuration);
-      if (existingData != null) {
-        updatedEntries[mediaId] = Resource.success(existingData);
-        notifyListeners();
-      } else {
-        final fetchedEntry = entries.data?.Page?.entries?.firstWhere(
-          (entry) => entry?.media?.id == mediaId,
-          orElse: () => null,
-        );
-        final data = QuickUpdateResult(
-          $__typename: '',
-          id: 0,
-          mediaId: mediaId,
-          progress: fetchedEntry?.progress,
-        );
-        updatedEntries[mediaId] = Resource.success(data);
-        notifyListeners();
-      }
+      updatedEntries[mediaId] = Resource.success(existingData ??
+          QuickUpdateResult(
+            $__typename: '',
+            id: 0,
+            mediaId: mediaId,
+            progress: fetchedEntry?.progress,
+          ));
+      notifyListeners();
     }
   }
 }
