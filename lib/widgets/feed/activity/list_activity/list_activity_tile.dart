@@ -87,6 +87,7 @@ class ListActivityTile extends StatelessWidget {
           MediaCover(
             url: mediaCoverUrl,
             type: mediaType,
+            color: mediaColorScheme?.surfaceVariant,
           ),
         ],
       ),

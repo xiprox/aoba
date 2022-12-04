@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 class MediaCover extends StatelessWidget {
   final String? url;
   final MediaType? type;
+  final Color? color;
 
   const MediaCover({
     super.key,
     this.url,
     this.type,
+    this.color,
   });
 
   @override
@@ -21,6 +23,7 @@ class MediaCover extends StatelessWidget {
       type: type == MediaType.ANIME ? ImageType.anime : ImageType.book,
       width: 48,
       height: 48 * AspectRatios.mediaCover,
+      color: color,
     );
   }
 }
