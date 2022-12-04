@@ -21,6 +21,7 @@ class ProfileViewModel extends ViewModel
   @override
   void onCreate() {
     super.onCreate();
+    fetchInfo();
     fetchFromTheStart();
   }
 

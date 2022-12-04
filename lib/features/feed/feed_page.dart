@@ -1,5 +1,6 @@
 import 'package:aoba/features/avatar/avatar_wrapper.dart';
 import 'package:aoba/features/quick_update/quick_update_sheet.dart';
+import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
@@ -7,7 +8,8 @@ import 'package:veee/veee.dart';
 import 'content/activities.dart';
 import 'feed_vm.dart';
 
-class FeedPage extends ViewModelWidget<FeedViewModel> {
+class FeedPage extends ViewModelWidget<FeedViewModel>
+    with SnackBarMixin, SnackBarInViewModelWidgetMixin<FeedViewModel> {
   const FeedPage({super.key});
 
   @override
@@ -16,6 +18,7 @@ class FeedPage extends ViewModelWidget<FeedViewModel> {
     ViewModelOrder order,
     FeedViewModel vm,
   ) {
+    super.handleOrder(context, order, vm);
     if (order is OpenProfile) {
       context.router.navigate(ProfileRoute(userId: order.userId));
     }

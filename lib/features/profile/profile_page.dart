@@ -1,10 +1,12 @@
+import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:veee/veee.dart';
 import 'package:flutter/material.dart';
 
 import 'content/activities.dart';
 import 'profile_vm.dart';
 
-class ProfilePage extends ViewModelWidget<ProfileViewModel> {
+class ProfilePage extends ViewModelWidget<ProfileViewModel>
+    with SnackBarMixin, SnackBarInViewModelWidgetMixin<ProfileViewModel> {
   const ProfilePage({super.key});
 
   @override

@@ -1,12 +1,14 @@
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/features/auth/content/auth_form.dart';
 import 'package:aoba/features/auth/content/illustration.dart';
+import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
 import 'auth_vm.dart';
 
-class AuthPage extends ViewModelWidget<AuthViewModel> {
+class AuthPage extends ViewModelWidget<AuthViewModel>
+    with SnackBarMixin, SnackBarInViewModelWidgetMixin<AuthViewModel> {
   const AuthPage({super.key});
 
   @override
@@ -15,6 +17,7 @@ class AuthPage extends ViewModelWidget<AuthViewModel> {
     ViewModelOrder order,
     AuthViewModel vm,
   ) {
+    super.handleOrder(context, order, vm);
     if (order is MoveOn) {
       vm.onSuccess?.call();
     }
