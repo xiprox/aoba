@@ -28,7 +28,7 @@ class Resource<T> {
   final T? data;
   final ErrorInfo? error;
 
-  const Resource._(
+  const Resource(
     this.status,
     this.data,
     this.error,
@@ -43,7 +43,7 @@ class Resource<T> {
   bool isSuccess() => status == ResourceStatus.success;
 
   factory Resource.success(T data) {
-    return Resource._(ResourceStatus.success, data, null);
+    return Resource(ResourceStatus.success, data, null);
   }
 
   factory Resource.error(String error, [T? data]) {
@@ -51,7 +51,7 @@ class Resource<T> {
   }
 
   factory Resource.exception(Exception exception, [T? data]) {
-    return Resource._(
+    return Resource(
       ResourceStatus.error,
       data,
       ErrorInfo(exception: exception),
@@ -63,7 +63,7 @@ class Resource<T> {
     StackTrace stackTrace, [
     T? data,
   ]) {
-    return Resource._(
+    return Resource(
       ResourceStatus.error,
       data,
       ErrorInfo(exception: exception, stackTrace: stackTrace),
@@ -71,11 +71,11 @@ class Resource<T> {
   }
 
   factory Resource.loading([T? data]) {
-    return Resource._(ResourceStatus.loading, data, null);
+    return Resource(ResourceStatus.loading, data, null);
   }
 
   factory Resource.empty() {
-    return const Resource._(ResourceStatus.empty, null, null);
+    return const Resource(ResourceStatus.empty, null, null);
   }
 
   @override
@@ -105,7 +105,7 @@ class Resource<T> {
   /// Just do existingResource.transform(() { ... }) and you don't need to
   /// worry about states other than success.
   Resource<NewType> transform<NewType>(NewType Function(T data) transformer) {
-    return Resource<NewType>._(
+    return Resource<NewType>(
       status,
       // ignore: null_check_on_nullable_type_parameter
       data == null ? null : transformer(data!),
