@@ -1,3 +1,4 @@
+import 'package:aoba/utils/anilist_utils.dart';
 import 'package:flutter/painting.dart';
 
 extension StringExts on String? {
@@ -14,6 +15,13 @@ extension StringExts on String? {
         if (colorInt == null) return null;
         return Color(colorInt);
       }
+    }
+    return null;
+  }
+
+  Color? fromAniListColor() {
+    if (this != null) {
+      return AniListUtils().colorFromProfileColor(this);
     }
     return null;
   }
