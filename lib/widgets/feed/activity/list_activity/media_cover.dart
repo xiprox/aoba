@@ -1,4 +1,4 @@
-import 'package:aoba/consts/consts.dart';
+import 'package:aoba/consts/aspect_ratios.dart';
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:flutter/material.dart';
