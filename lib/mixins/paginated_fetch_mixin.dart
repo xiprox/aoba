@@ -18,8 +18,8 @@ mixin PaginatedDataMixin<T> on InfiniteScrollMixin {
     if (scrollController.hasClients) {
       await scrollController.animateTo(
         0,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.fastOutSlowIn,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInCubic,
       );
     }
     _fetchFirstPage();
