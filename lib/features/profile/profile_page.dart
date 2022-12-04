@@ -1,3 +1,4 @@
+import 'package:aoba/consts/consts.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/theme/theme.dart';
 import 'package:veee/veee.dart';
@@ -30,7 +31,11 @@ class ProfilePage extends ViewModelWidget<ProfileViewModel>
                 child: Center(child: CircularProgressIndicator()),
               ),
             if (vm.activities.isError())
-              SliverToBoxAdapter(child: Text(vm.activities.error!.message)),
+              SliverToBoxAdapter(
+                child: Text(
+                  vm.activities.error!.message ?? kDefaultUnknownErrorText,
+                ),
+              ),
             if (vm.activities.isSuccess())
               Activities(activities: vm.activities.data!),
           ],

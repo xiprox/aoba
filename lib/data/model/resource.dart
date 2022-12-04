@@ -5,21 +5,24 @@ enum ResourceStatus { success, error, loading, empty }
 
 /// A container for error information
 class ErrorInfo {
+  final String? message;
   final Exception? exception;
   final StackTrace? stackTrace;
 
   ErrorInfo({
+    this.message,
     this.exception,
     this.stackTrace,
   });
-
-  String get message => exception?.cleanMessage() ?? '?';
 
   bool get isConnectionError => exception is SocketException;
 
   @override
   String toString() {
-    return message;
+    return stackTrace?.toString() ??
+        exception?.toString() ??
+        message ??
+        'Unknown error';
   }
 }
 

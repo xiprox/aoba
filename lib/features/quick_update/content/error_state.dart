@@ -1,3 +1,4 @@
+import 'package:aoba/consts/consts.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class ErrorState extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Text(
-              error.message,
+              error.message ?? kDefaultUnknownErrorText,
               style: TextStyle(
                 color: colors.onErrorContainer,
               ),

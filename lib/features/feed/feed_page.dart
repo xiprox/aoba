@@ -1,3 +1,4 @@
+import 'package:aoba/consts/consts.dart';
 import 'package:aoba/features/avatar/avatar_wrapper.dart';
 import 'package:aoba/features/quick_update/quick_update_sheet.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
@@ -57,7 +58,11 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
               child: Center(child: CircularProgressIndicator()),
             ),
           if (vm.activities.isError())
-            SliverToBoxAdapter(child: Text(vm.activities.error!.message)),
+            SliverToBoxAdapter(
+              child: Text(
+                vm.activities.error!.message ?? kDefaultUnknownErrorText,
+              ),
+            ),
           if (vm.activities.isSuccess())
             Activities(
               activities: vm.activities.data!,

@@ -15,18 +15,7 @@ class GqlRequest {
       arg1: options,
       arg2: accessToken,
     );
-    if (response.data != null) {
-      final deserialized = await Executor().execute(
-        fun2: _deserialize<T>,
-        arg1: fromJson,
-        arg2: response.data!,
-      );
-      return Resource.success(deserialized);
-    } else if (response.exception != null) {
-      return Resource.exception(response.exception!);
-    } else {
-      return Resource.error(response.toString());
-    }
+    return await _parseResponse<T>(response, fromJson: fromJson);
   }
 
   static Future<Resource<T>> mutation<T>(
@@ -39,6 +28,13 @@ class GqlRequest {
       arg1: options,
       arg2: accessToken,
     );
+    return await _parseResponse<T>(response, fromJson: fromJson);
+  }
+
+  static Future<Resource<T>> _parseResponse<T>(
+    QueryResult<Object?> response, {
+    required T Function(Map<String, dynamic> data) fromJson,
+  }) async {
     if (response.data != null) {
       final deserialized = await Executor().execute(
         fun2: _deserialize<T>,
@@ -47,9 +43,29 @@ class GqlRequest {
       );
       return Resource.success(deserialized);
     } else if (response.exception != null) {
-      return Resource.exception(response.exception!);
+      return Resource(
+        ResourceStatus.error,
+        null,
+        ErrorInfo(
+          message: _parseErrorMessage(response.exception!),
+          exception: response.exception,
+        ),
+      );
     } else {
       return Resource.error(response.toString());
+    }
+  }
+
+  static String? _parseErrorMessage(OperationException exception) {
+    if (exception.linkException != null) {
+      final excp = exception.linkException;
+      if (excp is ServerException) {
+        return excp.parsedResponse?.errors?.map((e) => e.message).join('\n');
+      } else {
+        return excp?.originalException?.cleanMessage();
+      }
+    } else {
+      return exception.graphqlErrors.map((e) => e.message).join('\n');
     }
   }
 
