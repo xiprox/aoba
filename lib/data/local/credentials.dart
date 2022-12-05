@@ -9,6 +9,7 @@ abstract class _Keys {
 abstract class Credentials {
   Future init();
   Future clear();
+  Future close();
 
   String? get accessToken;
   set accessToken(String? value);
@@ -34,6 +35,11 @@ class CredentialsImpl implements Credentials {
   }
 
   @override
+  Future close() {
+    return _box.close();
+  }
+
+  @override
   String? get accessToken => _box.get(_Keys.accessToken);
   @override
   set accessToken(String? value) => _box.put(_Keys.accessToken, value);
@@ -51,6 +57,9 @@ class CredentialsInIsolate implements Credentials {
 
   @override
   Future clear() async {}
+
+  @override
+  Future close() async {}
 
   @override
   String? get accessToken => _token;

@@ -5,20 +5,24 @@ import 'package:graphql/client.dart';
 
 import 'user_info.gql.dart';
 
+typedef BasicUserInfo = Query$FetchBasicUserInfo$Viewer;
+typedef BasicUserInfoAvatar = Query$FetchBasicUserInfo$Viewer$avatar;
+typedef BasicUserInfoOptions = Query$FetchBasicUserInfo$Viewer$options;
+
 abstract class UserInfoRepo {
-  Future<Resource<Query$FetchBasicUserInfo>> getBasicUserInfo();
+  Future<Resource<BasicUserInfo>> getBasicUserInfo();
 }
 
 class UserInfoRepoImpl extends GraphqlRepo implements UserInfoRepo {
   @override
-  Future<Resource<Query$FetchBasicUserInfo>> getBasicUserInfo() async {
+  Future<Resource<BasicUserInfo>> getBasicUserInfo() async {
     return GqlRequest.query(
       QueryOptions(
         document: documentNodeQueryFetchBasicUserInfo,
         fetchPolicy: FetchPolicy.networkOnly,
       ),
       accessToken: accessToken,
-      fromJson: Query$FetchBasicUserInfo.fromJson,
+      fromJson: (json) => BasicUserInfo.fromJson(json['Viewer']),
     );
   }
 }

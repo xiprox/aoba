@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:aoba/data/repo/user_info/user_info.gql.dart';
+import 'package:aoba/data/repo/user_info/user_info_repo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class _Keys {
@@ -18,6 +19,7 @@ abstract class _Keys {
 abstract class UserInfo {
   Future init();
   Future clear();
+  Future close();
 
   int get id;
   set id(int value);
@@ -48,7 +50,7 @@ abstract class UserInfo {
 
   Stream<String?> get profileColorStream;
 
-  void saveFromBasicUserInfo(Query$FetchBasicUserInfo$Viewer info);
+  void saveFromBasicUserInfo(BasicUserInfo info);
 }
 
 class UserInfoImpl implements UserInfo {
@@ -66,6 +68,11 @@ class UserInfoImpl implements UserInfo {
     // Failing to re-open after clearing a box will cause writes to not be
     // persisted.
     await init();
+  }
+
+  @override
+  Future close() {
+    return _box.close();
   }
 
   @override
