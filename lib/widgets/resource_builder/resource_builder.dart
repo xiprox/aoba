@@ -17,6 +17,7 @@ class ResourceBuilder<T> extends StatelessWidget {
   final ContentBuilder<T> contentBuilder;
   final ErrorBuilder<T>? errorBuilder;
   final EmptyBuilder<T>? emptyBuilder;
+  final bool Function(T data)? isEmpty;
   final Function()? onRetry;
 
   const ResourceBuilder({
@@ -26,6 +27,7 @@ class ResourceBuilder<T> extends StatelessWidget {
     required this.contentBuilder,
     this.errorBuilder,
     this.emptyBuilder,
+    this.isEmpty,
     this.onRetry,
     Resource<T>? initialData,
   });
@@ -33,14 +35,16 @@ class ResourceBuilder<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (resource != null) {
-      if (resource!.isError()) {
+      if (resource!.error != null) {
         return _buildError(context, resource!.error!, resource!.data);
-      } else if (resource!.isLoading()) {
+      } else if (resource!.isLoading) {
         return _buildLoading(context, resource!.data);
-      } else if (resource!.isEmpty()) {
-        return _buildEmpty(context);
       } else if (resource!.data != null) {
-        return _buildContent(context, resource!.data as T);
+        if (isEmpty?.call(resource!.data as T) == true) {
+          return _buildEmpty(context);
+        } else {
+          return _buildContent(context, resource!.data as T);
+        }
       } else {
         return Container();
       }

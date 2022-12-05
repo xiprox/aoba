@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'info.dart';
 
-class QuickUpdateEntry extends StatelessWidget {
+class QuickUpdateEntryTile extends StatelessWidget {
   static const kDesiredHeight = kDesiredWidth * AspectRatios.mediaCover;
   static const kDesiredWidth = 144.0;
 
@@ -29,7 +29,7 @@ class QuickUpdateEntry extends StatelessWidget {
   final bool loading;
   final Function()? onIncrementPress;
 
-  const QuickUpdateEntry({
+  const QuickUpdateEntryTile({
     super.key,
     required this.coverUrl,
     required this.type,

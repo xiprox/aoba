@@ -16,7 +16,7 @@ class AuthServiceImpl implements AuthService {
     _credentials.accessToken = token;
 
     final userData = await _userInfoRepo.getBasicUserInfo();
-    if (userData.isSuccess() && userData.data != null) {
+    if (userData.data != null) {
       _userInfo.saveFromBasicUserInfo(userData.data!);
       return null;
     } else {

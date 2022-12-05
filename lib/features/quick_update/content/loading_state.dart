@@ -1,5 +1,5 @@
 import 'package:aoba/exts/build_context_exts.dart';
-import 'package:aoba/features/quick_update/content/entry/quick_update_entry.dart';
+import 'package:aoba/features/quick_update/content/entry/quick_update_entry_tile.dart';
 import 'package:aoba/widgets/shimmer/shimmer_rect.dart';
 import 'package:flutter/material.dart';
 
@@ -14,22 +14,22 @@ class LoadingState extends StatelessWidget {
       children: [
         const SizedBox(width: 16),
         ShimmerRect(
-          width: QuickUpdateEntry.kDesiredWidth,
-          height: QuickUpdateEntry.kDesiredHeight,
+          width: QuickUpdateEntryTile.kDesiredWidth,
+          height: QuickUpdateEntryTile.kDesiredHeight,
           borderRadius: BorderRadius.circular(8),
           color: color,
         ),
         const SizedBox(width: 8),
         ShimmerRect(
-          width: QuickUpdateEntry.kDesiredWidth,
-          height: QuickUpdateEntry.kDesiredHeight,
+          width: QuickUpdateEntryTile.kDesiredWidth,
+          height: QuickUpdateEntryTile.kDesiredHeight,
           borderRadius: BorderRadius.circular(8),
           color: color,
         ),
         const SizedBox(width: 8),
         ShimmerRect(
-          width: QuickUpdateEntry.kDesiredWidth,
-          height: QuickUpdateEntry.kDesiredHeight,
+          width: QuickUpdateEntryTile.kDesiredWidth,
+          height: QuickUpdateEntryTile.kDesiredHeight,
           borderRadius: BorderRadius.circular(8),
           color: color,
         ),

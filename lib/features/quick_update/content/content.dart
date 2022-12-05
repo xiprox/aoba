@@ -5,14 +5,14 @@ import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_p
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
-import 'entry/quick_update_entry.dart';
+import 'entry/quick_update_entry_tile.dart';
 
 class Content extends ViewModelWidget<QuickUpdateViewModel> {
   const Content({super.key});
 
   @override
   Widget build(BuildContext context, QuickUpdateViewModel vm) {
-    final entries = vm.entries.data?.Page?.entries ?? [];
+    final entries = vm.entries.data ?? [];
     return ListView.separated(
       controller: vm.scrollController,
       physics: const ClampingScrollPhysics(),
@@ -21,18 +21,18 @@ class Content extends ViewModelWidget<QuickUpdateViewModel> {
       itemCount: entries.length,
       itemBuilder: (context, index) {
         final entry = entries[index];
-        final media = entry?.media;
+        final media = entry.media;
 
         if (media == null) return Container();
 
         final updateResult = vm.updatedEntries[media.id];
-        final loading = updateResult?.isLoading() == true;
+        final loading = updateResult?.isLoading == true;
         final error = updateResult?.error;
 
         // Use the updated progress if it exists.
-        final progress = updateResult?.data?.progress ?? entry?.progress;
+        final progress = updateResult?.data?.progress ?? entry.progress;
 
-        return QuickUpdateEntry(
+        return QuickUpdateEntryTile(
           coverUrl: media.coverImage?.large ?? '',
           type:
               media.type == MediaType.ANIME ? ImageType.anime : ImageType.book,

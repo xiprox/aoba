@@ -20,7 +20,7 @@ class ProfileViewModel extends ViewModel
 
   final _repo = get<ProfileRepo>();
 
-  Resource<User> info = Resource.loading();
+  Resource<User> info = const Resource(loading: true);
   Resource<List<Activity?>> get activities => paginatedResource;
 
   @override

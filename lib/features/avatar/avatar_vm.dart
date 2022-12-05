@@ -20,7 +20,7 @@ class AvatarViewModel extends ViewModel {
 
   void _updateUserInfo() async {
     final userData = await _userInfoRepo.getBasicUserInfo();
-    if (userData.isSuccess() && userData.data != null) {
+    if (userData.data != null) {
       _userInfo.saveFromBasicUserInfo(userData.data!);
       notifyListeners();
     }

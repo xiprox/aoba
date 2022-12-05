@@ -41,18 +41,18 @@ class GqlRequest {
         arg1: fromJson,
         arg2: response.data!,
       );
-      return Resource.success(deserialized);
+      return Resource(data: deserialized);
     } else if (response.exception != null) {
       return Resource(
-        ResourceStatus.error,
-        null,
-        ErrorInfo(
+        error: ErrorInfo(
           message: _parseErrorMessage(response.exception!),
           exception: response.exception,
         ),
       );
     } else {
-      return Resource.error(response.toString());
+      return Resource(
+        error: ErrorInfo(message: response.toString()),
+      );
     }
   }
 

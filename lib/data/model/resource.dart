@@ -1,7 +1,4 @@
 import 'dart:io';
-import 'package:flextensions/flextensions.dart';
-
-enum ResourceStatus { success, error, loading, empty }
 
 /// A container for error information
 class ErrorInfo {
@@ -27,92 +24,56 @@ class ErrorInfo {
 }
 
 class Resource<T> {
-  final ResourceStatus status;
-  final T? data;
+  final bool isLoading;
   final ErrorInfo? error;
+  final T? data;
 
-  const Resource(
-    this.status,
-    this.data,
+  const Resource({
+    bool loading = false,
     this.error,
-  );
-
-  bool isLoading() => status == ResourceStatus.loading;
-
-  bool isEmpty() => status == ResourceStatus.empty;
-
-  bool isError() => status == ResourceStatus.error;
-
-  bool isSuccess() => status == ResourceStatus.success;
-
-  factory Resource.success(T data) {
-    return Resource(ResourceStatus.success, data, null);
-  }
-
-  factory Resource.error(String error, [T? data]) {
-    return Resource.exception(Exception(error), data);
-  }
-
-  factory Resource.exception(Exception exception, [T? data]) {
-    return Resource(
-      ResourceStatus.error,
-      data,
-      ErrorInfo(exception: exception),
-    );
-  }
-
-  factory Resource.exceptionWithStack(
-    Exception exception,
-    StackTrace stackTrace, [
-    T? data,
-  ]) {
-    return Resource(
-      ResourceStatus.error,
-      data,
-      ErrorInfo(exception: exception, stackTrace: stackTrace),
-    );
-  }
-
-  factory Resource.loading([T? data]) {
-    return Resource(ResourceStatus.loading, data, null);
-  }
-
-  factory Resource.empty() {
-    return const Resource(ResourceStatus.empty, null, null);
-  }
+    this.data,
+  }) : isLoading = loading;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Resource &&
           runtimeType == other.runtimeType &&
-          status == other.status &&
-          data == other.data &&
-          error == other.error;
+          isLoading == other.isLoading &&
+          error == other.error &&
+          data == other.data;
 
   @override
   String toString() {
     return {
-      'status': status,
-      'data': data,
+      'isLoading': isLoading,
       'error': error,
+      'data': data,
     }.toString();
   }
 
   @override
-  int get hashCode => status.hashCode ^ data.hashCode ^ error.hashCode;
+  int get hashCode => isLoading.hashCode ^ error.hashCode ^ data.hashCode;
+
+  Resource<T> copyWith({
+    bool? loading,
+    ErrorInfo? error,
+    T? data,
+  }) {
+    return Resource(
+      loading: loading ?? isLoading,
+      error: error ?? this.error,
+      data: data ?? this.data,
+    );
+  }
 
   /// Transforms the data of this Resource using given [transformer] if
-  /// data isn't null, and keeps the status and error information.
-  ///
-  /// Just do existingResource.transform(() { ... }) and you don't need to
-  /// worry about states other than success.
+  /// data isn't null, and keeps the [isloading] and [error] information.
   Resource<NewType> transform<NewType>(NewType Function(T data) transformer) {
     return Resource<NewType>(
-      status,
-      // ignore: null_check_on_nullable_type_parameter
-      data == null ? null : transformer(data!),
-      error,
+      loading: isLoading,
+      error: error,
+      data: data == null ? null : transformer(data as T),
     );
   }
 }

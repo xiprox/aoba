@@ -6,7 +6,7 @@ mixin PaginatedDataMixin<T> on InfiniteScrollMixin {
   /// The current page.
   int _page = 1;
 
-  Resource<List<T>> paginatedResource = Resource.loading();
+  Resource<List<T>> paginatedResource = const Resource(loading: true);
 
   @override
   void onScrollEndReached() {
@@ -30,8 +30,8 @@ mixin PaginatedDataMixin<T> on InfiniteScrollMixin {
   }
 
   void _fetchFirstPage() async {
-    if (!paginatedResource.isLoading()) {
-      paginatedResource = Resource.loading();
+    if (!paginatedResource.isLoading) {
+      paginatedResource = const Resource(loading: true);
       notifyListeners();
     }
     paginatedResource = await fetchPage(_page);
@@ -39,16 +39,16 @@ mixin PaginatedDataMixin<T> on InfiniteScrollMixin {
   }
 
   void _fetchNextPage() async {
-    if (!paginatedResource.isSuccess()) {
+    if (paginatedResource.data == null) {
       // No point trying to fetch anything else if the first request failed.
       return;
     }
 
     final resource = await fetchPage(++_page);
-    if (resource.isSuccess()) {
+    if (resource.data != null) {
       paginatedResource.data!.addAll(resource.data!);
       notifyListeners();
-    } else if (resource.isError()) {
+    } else if (resource.error != null) {
       onFetchPageFailed(resource.error);
     }
   }

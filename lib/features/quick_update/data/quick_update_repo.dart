@@ -1,14 +1,17 @@
 import 'package:aoba/arch/graphql_repo.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
+import 'package:collection/collection.dart';
+import 'package:flextensions/flextensions.dart';
 import 'package:graphql/client.dart';
 
 import 'quick_update.gql.dart';
 
+typedef QuickUpdateEntry = Query$FetchQuickUpdate$Page$entries;
 typedef QuickUpdateResult = Mutation$UpdateEntry$SaveMediaListEntry;
 
 abstract class QuickUpdateRepo {
-  Future<Resource<Query$FetchQuickUpdate>> getEntries({
+  Future<Resource<List<QuickUpdateEntry>>> getEntries({
     required int userId,
     bool forceNetwork,
   });
@@ -18,7 +21,7 @@ abstract class QuickUpdateRepo {
 
 class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
   @override
-  Future<Resource<Query$FetchQuickUpdate>> getEntries({
+  Future<Resource<List<QuickUpdateEntry>>> getEntries({
     required int userId,
     bool forceNetwork = false,
   }) async {
@@ -31,7 +34,13 @@ class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
         fetchPolicy: forceNetwork ? FetchPolicy.networkOnly : null,
       ),
       accessToken: accessToken,
-      fromJson: Query$FetchQuickUpdate.fromJson,
+      fromJson: (json) {
+        return Query$FetchQuickUpdate$Page.fromJson(json['Page'])
+            .entries
+            .orEmpty()
+            .whereNotNull()
+            .toList();
+      },
     );
   }
 

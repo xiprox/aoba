@@ -1,7 +1,7 @@
 import 'package:aoba/consts/consts.dart';
+import 'package:collection/collection.dart';
 import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
-import 'package:aoba/features/quick_update/data/quick_update.gql.dart';
 import 'package:aoba/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:veee/veee.dart';
@@ -15,7 +15,7 @@ class QuickUpdateViewModel extends ViewModel {
 
   final scrollController = ScrollController();
 
-  Resource<Query$FetchQuickUpdate> entries = Resource.loading();
+  Resource<List<QuickUpdateEntry>> entries = const Resource(loading: true);
 
   Map<int, Resource<QuickUpdateResult>> updatedEntries = {};
 
@@ -31,7 +31,10 @@ class QuickUpdateViewModel extends ViewModel {
   }
 
   void _fetch({bool showLoading = true, bool forceRefresh = false}) async {
-    entries = Resource.loading(showLoading ? null : entries.data);
+    entries = Resource(
+      loading: showLoading,
+      data: showLoading ? null : entries.data,
+    );
     notifyListeners();
     entries = await _repo.getEntries(
       userId: _userInfo.id,
@@ -43,15 +46,14 @@ class QuickUpdateViewModel extends ViewModel {
   void onRefreshPress() => _fetch(showLoading: true, forceRefresh: true);
 
   void onIncrementEntryPress(int mediaId, int progress) async {
-    final fetchedEntry = entries.data?.Page?.entries?.firstWhere(
-      (entry) => entry?.media?.id == mediaId,
-      orElse: () => null,
+    final fetchedEntry = entries.data?.firstWhereOrNull(
+      (entry) => entry.media?.id == mediaId,
     );
     final media = fetchedEntry?.media;
 
     final existingData = updatedEntries[mediaId]?.data;
 
-    updatedEntries[mediaId] = Resource.loading(existingData);
+    updatedEntries[mediaId] = Resource(loading: true, data: existingData);
     notifyListeners();
 
     final result = await _repo.updateEntry(
@@ -59,7 +61,7 @@ class QuickUpdateViewModel extends ViewModel {
       progress: progress,
     );
 
-    if (!result.isError()) {
+    if (result.data != null) {
       updatedEntries[mediaId] = result;
 
       // If we completed the entry, refetch the list to remove it.
@@ -71,20 +73,18 @@ class QuickUpdateViewModel extends ViewModel {
         notifyListeners();
       }
     } else {
-      updatedEntries[mediaId] = Resource(
-        result.status,
-        existingData,
-        result.error,
-      );
+      updatedEntries[mediaId] = result.copyWith(data: existingData);
       notifyListeners();
       await Future.delayed(kErrorDisplayDuration);
-      updatedEntries[mediaId] = Resource.success(existingData ??
-          QuickUpdateResult(
-            $__typename: '',
-            id: 0,
-            mediaId: mediaId,
-            progress: fetchedEntry?.progress,
-          ));
+      updatedEntries[mediaId] = Resource(
+        data: existingData ??
+            QuickUpdateResult(
+              $__typename: '',
+              id: 0,
+              mediaId: mediaId,
+              progress: fetchedEntry?.progress,
+            ),
+      );
       notifyListeners();
     }
   }

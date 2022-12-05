@@ -53,17 +53,17 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
             ],
           ),
           const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
-          if (vm.activities.isLoading())
+          if (vm.activities.isLoading)
             const SliverToBoxAdapter(
               child: Center(child: CircularProgressIndicator()),
             ),
-          if (vm.activities.isError())
+          if (vm.activities.error != null)
             SliverToBoxAdapter(
               child: Text(
                 vm.activities.error!.message ?? kDefaultUnknownErrorText,
               ),
             ),
-          if (vm.activities.isSuccess())
+          if (vm.activities.data != null)
             Activities(
               activities: vm.activities.data!,
               onUserPress: vm.onUserPress,
