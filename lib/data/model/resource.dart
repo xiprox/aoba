@@ -6,7 +6,7 @@ class ErrorInfo {
   final Exception? exception;
   final StackTrace? stackTrace;
 
-  ErrorInfo({
+  const ErrorInfo({
     this.message,
     this.exception,
     this.stackTrace,
@@ -67,7 +67,7 @@ class Resource<T> {
     );
   }
 
-  /// Transforms the data of this Resource using given [transformer] if
+  /// Transforms the data of this [Resource] using given [transformer] if
   /// data isn't null, and keeps the [isloading] and [error] information.
   Resource<NewType> transform<NewType>(NewType Function(T data) transformer) {
     return Resource<NewType>(
