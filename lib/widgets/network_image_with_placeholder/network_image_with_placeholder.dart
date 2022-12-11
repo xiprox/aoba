@@ -5,7 +5,7 @@ import 'package:aoba/widgets/frame_builders.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
-enum ImageType { anime, book, user }
+enum ImageType { anime, book, user, banner }
 
 final _kDefaultBorderRadius = BorderRadius.circular(6);
 
@@ -134,7 +134,7 @@ class NetworkImageWithPlaceholder extends StatelessWidget {
     );
   }
 
-  IconData _getIcon() {
+  IconData? _getIcon() {
     switch (type) {
       case ImageType.anime:
         return Icons.movie_rounded;
@@ -143,7 +143,7 @@ class NetworkImageWithPlaceholder extends StatelessWidget {
       case ImageType.user:
         return Icons.person_rounded;
       default:
-        return Icons.circle;
+        return null;
     }
   }
 }
