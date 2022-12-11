@@ -85,12 +85,7 @@ class ExpandableSheetState extends State<ExpandableSheet>
     double collapsedHeight,
     double expandedHeight,
   ) {
-    final value = _controller.value;
-    if (value >= 0 && value < 0.01) {
-      yPos = expandedHeight - collapsedHeight;
-    } else {
-      yPos = _percentageToY(expandedHeight, _controller.value);
-    }
+    yPos = _percentageToY(expandedHeight, _controller.value);
     _controller.stop(canceled: true);
   }
 
