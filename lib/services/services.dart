@@ -36,6 +36,8 @@ class Services {
 
     getIt.registerSingleton<Logger>(LoggerImpl());
 
+    getIt.registerSingleton<PingService>(PingServiceImpl());
+
     /// We rely on platform paths, which aren't supported in non-root Isolates.
     if (isRootIsolate) {
       final credentials = CredentialsImpl();

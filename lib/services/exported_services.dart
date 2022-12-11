@@ -7,3 +7,4 @@ export 'package:aoba/data/local/credentials.dart';
 export 'package:aoba/data/remote/client/client.dart';
 
 export 'logger.dart';
+export 'ping.dart';
