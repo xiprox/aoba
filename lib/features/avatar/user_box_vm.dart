@@ -3,7 +3,7 @@ import 'package:aoba/data/repo/user_info/user_info_repo.dart';
 import 'package:aoba/services/services.dart';
 import 'package:veee/veee.dart';
 
-class AvatarViewModel extends ViewModel {
+class UserBoxViewModel extends ViewModel {
   final _userInfo = get<UserInfo>();
   final _userInfoRepo = get<UserInfoRepo>();
 

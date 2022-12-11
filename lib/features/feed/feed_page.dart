@@ -1,5 +1,5 @@
 import 'package:aoba/consts/consts.dart';
-import 'package:aoba/features/avatar/avatar_wrapper.dart';
+import 'package:aoba/features/avatar/user_box_wrapper.dart';
 import 'package:aoba/features/quick_update/quick_update_sheet.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/navigation/navigation.dart';
@@ -34,7 +34,7 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
         controller: vm.scrollController,
         slivers: [
           SliverAppBar(
-            leading: AvatarWrapper(onPress: vm.onProfilePress),
+            leading: UserBoxWrapper(onPress: vm.onProfilePress),
             titleSpacing: 0,
             title: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
             floating: true,

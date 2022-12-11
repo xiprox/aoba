@@ -2,15 +2,15 @@ import 'package:aoba/utils/anilist_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
-import 'avatar_vm.dart';
+import 'user_box_vm.dart';
 
-class Avatar extends ViewModelWidget<AvatarViewModel> {
+class UserBox extends ViewModelWidget<UserBoxViewModel> {
   final Function()? onPress;
 
-  const Avatar({super.key, this.onPress});
+  const UserBox({super.key, this.onPress});
 
   @override
-  Widget build(BuildContext context, AvatarViewModel vm) {
+  Widget build(BuildContext context, UserBoxViewModel vm) {
     final color = AniListUtils().colorFromProfileColor(vm.color);
     return Padding(
       padding: const EdgeInsets.all(8),
