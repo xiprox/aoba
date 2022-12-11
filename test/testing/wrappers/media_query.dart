@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 extension WidgetTesterMediaQueryExt on WidgetTester {
-  Future<void> pumpWidgetDirectionality(Widget widget) {
+  Future<void> pumpWidgetMediaQuery(Widget widget) {
     return pumpWidget(MediaQueryWrapper(child: widget));
   }
 }
