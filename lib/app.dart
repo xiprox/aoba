@@ -25,6 +25,7 @@ class App extends StatelessWidget {
           routeInformationParser: CustomRouteInfoParser(
             router.defaultRouteParser(),
           ),
+          debugShowCheckedModeBanner: false,
         );
       },
     );
