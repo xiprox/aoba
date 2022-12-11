@@ -3,10 +3,15 @@ import 'package:duration/duration.dart';
 
 extension DurationExts on Duration {
   String toAiringCountdown() {
-    final moreThanAHundredWeeks = inWeeks >= 100;
-    final moreThanAWeek = inWeeks > 1;
-    final moreThanADay = inDays > 1;
-    final moreThanAnHour = inHours > 1;
+    final seconds = inSeconds;
+    final minutes = seconds / 60;
+    final hours = minutes / 60;
+    final days = hours / 24;
+    final weeks = days / 7;
+    final moreThanAHundredWeeks = weeks >= 100;
+    final moreThanAWeek = weeks > 1;
+    final moreThanADay = days > 1;
+    final moreThanAnHour = hours > 1;
 
     DurationTersity tersity;
     if (moreThanAHundredWeeks) {
