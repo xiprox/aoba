@@ -49,7 +49,7 @@ class Info extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: Padding(
-              padding: EdgeInsetsDirectional.only(start: hasAiringInfo ? 4 : 8),
+              padding: const EdgeInsetsDirectional.only(start: 4),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +58,6 @@ class Info extends StatelessWidget {
                     'On ${mediaType == MediaType.ANIME ? 'ep' : 'ch'} '
                     '${progress ?? '?'}',
                     style: TextStyle(
-                      height: 1,
                       color: colors.onSecondaryContainer,
                       fontWeight: FontWeight.w500,
                     ),
@@ -93,7 +92,7 @@ class Info extends StatelessWidget {
               child: Align(
                 alignment: AlignmentDirectional.centerEnd,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 8),
+                  padding: const EdgeInsetsDirectional.only(end: 4),
                   child: ActionLoadingError(
                     loading: loading,
                     error: error,
