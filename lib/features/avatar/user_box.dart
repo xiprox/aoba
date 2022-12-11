@@ -16,7 +16,7 @@ class UserBox extends ViewModelWidget<UserBoxViewModel> {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Avatar(
-        image: NetworkImage(vm.avatarMedium ?? ''),
+        image: vm.avatarMedium,
         imagePadding: const EdgeInsets.all(4),
         color: color,
         onPress: onPress,
