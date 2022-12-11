@@ -1,4 +1,5 @@
 import 'package:aoba/utils/anilist_utils.dart';
+import 'package:aoba/widgets/avatar/avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
@@ -14,27 +15,11 @@ class UserBox extends ViewModelWidget<UserBoxViewModel> {
     final color = AniListUtils().colorFromProfileColor(vm.color);
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(4),
-            child: CircleAvatar(
-              foregroundImage: NetworkImage(vm.avatarMedium ?? ''),
-              backgroundColor: color,
-            ),
-          ),
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(100),
-              child: InkWell(
-                onTap: onPress,
-                borderRadius: BorderRadius.circular(100),
-                child: Container(),
-              ),
-            ),
-          ),
-        ],
+      child: Avatar(
+        image: NetworkImage(vm.avatarMedium ?? ''),
+        imagePadding: const EdgeInsets.all(4),
+        color: color,
+        onPress: onPress,
       ),
     );
   }
