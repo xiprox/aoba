@@ -1,4 +1,5 @@
 import 'package:aoba/consts/consts.dart';
+import 'package:aoba/features/profile/content/app_bar/app_bar.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/theme/theme.dart';
 import 'package:veee/veee.dart';
@@ -13,19 +14,15 @@ class ProfilePage extends ViewModelWidget<ProfileViewModel>
 
   @override
   Widget build(BuildContext context, ProfileViewModel vm) {
+    final theme = AppTheme.override(context, vm.color);
     return Theme(
-      data: AppTheme.override(context, vm.color),
+      data: theme,
       child: Scaffold(
         body: CustomScrollView(
           controller: vm.scrollController,
           slivers: [
-            SliverAppBar(
-              titleSpacing: 0,
-              title: Text(vm.info.data?.name ?? ''),
-              // floating: true,
-              // snap: true,
-            ),
-            const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
+            const ProfileAppBar(),
+            const SliverPadding(padding: EdgeInsets.only(bottom: 8)),
             if (vm.activities.isLoading)
               const SliverToBoxAdapter(
                 child: Center(child: CircularProgressIndicator()),
