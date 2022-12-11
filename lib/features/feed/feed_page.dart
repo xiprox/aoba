@@ -1,4 +1,5 @@
 import 'package:aoba/consts/consts.dart';
+import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/features/avatar/user_box_wrapper.dart';
 import 'package:aoba/features/quick_update/quick_update_sheet.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
@@ -29,51 +30,58 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
 
   @override
   Widget build(BuildContext context, FeedViewModel vm) {
+    final colors = context.colors;
     return Scaffold(
-      body: CustomScrollView(
-        controller: vm.scrollController,
-        slivers: [
-          SliverAppBar(
-            leading: UserBoxWrapper(onPress: vm.onProfilePress),
-            titleSpacing: 0,
-            title: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
-            floating: true,
-            snap: true,
-            actions: [
-              IconButton(
-                icon: Icon(vm.followingOnly
-                    ? Icons.public_rounded
-                    : Icons.public_off_rounded),
-                onPressed: () => vm.onFollowingOnlyChange(!vm.followingOnly),
+      body: RefreshIndicator(
+        onRefresh: vm.onPulledToRefresh,
+        displacement: context.media.padding.top + 56 + 16,
+        backgroundColor: colors.secondaryContainer,
+        child: CustomScrollView(
+          controller: vm.scrollController,
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              leading: UserBoxWrapper(onPress: vm.onProfilePress),
+              titleSpacing: 0,
+              title: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
+              floating: true,
+              snap: true,
+              actions: [
+                IconButton(
+                  icon: Icon(vm.followingOnly
+                      ? Icons.public_rounded
+                      : Icons.public_off_rounded),
+                  onPressed: () => vm.onFollowingOnlyChange(!vm.followingOnly),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.logout_rounded),
+                  onPressed: vm.onLogoutPress,
+                ),
+              ],
+            ),
+            const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
+            if (vm.activities.isLoading)
+              const SliverToBoxAdapter(
+                child: Center(child: CircularProgressIndicator()),
               ),
-              IconButton(
-                icon: const Icon(Icons.logout_rounded),
-                onPressed: vm.onLogoutPress,
+            if (vm.activities.error != null)
+              SliverToBoxAdapter(
+                child: Text(
+                  vm.activities.error!.message ?? kDefaultUnknownErrorText,
+                ),
               ),
-            ],
-          ),
-          const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
-          if (vm.activities.isLoading)
-            const SliverToBoxAdapter(
-              child: Center(child: CircularProgressIndicator()),
-            ),
-          if (vm.activities.error != null)
-            SliverToBoxAdapter(
-              child: Text(
-                vm.activities.error!.message ?? kDefaultUnknownErrorText,
+            if (vm.activities.data != null)
+              Activities(
+                activities: vm.activities.data!,
+                onUserPress: vm.onUserPress,
+              ),
+            const SliverPadding(
+              padding: EdgeInsets.only(
+                bottom: QuickUpdateSheet.kCollapsedHeight + 4,
               ),
             ),
-          if (vm.activities.data != null)
-            Activities(
-              activities: vm.activities.data!,
-              onUserPress: vm.onUserPress,
-            ),
-          const SliverPadding(
-            padding: EdgeInsets.only(
-              bottom: QuickUpdateSheet.kCollapsedHeight + 4,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

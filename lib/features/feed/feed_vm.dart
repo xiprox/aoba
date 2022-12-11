@@ -68,6 +68,10 @@ class FeedViewModel extends ViewModel
     }
   }
 
+  Future onPulledToRefresh() {
+    return fetchFromTheStart(silent: true, forceNetwork: true);
+  }
+
   void onFollowingOnlyChange(bool value) async {
     if (value == followingOnly) return;
     followingOnly = value;
