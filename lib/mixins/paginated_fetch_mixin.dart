@@ -14,7 +14,7 @@ mixin PaginatedDataMixin<T> on InfiniteScrollMixin {
     _fetchNextPage();
   }
 
-  void fetchFromTheStart({
+  Future fetchFromTheStart({
     bool silent = false,
     bool forceNetwork = false,
   }) async {
@@ -26,14 +26,14 @@ mixin PaginatedDataMixin<T> on InfiniteScrollMixin {
         curve: Curves.easeInCubic,
       );
     }
-    _fetchFirstPage(silent, forceNetwork);
+    return _fetchFirstPage(silent, forceNetwork);
   }
 
   Future<Resource<List<T>>> fetchPage(int page, bool forceNetwork) {
     throw UnimplementedError();
   }
 
-  void _fetchFirstPage(bool silent, bool forceNetwork) async {
+  Future _fetchFirstPage(bool silent, bool forceNetwork) async {
     if (!paginatedResource.isLoading && !silent) {
       paginatedResource = const Resource(loading: true);
       notifyListeners();
