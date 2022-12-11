@@ -14,6 +14,7 @@ abstract class FeedRepo {
   Future<Resource<Feed>> getFeed({
     required int page,
     required bool followingOnly,
+    bool forceNetwork = false,
   });
 }
 
@@ -22,6 +23,7 @@ class FeedRepoImpl extends GraphqlRepo implements FeedRepo {
   Future<Resource<Feed>> getFeed({
     required int page,
     required bool followingOnly,
+    bool forceNetwork = false,
   }) async {
     return GqlRequest.query(
       QueryOptions(
@@ -30,6 +32,7 @@ class FeedRepoImpl extends GraphqlRepo implements FeedRepo {
           'isFollowing': followingOnly,
           'page': page,
         },
+        fetchPolicy: forceNetwork ? FetchPolicy.networkOnly : null,
       ),
       accessToken: accessToken,
       fromJson: Feed.fromJson,

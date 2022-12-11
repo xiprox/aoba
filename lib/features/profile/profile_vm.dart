@@ -36,7 +36,10 @@ class ProfileViewModel extends ViewModel
   }
 
   @override
-  Future<Resource<List<Activity?>>> fetchPage(int page) async {
+  Future<Resource<List<Activity?>>> fetchPage(
+    int page,
+    bool forceNetwork,
+  ) async {
     final resource = await _repo.getFeed(userId: userId, page: page);
     return resource.transform((data) => data.Page?.activities ?? []);
   }

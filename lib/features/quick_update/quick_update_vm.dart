@@ -10,8 +10,8 @@ import 'data/quick_update_repo.dart';
 
 class QuickUpdateViewModel extends ViewModel {
   final _userInfo = get<UserInfo>();
-
   final _repo = get<QuickUpdateRepo>();
+  final _ping = get<PingService>();
 
   final scrollController = ScrollController();
 
@@ -72,6 +72,7 @@ class QuickUpdateViewModel extends ViewModel {
       } else {
         notifyListeners();
       }
+      _ping.notify(PingType.quickUpdateHappened);
     } else {
       updatedEntries[mediaId] = result.copyWith(data: existingData);
       notifyListeners();
