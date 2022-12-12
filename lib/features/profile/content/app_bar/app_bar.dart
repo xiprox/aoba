@@ -61,7 +61,7 @@ class ProfileAppBar extends ViewModelWidget<ProfileViewModel> {
                       ),
                       child: InfoBox(
                         scrollProgress: infoCurve,
-                        avatarUrl: vm.info.data?.avatar?.medium,
+                        avatarUrl: vm.info.data?.avatar?.large,
                         name: vm.info.data?.name,
                       ),
                     ),

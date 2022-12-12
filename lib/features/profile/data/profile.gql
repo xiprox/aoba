@@ -76,6 +76,7 @@ query FetchInfo($userId: Int) {
     name
     avatar {
       medium
+      large
     }
     bannerImage
     options {
