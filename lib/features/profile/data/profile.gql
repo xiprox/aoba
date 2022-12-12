@@ -1,6 +1,6 @@
 
 query FetchFeed($userId: Int!, $page: Int!) {
-  Page(page: $page, perPage: 50) {
+  Page(page: $page, perPage: 20) {
     activities(userId: $userId, sort: [PINNED,ID_DESC]) {
       ... on MessageActivity {
         id

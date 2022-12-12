@@ -1,6 +1,6 @@
 
 query FetchFeed($isFollowing: Boolean!, $page: Int!) {
-  Page(page: $page, perPage: 50) {
+  Page(page: $page, perPage: 20) {
     activities(isFollowing: $isFollowing, sort: ID_DESC) {
       ... on TextActivity {
        	id
