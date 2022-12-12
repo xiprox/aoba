@@ -5,7 +5,19 @@ mixin InfiniteScrollMixin on ViewModel {
   final scrollController = ScrollController();
 
   /// How far from the end should we fetch the next page.
-  final infiniteScrollTriggerWindow = 400.0;
+  ///
+  /// The default implementation aims for 1000 pixels from the end. If the
+  /// scrollable area is smaller than that, it chooses half of the max scroll
+  /// extent.
+  double get infiniteScrollTriggerWindow {
+    const desired = 1000.0;
+    final max = scrollController.position.maxScrollExtent;
+    if (max < desired) {
+      return max / 2;
+    } else {
+      return desired;
+    }
+  }
 
   @override
   void onCreate() {
