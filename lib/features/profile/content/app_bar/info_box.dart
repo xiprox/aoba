@@ -22,17 +22,11 @@ class InfoBox extends StatelessWidget {
     final progress = Curves.ease.transform(1 - scrollProgress);
     return Material(
       shape: const SmoothRectangleBorder(
-        borderRadius: BorderRadiusDirectional.only(
-          topEnd: Radius.circular(16),
-          bottomEnd: Radius.circular(16),
-        ),
+        borderRadius: BorderRadiusDirectional.all(Radius.circular(12)),
       ),
       color: colors.secondaryContainer.withOpacity(1 - scrollProgress),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 0 * (1 - scrollProgress),
-        ),
+        padding: const EdgeInsets.all(8),
         child: AnimatedSize(
           duration: const Duration(milliseconds: 300),
           curve: Curves.fastOutSlowIn,
@@ -66,7 +60,7 @@ class InfoBox extends StatelessWidget {
                   color: colors.onSecondaryContainer,
                 ),
               ),
-              SizedBox(width: name == null ? 8 : 16),
+              SizedBox(width: name == null ? 0 : 8),
             ],
           ),
         ),

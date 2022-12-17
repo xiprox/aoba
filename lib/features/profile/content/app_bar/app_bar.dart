@@ -55,7 +55,7 @@ class ProfileAppBar extends ViewModelWidget<ProfileViewModel> {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.only(
-                        start: 0,
+                        start: Tween(begin: 8.0, end: 0.0).transform(infoCurve),
                         bottom:
                             Tween(begin: 24.0, end: 0.0).transform(infoCurve),
                       ),
