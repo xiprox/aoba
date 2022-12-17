@@ -33,7 +33,7 @@ class ShimmerRectOutline extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: borderRadius,
           border: Border.all(
-            color: Colors.black,
+            color: color ?? Shimmer.defaultColor(context),
             width: borderWidth,
           ),
         ),

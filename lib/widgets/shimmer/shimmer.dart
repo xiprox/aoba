@@ -1,6 +1,7 @@
+import 'package:aoba/exts/build_context_exts.dart';
+import 'package:shimmer/shimmer.dart' as shimmer;
 import 'package:aoba/exts/material_exts.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart' as shimmer;
 
 export 'shimmer_circle.dart';
 export 'shimmer_rect_outline.dart';
@@ -19,12 +20,17 @@ class Shimmer extends StatelessWidget {
     this.color,
   });
 
+  static Color defaultColor(BuildContext context) {
+    return context.colors.surfaceTone1;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final c = color ?? defaultColor(context);
     return shimmer.Shimmer.fromColors(
       enabled: enabled,
-      baseColor: color ?? Colors.grey[300]!,
-      highlightColor: color?.manipulate(1.4) ?? Colors.grey[200]!,
+      baseColor: c,
+      highlightColor: c.manipulate(1.1),
       child: child,
     );
   }

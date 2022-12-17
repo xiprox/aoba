@@ -24,7 +24,7 @@ class ShimmerCircle extends StatelessWidget {
         height: radius * 2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: Colors.black,
+          color: color ?? Shimmer.defaultColor(context),
         ),
       ),
     );

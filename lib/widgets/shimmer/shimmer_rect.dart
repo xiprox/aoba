@@ -4,15 +4,15 @@ import 'shimmer.dart';
 
 class ShimmerRect extends StatelessWidget {
   final BorderRadius borderRadius;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final bool enabled;
   final Color? color;
 
   const ShimmerRect({
     super.key,
-    required this.width,
-    required this.height,
+    this.width = double.infinity,
+    this.height = double.infinity,
     this.borderRadius = BorderRadius.zero,
     this.enabled = true,
     this.color,
@@ -28,7 +28,7 @@ class ShimmerRect extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           borderRadius: borderRadius,
-          color: color ?? Colors.black,
+          color: color ?? Shimmer.defaultColor(context),
         ),
       ),
     );
