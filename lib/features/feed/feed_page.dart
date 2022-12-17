@@ -4,10 +4,13 @@ import 'package:aoba/features/avatar/user_box_wrapper.dart';
 import 'package:aoba/features/quick_update/quick_update_sheet.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/navigation/navigation.dart';
+import 'package:aoba/widgets/resource_builder/resource_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
 import 'content/activities.dart';
+import 'content/error_state/error_state.dart';
+import 'content/loading_state/loading_state.dart';
 import 'feed_vm.dart';
 
 class FeedPage extends ViewModelWidget<FeedViewModel>
@@ -60,25 +63,20 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
               ],
             ),
             const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
-            if (vm.activities.isLoading)
-              const SliverToBoxAdapter(
-                child: Center(child: CircularProgressIndicator()),
-              ),
-            if (vm.activities.error != null)
-              SliverToBoxAdapter(
-                child: Text(
-                  vm.activities.error!.message ?? kDefaultUnknownErrorText,
-                ),
-              ),
-            if (vm.activities.data != null)
-              Activities(
-                activities: vm.activities.data!,
-                onUserPress: vm.onUserPress,
-              ),
-            const SliverPadding(
-              padding: EdgeInsets.only(
-                bottom: QuickUpdateSheet.kCollapsedHeight + 4,
-              ),
+            ResourceBuilder(
+              resource: vm.activities,
+              loadingBuilder: (context, data) {
+                return const SliverToBoxAdapter(child: LoadingState());
+              },
+              errorBuilder: (context, error, data) {
+                return ErrorState(error: error);
+              },
+              contentBuilder: (context, data) {
+                return Activities(
+                  activities: vm.activities.data!,
+                  onUserPress: vm.onUserPress,
+                );
+              },
             ),
           ],
         ),
