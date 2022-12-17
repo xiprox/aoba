@@ -1,11 +1,13 @@
-import 'package:aoba/consts/consts.dart';
 import 'package:aoba/features/profile/content/app_bar/app_bar.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/theme/theme.dart';
+import 'package:aoba/widgets/resource_builder/resource_builder.dart';
 import 'package:veee/veee.dart';
 import 'package:flutter/material.dart';
 
 import 'content/activities.dart';
+import 'content/error_state/error_state.dart';
+import 'content/loading_state/loading_state.dart';
 import 'profile_vm.dart';
 
 class ProfilePage extends ViewModelWidget<ProfileViewModel>
@@ -23,18 +25,18 @@ class ProfilePage extends ViewModelWidget<ProfileViewModel>
           slivers: [
             const ProfileAppBar(),
             const SliverPadding(padding: EdgeInsets.only(bottom: 8)),
-            if (vm.activities.isLoading)
-              const SliverToBoxAdapter(
-                child: Center(child: CircularProgressIndicator()),
-              ),
-            if (vm.activities.error != null)
-              SliverToBoxAdapter(
-                child: Text(
-                  vm.activities.error!.message ?? kDefaultUnknownErrorText,
-                ),
-              ),
-            if (vm.activities.data != null)
-              Activities(activities: vm.activities.data!),
+            ResourceBuilder(
+              resource: vm.activities.combineStatus(vm.info),
+              loadingBuilder: (context, data) {
+                return const SliverToBoxAdapter(child: LoadingState());
+              },
+              errorBuilder: (context, error, data) {
+                return ErrorState(error: error);
+              },
+              contentBuilder: (context, data) {
+                return Activities(activities: vm.activities.data!);
+              },
+            ),
           ],
         ),
       ),

@@ -76,4 +76,14 @@ class Resource<T> {
       data: data == null ? null : transformer(data as T),
     );
   }
+
+  /// Returns a [Resource] that combines [loading] and [error] information with
+  /// [other] but not the data.
+  Resource<T> combineStatus(Resource other) {
+    return Resource(
+      loading: isLoading || other.isLoading,
+      error: error ?? other.error,
+      data: data,
+    );
+  }
 }

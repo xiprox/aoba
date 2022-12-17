@@ -78,6 +78,7 @@ query FetchInfo($userId: Int) {
       medium
       large
     }
+    about
     bannerImage
     options {
       profileColor

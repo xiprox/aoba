@@ -1,3 +1,4 @@
+import 'package:graphql/client.dart';
 import 'package:veee/veee.dart';
 import 'package:flutter/material.dart' show Color;
 import 'package:aoba/arch/show_snack_bar.dart';
