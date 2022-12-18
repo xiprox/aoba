@@ -1,5 +1,5 @@
 import 'package:aoba/exts/build_context_exts.dart';
-import 'package:aoba/widgets/smoorth_rectangle_border/smoorth_rectangle_border.dart';
+import 'package:aoba/widgets/smooth_rectangle_border/smooth_rectangle_border.dart';
 import 'package:flutter/material.dart';
 
 class PinInput extends StatelessWidget {
