@@ -1,4 +1,5 @@
 import 'package:aoba/exts/build_context_exts.dart';
+import 'package:aoba/widgets/avatar/avatar.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class User extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = color == null
+    final colors = color == null
         ? null
         : ColorScheme.fromSeed(
             seedColor: color!,
@@ -37,19 +38,17 @@ class User extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NetworkImageWithPlaceholder(
+            Avatar(
               key: ValueKey(avatarUrl),
-              url: avatarUrl,
-              type: ImageType.user,
-              width: 24,
-              height: 24,
-              borderRadius: BorderRadius.circular(40),
+              image: avatarUrl,
+              size: 24,
+              color: colors?.surfaceVariant,
             ),
             const SizedBox(width: 8),
             Text(
               username ?? '?',
               style: TextStyle(
-                color: colorScheme?.primary ?? context.colors.onSurface,
+                color: colors?.primary ?? context.colors.onSurface,
               ),
             ),
           ],
