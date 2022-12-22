@@ -6,6 +6,8 @@ import 'package:veee/veee.dart';
 
 class OpenProfile extends ViewModelOrder {}
 
+class ClosePopup extends ViewModelOrder {}
+
 class UserBoxViewModel extends ViewModel {
   final _userInfo = get<UserInfo>();
   final _userInfoRepo = get<UserInfoRepo>();
@@ -32,10 +34,12 @@ class UserBoxViewModel extends ViewModel {
 
   void onProfilePress() {
     order(OpenProfile());
+    order(ClosePopup());
   }
 
   void onSettingsPress() {
     order(ShowSnackBar('Soon™️'));
+    order(ClosePopup());
   }
 
   void onLogoutPress() async {

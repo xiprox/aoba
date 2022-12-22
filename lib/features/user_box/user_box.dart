@@ -29,6 +29,9 @@ class UserBox extends ViewModelWidget<UserBoxViewModel>
         ProfileRoute(userId: vm.userId, color: vm.color?.fromAniListColor()),
       );
     }
+    if (order is ClosePopup) {
+      context.router.pop();
+    }
   }
 
   void _onPress(BuildContext context, UserBoxViewModel vm) {
