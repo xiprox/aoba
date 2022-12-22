@@ -1679,6 +1679,10 @@ type UserOptions {
   disabledListActivity: [ListActivityOption]
 }
 
+scalar Json 
+
+scalar CountryCode 
+
 type UserPreviousName {
   name: String
   createdAt: Int

@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      graphql_codegen:
+        options:
+          scalars:
+            Json:
+              type: Map<String, dynamic>
+            CountryCode:
+              type: String
