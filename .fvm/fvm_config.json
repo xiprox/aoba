@@ -1,4 +1,5 @@
 {
+  "NOTE": "When updating the SDK version, make sure to update it in deployment workflows as well.",
   "flutterSdkVersion": "3.7.0-1.2.pre",
   "flavors": {}
 }
