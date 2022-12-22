@@ -3,7 +3,6 @@ import 'package:aoba/mixins/vm_stream_subscription_manager_mixin.dart';
 import 'package:veee/veee.dart';
 import 'package:flutter/material.dart' show Color;
 import 'package:aoba/arch/show_snack_bar.dart';
-import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/mixins/infinite_scroll_mixin.dart';
 import 'package:aoba/mixins/paginated_fetch_mixin.dart';
@@ -84,11 +83,5 @@ class FeedViewModel extends ViewModel
 
   void onUserPress(int id, Color? color) {
     order(OpenProfile(userId: id, color: color));
-  }
-
-  void onLogoutPress() async {
-    await get<Credentials>().clear();
-    await get<UserInfo>().clear();
-    get<AppRouter>().replaceAll([const HomeRoute()]);
   }
 }
