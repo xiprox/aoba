@@ -16,8 +16,6 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colors,
-      backgroundColor: colors.surfaceTone1,
-      scaffoldBackgroundColor: colors.background,
       cardTheme: CardTheme(
         elevation: 0,
         color: colors.surfaceTone1,
@@ -27,7 +25,7 @@ class AppTheme {
       focusColor: colors.primary.withOpacity(0.05),
       hoverColor: colors.primary.withOpacity(0.05),
       highlightColor: colors.primary.withOpacity(0.05),
-      splashFactory: InkRipple.splashFactory,
+      splashFactory: InkSparkle.splashFactory,
     );
   }
 
