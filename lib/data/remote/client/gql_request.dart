@@ -62,7 +62,7 @@ class GqlRequest {
       if (excp is ServerException) {
         return excp.parsedResponse?.errors?.map((e) => e.message).join('\n');
       } else {
-        return excp?.originalException?.cleanMessage();
+        return excp?.originalException?.toString();
       }
     } else {
       return exception.graphqlErrors.map((e) => e.message).join('\n');
