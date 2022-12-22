@@ -40,7 +40,10 @@ class QuickUpdateSheet extends ViewModelWidget<QuickUpdateViewModel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Header(onRefreshPress: vm.onRefreshPress),
+          Header(
+            onSeeAllListsPress: vm.onSeeAllListsPress,
+            onRefreshPress: vm.onRefreshPress,
+          ),
           SizedBox(
             height: contentHeight,
             child: AnimatedSwitcher(

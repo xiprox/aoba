@@ -1,3 +1,4 @@
+import 'package:aoba/arch/show_snack_bar.dart';
 import 'package:aoba/consts/consts.dart';
 import 'package:collection/collection.dart';
 import 'package:aoba/data/local/user_info.dart';
@@ -41,6 +42,10 @@ class QuickUpdateViewModel extends ViewModel {
       forceNetwork: forceRefresh,
     );
     notifyListeners();
+  }
+
+  void onSeeAllListsPress() {
+    // TODO
   }
 
   void onRefreshPress() => _fetch(showLoading: true, forceRefresh: true);
