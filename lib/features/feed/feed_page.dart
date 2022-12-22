@@ -29,17 +29,14 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
             SliverAppBar(
               leading: UserBoxWrapper(onPress: vm.onProfilePress),
               titleSpacing: 0,
-              title: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
+              title: GestureDetector(
+                // Temporary during development.
+                child: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
+                onTap: () => vm.onFollowingOnlyChange(!vm.followingOnly),
+              ),
               floating: true,
               snap: true,
-              actions: [
-                IconButton(
-                  icon: Icon(vm.followingOnly
-                      ? Icons.public_rounded
-                      : Icons.public_off_rounded),
-                  onPressed: () => vm.onFollowingOnlyChange(!vm.followingOnly),
-                ),
-              ],
+              actions: [],
             ),
             const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
             ResourceBuilder(
