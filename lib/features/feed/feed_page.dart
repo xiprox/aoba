@@ -1,6 +1,7 @@
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/features/user_box/user_box_wrapper.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
+import 'package:aoba/navigation/navigation.dart';
 import 'package:aoba/widgets/resource_builder/resource_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
@@ -13,6 +14,20 @@ import 'feed_vm.dart';
 class FeedPage extends ViewModelWidget<FeedViewModel>
     with SnackBarMixin, SnackBarInViewModelWidgetMixin<FeedViewModel> {
   const FeedPage({super.key});
+
+  @override
+  void handleOrder(
+    BuildContext context,
+    ViewModelOrder order,
+    FeedViewModel vm,
+  ) {
+    super.handleOrder(context, order, vm);
+    if (order is OpenProfile) {
+      context.router.navigate(
+        ProfileRoute(userId: order.userId, color: order.color),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context, FeedViewModel vm) {
