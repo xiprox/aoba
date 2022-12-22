@@ -54,3 +54,6 @@ app.*.map.json
 
 # Sensitive files
 lib/consts/anilist_consts.dart
+
+# Flutter Version Manager
+.fvm/flutter_sdk

@@ -4,6 +4,11 @@ This document assumes that you have a working Flutter (stable) environment. If y
 
 To get the app running, you will need do a few things first.
 
+## Flutter Version Manager and project SDK
+
+1. Install [FVM](https://fvm.app/docs/getting_started/installation)
+2. Run `fvm install` in project directory
+
 ## Change the redirect URL Scheme
 
 1. Open the [AndroidManifest](../android/app/src/main/AndroidManifest.xml) file and find the section configuring deep links. Replace the value of `android:scheme` from `aoba-anilist` to whatever else you like.
