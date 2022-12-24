@@ -22,7 +22,7 @@ class MediaCover extends StatelessWidget {
       url: url,
       type: type == MediaType.ANIME ? ImageType.anime : ImageType.book,
       width: 48,
-      height: 48 * AspectRatios.mediaCover,
+      height: 48 / AspectRatios.mediaCover,
       color: color,
     );
   }

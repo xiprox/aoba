@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'info.dart';
 
 class QuickUpdateEntryTile extends StatelessWidget {
-  static const kDesiredHeight = kDesiredWidth * AspectRatios.mediaCover;
+  static const kDesiredHeight = kDesiredWidth / AspectRatios.mediaCover;
   static const kDesiredWidth = 144.0;
 
   final String coverUrl;
