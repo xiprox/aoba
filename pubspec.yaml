@@ -30,6 +30,7 @@ dependencies:
   flutter_html: ^3.0.0-alpha.6
   shimmer: ^2.0.0
   # Util
+  vector_math: ^2.1.4
   material_color_utilities: ^0.2.0
   stringr: ^1.0.0
   date_time_format: ^2.0.1

@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 class WavePainter extends CustomPainter {
   final Color color;
   final double wavelength;
+  final bool? startFromTop;
+  final WaveDirection? direction;
 
   const WavePainter({
-    this.color = Colors.black,
+    required this.color,
     this.wavelength = 24 * 2,
+    this.startFromTop,
+    this.direction,
   });
 
   @override
@@ -16,9 +20,11 @@ class WavePainter extends CustomPainter {
       ..color = color
       ..style = PaintingStyle.fill;
     final path = WavePath.get(
-      width: size.width,
+      length: size.width,
       height: size.height,
       wavelength: wavelength,
+      startFromTop: startFromTop == true,
+      direction: direction ?? WaveDirection.horizontal,
     );
     canvas.drawPath(path, paint);
   }
