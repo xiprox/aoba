@@ -5,7 +5,7 @@ import 'package:aoba/widgets/frame_builders.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
-enum ImageType { anime, book, user, banner }
+enum ImageType { anime, book, user, banner, generic }
 
 final _kDefaultBorderRadius = BorderRadius.circular(6);
 
