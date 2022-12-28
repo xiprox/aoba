@@ -1,4 +1,3 @@
-import 'package:graphql/client.dart';
 import 'package:veee/veee.dart';
 import 'package:flutter/material.dart' show Color;
 import 'package:aoba/arch/show_snack_bar.dart';
@@ -8,6 +7,8 @@ import 'package:aoba/mixins/paginated_fetch_mixin.dart';
 import 'package:aoba/services/services.dart';
 
 import 'data/profile_repo.dart';
+
+class OpenLists extends ViewModelOrder {}
 
 class ProfileViewModel extends ViewModel
     with InfiniteScrollMixin, PaginatedDataMixin<Activity?> {
@@ -48,5 +49,9 @@ class ProfileViewModel extends ViewModel
   @override
   void onFetchPageFailed(ErrorInfo? error) {
     order(ShowSnackBar(error?.message ?? ''));
+  }
+
+  void onSeeListsPress() {
+    order(OpenLists());
   }
 }

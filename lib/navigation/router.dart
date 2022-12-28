@@ -1,3 +1,4 @@
+import 'package:aoba/features/lists/lists_wrapper.dart';
 import 'package:aoba/features/profile/profile_wrapper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
@@ -26,6 +27,10 @@ part 'router.gr.dart';
     AutoRoute(
       path: '/profile/:id',
       page: ProfileWrapper,
+    ),
+    AutoRoute(
+      path: '/lists/:userId',
+      page: ListsWrapper,
     ),
     AutoRoute(
       path: '/redirect',

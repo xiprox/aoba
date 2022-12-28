@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-class InfoBox extends StatelessWidget {
-  final double height;
+class MediaCoverInfoBox extends StatelessWidget {
   final Color color;
   final Widget child;
+  final double? height;
+  final AlignmentGeometry alignment;
   final EdgeInsetsGeometry outerPadding;
   final EdgeInsetsGeometry innerPadding;
 
-  const InfoBox({
+  const MediaCoverInfoBox({
     super.key,
-    this.height = 72,
     required this.color,
     required this.child,
+    this.height,
+    this.alignment = Alignment.bottomCenter,
     this.outerPadding = const EdgeInsets.all(8),
     this.innerPadding = const EdgeInsets.all(8),
   });
@@ -19,7 +21,7 @@ class InfoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.bottomCenter,
+      alignment: alignment,
       child: SizedBox(
         height: height,
         child: Padding(

@@ -1,4 +1,3 @@
-import 'package:aoba/arch/show_snack_bar.dart';
 import 'package:aoba/consts/consts.dart';
 import 'package:collection/collection.dart';
 import 'package:aoba/data/local/user_info.dart';
@@ -8,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:veee/veee.dart';
 
 import 'data/quick_update_repo.dart';
+
+class OpenLists extends ViewModelOrder {}
 
 class QuickUpdateViewModel extends ViewModel {
   final _userInfo = get<UserInfo>();
@@ -45,7 +46,7 @@ class QuickUpdateViewModel extends ViewModel {
   }
 
   void onSeeAllListsPress() {
-    // TODO
+    order(OpenLists());
   }
 
   void onRefreshPress() => _fetch(showLoading: true, forceRefresh: true);

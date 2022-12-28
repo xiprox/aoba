@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/repo/user_info/user_info_repo.dart';
 import 'package:aoba/features/feed/data/feed_repo.dart';
+import 'package:aoba/features/lists/data/lists_repo.dart';
 import 'package:aoba/features/profile/data/profile_repo.dart';
 import 'package:aoba/features/quick_update/data/quick_update_repo.dart';
 import 'package:get_it/get_it.dart';
@@ -60,6 +61,7 @@ class Services {
     getIt.registerSingleton<FeedRepo>(FeedRepoImpl());
     getIt.registerSingleton<ProfileRepo>(ProfileRepoImpl());
     getIt.registerSingleton<QuickUpdateRepo>(QuickUpdateRepoImpl());
+    getIt.registerFactory<ListsRepo>(() => ListsRepoImpl());
 
     getIt.registerSingleton(AppRouter(authGuard: AuthGuard()));
   }

@@ -1,0 +1,78 @@
+
+fragment mediaListEntry on MediaList {
+  id
+  mediaId
+  status
+  score
+  progress
+  progressVolumes
+  repeat
+  priority
+  private
+  hiddenFromStatusLists
+  customLists
+  advancedScores
+  notes
+  updatedAt
+  startedAt {
+    year
+    month
+    day
+  }
+  completedAt {
+    year
+    month
+    day
+  }
+  media {
+    id
+    title {
+      userPreferred
+    }
+    coverImage {
+      large
+      color
+    }
+    type
+    format
+    status(version: 2)
+    duration
+    episodes
+    volumes
+    chapters
+    averageScore
+    popularity
+    countryOfOrigin
+    genres
+  }
+}
+
+query FetchData($userId: Int, $type: MediaType) {
+  MediaListCollection(userId: $userId, type: $type, forceSingleCompletedList: true) {
+    lists {
+      name
+      isCustomList
+      isSplitCompletedList
+      entries {
+        ...mediaListEntry
+      }
+    }
+    user {
+      name
+      mediaListOptions {
+        scoreFormat
+        rowOrder
+        animeList {
+          sectionOrder
+          customLists
+          splitCompletedSectionByFormat
+        }
+        mangaList {
+          sectionOrder
+          customLists
+          splitCompletedSectionByFormat
+        }
+      }
+    }
+  }
+}

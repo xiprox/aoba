@@ -1,6 +1,7 @@
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/material_exts.dart';
 import 'package:aoba/features/quick_update/quick_update_vm.dart';
+import 'package:aoba/navigation/navigation.dart';
 import 'package:aoba/widgets/expandable_sheet/expandable_sheet.dart';
 import 'package:aoba/widgets/resource_builder/resource_builder.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,9 @@ class QuickUpdateSheet extends ViewModelWidget<QuickUpdateViewModel> {
     QuickUpdateViewModel vm,
   ) {
     super.handleOrder(context, order, vm);
+    if (order is OpenLists) {
+      context.router.navigate(ListsRoute());
+    }
   }
 
   @override
