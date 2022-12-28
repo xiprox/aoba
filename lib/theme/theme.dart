@@ -21,7 +21,7 @@ class AppTheme {
         color: colors.surfaceTone1,
         surfaceTintColor: colors.surfaceTint,
       ),
-      splashColor: colors.primary.withOpacity(0.05),
+      splashColor: colors.primary.withOpacity(0.1),
       focusColor: colors.primary.withOpacity(0.05),
       hoverColor: colors.primary.withOpacity(0.05),
       highlightColor: colors.primary.withOpacity(0.05),
