@@ -23,7 +23,7 @@ class ResourceBuilderAnimatedSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 500),
       switchInCurve: Curves.fastOutSlowIn,
       switchOutCurve: Curves.fastOutSlowIn.flipped,
       child: child,
