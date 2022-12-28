@@ -35,4 +35,15 @@ extension DurationExts on Duration {
       locale: const CustomDurationLocale(),
     );
   }
+
+  String toMediaDuration() {
+    return prettyDuration(
+      this,
+      abbreviated: true,
+      delimiter: ' ',
+      spacer: '',
+      tersity: DurationTersity.minute,
+      locale: const CustomDurationLocale(),
+    );
+  }
 }
