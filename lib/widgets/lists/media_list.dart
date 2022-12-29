@@ -79,7 +79,7 @@ class MediaListView extends StatelessWidget {
             color: media.coverImage?.color?.toColor(),
             mediaStatus: media.status ?? MediaStatus.$unknown,
             status: entry.status ?? MediaListStatus.$unknown,
-            duration: media.duration ?? 0,
+            duration: media.duration,
             progress: entry.progress ?? 0,
             total: media.episodes ?? media.chapters ?? 0,
             score: entry.score,

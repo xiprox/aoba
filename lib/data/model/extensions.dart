@@ -65,7 +65,7 @@ extension MediaStatusExts on MediaStatus {
       case MediaStatus.RELEASING:
         return 'Releasing';
       case MediaStatus.NOT_YET_RELEASED:
-        return 'Not yet released';
+        return 'Not Yet Released';
       case MediaStatus.CANCELLED:
         return 'Cancelled';
       case MediaStatus.HIATUS:

@@ -15,7 +15,7 @@ class Status extends StatelessWidget {
   final MediaType type;
   final MediaFormat format;
   final MediaStatus mediaStatus;
-  final int duration;
+  final int? duration;
   final int progress;
   final int total;
   final ScoreFormat? scoreFormat;
@@ -82,23 +82,33 @@ class Status extends StatelessWidget {
           case MediaFormat.SPECIAL:
           case MediaFormat.OVA:
           case MediaFormat.ONA:
-            final length = '$totalText ${'episode'.plural('episodes', total)}';
-            value = '${format.displayName} • $length';
+            if (isTotalKnown) {
+              final length =
+                  '$totalText ${'episode'.plural('episodes', total)}';
+              value = '${format.displayName} • $length';
+            } else {
+              value = '${format.displayName} • ${mediaStatus.displayName}';
+            }
             break;
           case MediaFormat.MOVIE:
           case MediaFormat.MUSIC:
-            final dur = Duration(minutes: duration).toMediaDuration();
-            value = '${format.displayName} • $dur';
+            final dur = duration == null
+                ? null
+                : Duration(minutes: duration!).toMediaDuration();
+            value = format.displayName.append(dur?.prepend(' • '));
             break;
           case MediaFormat.MANGA:
           case MediaFormat.NOVEL:
-            final length = '$totalText ${'chapter'.plural('chapters', total)}';
+            final formatText =
+                format == MediaFormat.MANGA ? null : format.displayName;
             if (isTotalKnown) {
-              value = '${format.displayName} • $length';
+              final length =
+                  '$totalText ${'chapter'.plural('chapters', total)}';
+              value = '${formatText?.append(' • ')}$length';
             } else {
               // If the total is unknown, it's more useful to know if the media
               // has finished releasing or not.
-              value = '${format.displayName} • ${mediaStatus.displayName}';
+              value = '${formatText?.append(' • ')}${mediaStatus.displayName}';
             }
             break;
           case MediaFormat.ONE_SHOT:

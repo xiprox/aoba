@@ -20,7 +20,7 @@ class ListEntryGridTile extends StatelessWidget {
   final MediaFormat format;
   final MediaStatus mediaStatus;
   final MediaListStatus status;
-  final int duration;
+  final int? duration;
   final int progress;
   final int total;
   final ScoreFormat? scoreFormat;
