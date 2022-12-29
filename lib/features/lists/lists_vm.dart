@@ -49,14 +49,14 @@ class ListsViewModel extends ViewModel {
 
   String get appBarTitle {
     if (_isOwnLibrary) {
-      return 'My Library';
+      return 'My Lists';
     } else if (data.isLoading && data.data?.user?.name == null) {
       return '';
     } else {
       final username = data.data?.user?.name;
       return username != null
-          ? '${username.withApostrophe()} Library'
-          : 'User\'s Library';
+          ? '${username.withApostrophe()} Lists'
+          : 'User\'s Lists';
     }
   }
 
