@@ -62,6 +62,15 @@ class Status extends StatelessWidget {
         }
         break;
 
+      // Same as CURRENT (see above) except we prepend "Re-".
+      case MediaListStatus.REPEATING:
+        if (type == MediaType.ANIME) {
+          value = 'Re-watched $progress/$totalText';
+        } else {
+          value = 'Re-read $progress/$totalText';
+        }
+        break;
+
       // I have not watched/read this and likely don't know much about it,
       // or I may have forgotten.
       //
@@ -109,15 +118,6 @@ class Status extends StatelessWidget {
           value = 'Rated ${score!.toHumanReadableScore(scoreFormat!)}';
         } else {
           value = 'Not rated';
-        }
-        break;
-
-      // Same as CURRENT (see above) except we prepend "Re-".
-      case MediaListStatus.REPEATING:
-        if (type == MediaType.ANIME) {
-          value = 'Re-watched $progress/$totalText';
-        } else {
-          value = 'Re-read $progress/$totalText';
         }
         break;
 

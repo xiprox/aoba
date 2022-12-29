@@ -29,7 +29,6 @@ extension StringExts on String {
   /// 'episode'.plural('episodes', 2);
   /// ```
   String plural(String more, int count) {
-    if (count == 1) return this;
-    return more;
+    return count == 1 ? this : more;
   }
 }
