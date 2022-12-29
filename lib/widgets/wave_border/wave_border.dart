@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class Wave {
   final double amplitude;
   final double wavelength;
+  final bool startFromTop;
 
   const Wave({
     required this.amplitude,
     required this.wavelength,
+    this.startFromTop = true,
   });
 
   Wave scale(double t) {
@@ -24,11 +26,9 @@ class WaveSide {
   const WaveSide.all(Wave wave)
       : this.only(left: wave, top: wave, right: wave, bottom: wave);
 
-  const WaveSide.vertical({Wave? top, Wave? bottom})
-      : this.only(top: top, bottom: bottom);
+  const WaveSide.vertical(Wave? wave) : this.only(top: wave, bottom: wave);
 
-  const WaveSide.horizontal({Wave? left, Wave? right})
-      : this.only(left: left, right: right);
+  const WaveSide.horizontal(Wave? wave) : this.only(left: wave, right: wave);
 
   const WaveSide.only({this.left, this.top, this.right, this.bottom});
 
@@ -97,7 +97,7 @@ class WaveBorder extends ShapeBorder {
         length: verticalLength,
         height: sideLeft.amplitude,
         wavelength: sideLeft.wavelength,
-        startFromTop: true,
+        startFromTop: sideLeft.startFromTop,
         direction: WaveDirection.verticalFlipped,
       );
       path.addPath(wave, Offset(left, top));
@@ -108,7 +108,7 @@ class WaveBorder extends ShapeBorder {
         length: horizontalLength,
         height: sideTop.amplitude,
         wavelength: sideTop.wavelength,
-        startFromTop: true,
+        startFromTop: sideTop.startFromTop,
         direction: WaveDirection.horizontal,
       );
       path.addPath(wave, Offset(left, top));
@@ -119,7 +119,7 @@ class WaveBorder extends ShapeBorder {
         length: verticalLength,
         height: sideRight.amplitude,
         wavelength: sideRight.wavelength,
-        startFromTop: true,
+        startFromTop: sideRight.startFromTop,
         direction: WaveDirection.vertical,
       );
       path.addPath(wave, Offset(fillRect.right, top));
@@ -130,7 +130,7 @@ class WaveBorder extends ShapeBorder {
         length: horizontalLength,
         height: sideBottom.amplitude,
         wavelength: sideBottom.wavelength,
-        startFromTop: true,
+        startFromTop: sideBottom.startFromTop,
         direction: WaveDirection.horizontalFlipped,
       );
       path.addPath(wave, Offset(left, fillRect.bottom));
