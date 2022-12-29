@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
@@ -35,8 +37,12 @@ class UserBox extends ViewModelWidget<UserBoxViewModel>
   }
 
   void _onPress(BuildContext context, UserBoxViewModel vm) {
+    final windowPadding = MediaQueryData.fromWindow(window).padding;
     final position = context.findPosition();
-    final movedPosition = position.translate(position.dx, position.dy + 48);
+    final movedPosition = position.translate(
+      position.dx,
+      position.dy + 48 - windowPadding.top,
+    );
     context.router.pushNativeRoute(PopupOnPositionRoute(
       position: movedPosition,
       child: UserBoxPopupContent(
