@@ -1,50 +1,34 @@
 import 'package:aoba/consts/aspect_ratios.dart';
-import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/data/model/extensions.dart';
 import 'package:aoba/exts/material_exts.dart';
 import 'package:aoba/theme/theme.dart';
+import 'package:aoba/widgets/lists/entries/common/list_entry_base.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:flutter/material.dart';
 
 import 'cover.dart';
 import 'info.dart';
-import 'status.dart';
+import '../common/status.dart';
 
-class ListEntryGridTile extends StatelessWidget {
+class ListEntryGridTile extends ListEntryBase {
   static const kDesiredWidth = 128.0;
-
-  final String title;
-  final String? coverUrl;
-  final Color? color;
-  final MediaType type;
-  final MediaFormat format;
-  final MediaStatus mediaStatus;
-  final MediaListStatus status;
-  final int? duration;
-  final int progress;
-  final int total;
-  final ScoreFormat? scoreFormat;
-  final double? score;
-
-  final Function()? onPress;
-  final Function()? onEditPress;
 
   const ListEntryGridTile({
     super.key,
-    required this.title,
-    this.coverUrl,
-    this.color,
-    required this.type,
-    required this.format,
-    required this.mediaStatus,
-    required this.status,
-    required this.duration,
-    required this.progress,
-    required this.total,
-    this.scoreFormat,
-    this.score,
-    this.onPress,
-    this.onEditPress,
+    required super.title,
+    super.coverUrl,
+    super.color,
+    required super.type,
+    required super.format,
+    required super.mediaStatus,
+    required super.status,
+    required super.duration,
+    required super.progress,
+    required super.total,
+    super.scoreFormat,
+    super.score,
+    super.onPress,
+    super.onEditPress,
   });
 
   @override

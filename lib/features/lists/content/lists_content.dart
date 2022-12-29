@@ -1,11 +1,14 @@
+import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/features/lists/data/lists_repo.dart';
+import 'package:aoba/features/lists/lists_vm.dart';
 import 'package:aoba/features/profile/content/error_state/error_state.dart';
 import 'package:aoba/widgets/lists/media_list.dart';
 import 'package:aoba/widgets/resource_builder/resource_builder.dart';
 import 'package:aoba/widgets/resource_builder_animated_switcher/resource_builder_animated_switcher.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
+import 'package:veee/veee.dart';
 
 import 'app_bar/app_bar.dart';
 import 'loading_state/loading_state.dart';
@@ -60,6 +63,7 @@ class _ListsContentState extends State<ListsContent>
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.vm<ListsViewModel>(listen: true);
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
@@ -82,6 +86,14 @@ class _ListsContentState extends State<ListsContent>
                 if (list == null) return Container();
                 return MediaListView(
                   key: ValueKey(list.hashCode),
+                  scoreFormat:
+                      widget.data.data?.user?.mediaListOptions?.scoreFormat ??
+                          ScoreFormat.$unknown,
+                  type: vm.filterMediaType,
+                  onEntryPress: vm.onEntryPress,
+                  canEditEntries: vm.canEditEntries,
+                  onEntryEditPress: vm.onEntryEditPress,
+                  displayType: vm.displayType,
                   list: list,
                 );
               }).toList(),

@@ -1,9 +1,7 @@
-import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/exts/build_context_exts.dart';
+import 'package:aoba/widgets/lists/entries/common/title.dart';
 import 'package:aoba/widgets/wave_border/wave_border.dart';
-import 'package:flutter/material.dart';
-
-import 'status.dart';
+import 'package:flutter/material.dart' hide Title;
 
 class Info extends StatelessWidget {
   static const kWaveHeight = 4.0;
@@ -58,15 +56,7 @@ class Info extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          title,
-                          maxLines: 1,
-                          overflow: TextOverflow.fade,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: colors.onSecondaryContainer,
-                          ),
-                        ),
+                        Title(title),
                         subtitle,
                       ],
                     ),

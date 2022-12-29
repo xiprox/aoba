@@ -2,14 +2,12 @@ import 'package:aoba/consts/aspect_ratios.dart';
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/features/lists/data/lists_repo.dart';
-import 'package:aoba/features/lists/lists_vm.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
-import 'package:veee/veee.dart';
 
 import 'entries/grid/info.dart';
 import 'entries/grid/list_entry_grid_tile.dart';
-import 'entries/list_entry_tile.dart';
+import 'entries/list/list_entry_list_tile.dart';
 
 enum ListDisplayType {
   grid,
@@ -19,17 +17,26 @@ enum ListDisplayType {
 
 class MediaListView extends StatelessWidget {
   final MediaList list;
+  final MediaType type;
+  final ScoreFormat scoreFormat;
+  final Function(MediaListEntry entry) onEntryPress;
+  final bool canEditEntries;
+  final Function(MediaListEntry entry) onEntryEditPress;
   final ListDisplayType displayType;
 
   const MediaListView({
     super.key,
     required this.list,
+    required this.type,
+    required this.scoreFormat,
+    required this.onEntryPress,
+    required this.canEditEntries,
+    required this.onEntryEditPress,
     this.displayType = ListDisplayType.grid,
   });
 
   @override
   Widget build(BuildContext context) {
-    final vm = context.vm<ListsViewModel>(listen: true);
     if (displayType == ListDisplayType.grid) {
       final availableWidth = context.media.size.width;
       const desiredTileWidth = ListEntryGridTile.kDesiredWidth;
@@ -83,23 +90,38 @@ class MediaListView extends StatelessWidget {
             progress: entry.progress ?? 0,
             total: media.episodes ?? media.chapters ?? 0,
             score: entry.score,
-            scoreFormat: vm.data.data?.user?.mediaListOptions?.scoreFormat,
-            onPress: () => vm.onEntryPress(entry),
-            onEditPress:
-                vm.canEditEntries ? () => vm.onEntryEditPress(entry) : null,
+            scoreFormat: scoreFormat,
+            onPress: () => onEntryPress(entry),
+            onEditPress: canEditEntries ? () => onEntryEditPress(entry) : null,
           );
         },
       );
     } else {
       return ListView.builder(
         itemCount: list.entries?.length ?? 0,
+        padding: const EdgeInsets.symmetric(vertical: 8),
         itemBuilder: (context, index) {
           final entry = list.entries?[index];
           final media = entry?.media;
 
           if (entry == null || media == null) return Container();
 
-          return ListEntryTile(
+          return ListEntryListTile(
+            index: index,
+            title: media.title?.userPreferred ?? '?',
+            coverUrl: media.coverImage?.large,
+            type: media.type ?? MediaType.$unknown,
+            format: media.format ?? MediaFormat.$unknown,
+            color: media.coverImage?.color?.toColor(),
+            mediaStatus: media.status ?? MediaStatus.$unknown,
+            status: entry.status ?? MediaListStatus.$unknown,
+            duration: media.duration,
+            progress: entry.progress ?? 0,
+            total: media.episodes ?? media.chapters ?? 0,
+            score: entry.score,
+            scoreFormat: scoreFormat,
+            onPress: () => onEntryPress(entry),
+            onEditPress: canEditEntries ? () => onEntryEditPress(entry) : null,
             compact: displayType == ListDisplayType.listCompact,
           );
         },

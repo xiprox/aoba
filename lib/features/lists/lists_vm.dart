@@ -40,7 +40,26 @@ class ListsViewModel extends ViewModel {
 
   void fetch() async {
     data = await _repo.getData(userId: userId, type: filterMediaType);
+    if (data.data != null) {
+      _refreshListUpdateType();
+    }
     notifyListeners();
+  }
+
+  void _refreshListUpdateType() {
+    final mediaListOptions = data.data?.user?.mediaListOptions;
+    final themeData = filterMediaType == MediaType.ANIME
+        ? mediaListOptions?.animeList?.theme
+        : mediaListOptions?.mangaList?.theme;
+
+    final theme = themeData?['theme'] as String?;
+    if (theme == 'list') {
+      displayType = ListDisplayType.listComfortable;
+    } else if (theme == 'list-compact') {
+      displayType = ListDisplayType.listCompact;
+    } else {
+      displayType = ListDisplayType.grid;
+    }
   }
 
   bool get _isOwnLibrary {
