@@ -31,4 +31,12 @@ extension StringExts on String {
   String plural(String more, int count) {
     return count == 1 ? this : more;
   }
+
+  String append(String? other) {
+    return other != null ? '$this$other' : this;
+  }
+
+  String prepend(String? other) {
+    return other != null ? '$other$this' : this;
+  }
 }
