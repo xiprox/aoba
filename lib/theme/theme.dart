@@ -16,6 +16,9 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colors,
+      appBarTheme: const AppBarTheme(
+        titleSpacing: 8,
+      ),
       cardTheme: CardTheme(
         elevation: 0,
         color: colors.surfaceTone1,
