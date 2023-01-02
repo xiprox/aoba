@@ -65,14 +65,12 @@ query FetchData($userId: Int, $type: MediaType) {
         animeList {
           sectionOrder
           customLists
-          splitCompletedSectionByFormat
-          theme
+          splitCompletedSectionByFormat 
         }
         mangaList {
           sectionOrder
           customLists
-          splitCompletedSectionByFormat
-          theme
+          splitCompletedSectionByFormat 
         }
       }
     }

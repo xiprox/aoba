@@ -1,3 +1,4 @@
+import 'package:aoba/data/local/preferences/preferences.dart';
 import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/data/model/resource.dart';
@@ -14,20 +15,21 @@ class ListsViewModel extends ViewModel {
   final int userId;
   final Color? color;
 
-  MediaType filterMediaType = MediaType.ANIME;
-  ListDisplayType displayType = ListDisplayType.grid;
-
   ListsViewModel({
     required this.userId,
     this.color,
   });
 
+  final _prefs = get<Preferences>();
   final _userInfo = get<UserInfo>();
   final _repo = get<ListsRepo>();
 
   final scrollController = ScrollController();
 
   Resource<ListsData> data = const Resource(loading: true);
+
+  MediaType filterMediaType = MediaType.ANIME;
+  late ListDisplayType displayType = _prefs.get().lists.displayType;
 
   int animeIndex = 0;
   int mangaIndex = 0;
@@ -40,26 +42,7 @@ class ListsViewModel extends ViewModel {
 
   void fetch() async {
     data = await _repo.getData(userId: userId, type: filterMediaType);
-    if (data.data != null) {
-      _refreshListUpdateType();
-    }
     notifyListeners();
-  }
-
-  void _refreshListUpdateType() {
-    final mediaListOptions = data.data?.user?.mediaListOptions;
-    final themeData = filterMediaType == MediaType.ANIME
-        ? mediaListOptions?.animeList?.theme
-        : mediaListOptions?.mangaList?.theme;
-
-    final theme = themeData?['theme'] as String?;
-    if (theme == 'list') {
-      displayType = ListDisplayType.listComfortable;
-    } else if (theme == 'list-compact') {
-      displayType = ListDisplayType.listCompact;
-    } else {
-      displayType = ListDisplayType.grid;
-    }
   }
 
   bool get _isOwnLibrary {
@@ -93,6 +76,12 @@ class ListsViewModel extends ViewModel {
     data = data.copyWith(loading: true);
     notifyListeners();
     fetch();
+  }
+
+  void onDisplayTypeChange(ListDisplayType value) {
+    _prefs.update((it) => it.lists.displayType = value);
+    displayType = value;
+    notifyListeners();
   }
 
   bool get canEditEntries => _isOwnLibrary;
