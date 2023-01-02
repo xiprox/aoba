@@ -10,7 +10,7 @@ class TabsLoadingState extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 14),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(width: 16),
           ShimmerRect(width: 72, height: 16, borderRadius: borderRadius),

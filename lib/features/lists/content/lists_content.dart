@@ -65,6 +65,7 @@ class _ListsContentState extends State<ListsContent>
   Widget build(BuildContext context) {
     final vm = context.vm<ListsViewModel>(listen: true);
     return NestedScrollView(
+      controller: vm.scrollController,
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
           ListsAppBar(
@@ -75,7 +76,9 @@ class _ListsContentState extends State<ListsContent>
       },
       body: ResourceBuilderAnimatedSwitcher(
         child: ResourceBuilder(
-          key: ValueKey(widget.data),
+          key: ValueKey(
+            widget.data.hashCode + vm.displayType.hashCode,
+          ),
           loadingBuilder: (context, data) => const LoadingState(),
           errorBuilder: (context, error, _) => ErrorState(error: error),
           resource: widget.data,
