@@ -1,6 +1,6 @@
 import 'package:aoba/exts/build_context_exts.dart';
+import 'package:aoba/theme/theme.dart';
 import 'package:aoba/widgets/avatar/avatar.dart';
-import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +21,7 @@ class User extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
     final colors = color == null
         ? null
         : ColorScheme.fromSeed(
@@ -47,8 +48,9 @@ class User extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               username ?? '?',
-              style: TextStyle(
+              style: theme.textTheme.titleSmall?.copyWith(
                 color: colors?.primary ?? context.colors.onSurface,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],

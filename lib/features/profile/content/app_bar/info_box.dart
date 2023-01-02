@@ -2,6 +2,7 @@ import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/material_exts.dart';
 import 'package:aoba/widgets/avatar/avatar.dart';
 import 'package:aoba/widgets/smooth_rectangle_border/smooth_rectangle_border.dart';
+import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
 class InfoBox extends StatelessWidget {
@@ -19,6 +20,7 @@ class InfoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+    final theme = context.theme;
     final progress = Curves.ease.transform(1 - scrollProgress);
     return Material(
       shape: const SmoothRectangleBorder(
@@ -55,8 +57,7 @@ class InfoBox extends StatelessWidget {
               ),
               Text(
                 name ?? '',
-                style: TextStyle(
-                  fontSize: 22,
+                style: theme.textTheme.titleLarge?.copyWith(
                   color: colors.onSecondaryContainer,
                 ),
               ),

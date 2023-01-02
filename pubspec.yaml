@@ -24,6 +24,7 @@ dependencies:
   isar: ^3.0.5
   isar_flutter_libs: ^3.0.5
   # Widgets & UI
+  google_fonts: ^3.0.1
   flutter_svg: ^1.1.6
   auto_route: ^5.0.2
   sliver_tools: ^0.2.8

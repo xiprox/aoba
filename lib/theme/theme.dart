@@ -1,6 +1,7 @@
 import 'package:aoba/exts/material_exts.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const _kDefaultSeedColor = Color.fromRGBO(92, 182, 72, 1);
 
@@ -13,7 +14,7 @@ class AppTheme {
       seedColor: seed ?? _kDefaultSeedColor,
       brightness: brightness,
     );
-    return ThemeData(
+    final theme = ThemeData(
       useMaterial3: true,
       colorScheme: colors,
       appBarTheme: const AppBarTheme(
@@ -29,6 +30,23 @@ class AppTheme {
       hoverColor: colors.primary.withOpacity(0.05),
       highlightColor: colors.primary.withOpacity(0.05),
       splashFactory: InkSparkle.splashFactory,
+    );
+    final textTheme = GoogleFonts.rubikTextTheme(theme.textTheme);
+    return theme.copyWith(
+      textTheme: theme.textTheme.copyWith(
+        displaySmall: textTheme.displaySmall,
+        displayMedium: textTheme.displayMedium,
+        displayLarge: textTheme.displayLarge,
+        titleSmall: textTheme.titleSmall,
+        titleMedium: textTheme.titleMedium,
+        titleLarge: textTheme.titleLarge,
+        headlineSmall: textTheme.headlineSmall,
+        headlineMedium: textTheme.headlineMedium,
+        headlineLarge: textTheme.headlineLarge,
+        labelSmall: textTheme.labelSmall,
+        labelMedium: textTheme.labelMedium,
+        labelLarge: textTheme.labelLarge,
+      ),
     );
   }
 

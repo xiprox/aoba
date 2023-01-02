@@ -3,6 +3,7 @@ import 'package:aoba/features/user_box/user_box_wrapper.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/navigation/navigation.dart';
 import 'package:aoba/widgets/resource_builder/resource_builder.dart';
+import 'package:flextensions/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
@@ -31,6 +32,7 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
 
   @override
   Widget build(BuildContext context, FeedViewModel vm) {
+    final theme = context.theme;
     final colors = context.colors;
     return Scaffold(
       body: RefreshIndicator(
@@ -46,7 +48,10 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
               titleSpacing: 0,
               title: GestureDetector(
                 // Temporary during development.
-                child: Text(vm.followingOnly ? 'My Feed' : 'Global Feed'),
+                child: Text(
+                  vm.followingOnly ? 'My Feed' : 'Global Feed',
+                  style: theme.textTheme.titleLarge,
+                ),
                 onTap: () => vm.onFollowingOnlyChange(!vm.followingOnly),
               ),
               floating: true,

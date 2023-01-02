@@ -1,6 +1,7 @@
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/widgets/lists/entries/common/title.dart';
 import 'package:aoba/widgets/wave_border/wave_border.dart';
+import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart' hide Title;
 
 class Info extends StatelessWidget {
@@ -24,6 +25,7 @@ class Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+    final theme = context.theme;
 
     final shape = WaveBorder(
       borderRadius: BorderRadius.only(bottomLeft: radius, bottomRight: radius),
@@ -56,7 +58,12 @@ class Info extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Title(title),
+                        Title(
+                          title,
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: colors.onSecondaryContainer,
+                          ),
+                        ),
                         subtitle,
                       ],
                     ),
