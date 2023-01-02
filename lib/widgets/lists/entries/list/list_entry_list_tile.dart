@@ -83,17 +83,18 @@ class ListEntryListTile extends ListEntryBase {
                   ],
                 ),
               ),
-              InkWell(
-                onTap: onEditPress,
-                borderRadius: borderRadius,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Icon(
-                    Icons.edit_rounded,
-                    color: colors.secondary,
+              if (onEditPress != null)
+                InkWell(
+                  onTap: onEditPress,
+                  borderRadius: borderRadius,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(
+                      Icons.edit_rounded,
+                      color: colors.secondary,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),
