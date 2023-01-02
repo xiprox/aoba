@@ -95,7 +95,7 @@ class Status extends StatelessWidget {
             final dur = duration == null
                 ? null
                 : Duration(minutes: duration!).toMediaDuration();
-            value = format.displayName.append(dur?.prepend(' • '));
+            value = format.displayName.append(dur?.prepend(' • ') ?? '');
             break;
           case MediaFormat.MANGA:
           case MediaFormat.NOVEL:
@@ -104,11 +104,12 @@ class Status extends StatelessWidget {
             if (isTotalKnown) {
               final length =
                   '$totalText ${'chapter'.plural('chapters', total)}';
-              value = '${formatText?.append(' • ')}$length';
+              value = '${formatText?.append(' • ') ?? ''}$length';
             } else {
               // If the total is unknown, it's more useful to know if the media
               // has finished releasing or not.
-              value = '${formatText?.append(' • ')}${mediaStatus.displayName}';
+              value =
+                  '${formatText?.append(' • ') ?? ''}${mediaStatus.displayName}';
             }
             break;
           case MediaFormat.ONE_SHOT:
