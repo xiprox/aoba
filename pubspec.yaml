@@ -21,6 +21,8 @@ dependencies:
   # Data & storage
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  isar: ^3.0.5
+  isar_flutter_libs: ^3.0.5
   # Widgets & UI
   flutter_svg: ^1.1.6
   auto_route: ^5.0.2
@@ -52,6 +54,7 @@ dev_dependencies:
   json_serializable: ^6.5.4
   auto_route_generator: ^5.0.2
   hive_generator: ^1.1.3
+  isar_generator: ^3.0.5
   graphql_codegen: ^0.11.2
   code_builder: ^4.3.0
   # Packaging

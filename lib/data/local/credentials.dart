@@ -1,48 +1,27 @@
 import 'dart:async';
 
-import 'package:hive_flutter/hive_flutter.dart';
+import 'base/base_hive_storage.dart';
+import 'base/storage_public_interface.dart';
 
 abstract class _Keys {
   static const accessToken = 'accessToken';
 }
 
-abstract class Credentials {
-  Future init();
-  Future clear();
-  Future close();
-
+abstract class Credentials implements StoragePublicInterface {
   String? get accessToken;
   set accessToken(String? value);
 
   bool get isAuthenticated;
 }
 
-class CredentialsImpl implements Credentials {
-  late Box _box;
+class CredentialsImpl extends BaseHiveStorage implements Credentials {
+  @override
+  String get boxName => 'credentials';
 
   @override
-  Future init() async {
-    _box = await Hive.openBox('credentials');
-  }
-
+  String? get accessToken => box.get(_Keys.accessToken);
   @override
-  Future clear() async {
-    await _box.clear();
-    // Box gets closed when cleared so call init to re-open it.
-    // Failing to re-open after clearing a box will cause writes to not be
-    // persisted.
-    await init();
-  }
-
-  @override
-  Future close() {
-    return _box.close();
-  }
-
-  @override
-  String? get accessToken => _box.get(_Keys.accessToken);
-  @override
-  set accessToken(String? value) => _box.put(_Keys.accessToken, value);
+  set accessToken(String? value) => box.put(_Keys.accessToken, value);
 
   @override
   bool get isAuthenticated => accessToken != null;
