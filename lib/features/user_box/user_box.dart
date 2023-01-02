@@ -37,7 +37,7 @@ class UserBox extends ViewModelWidget<UserBoxViewModel>
   }
 
   void _onPress(BuildContext context, UserBoxViewModel vm) {
-    final windowPadding = MediaQueryData.fromWindow(window).padding;
+    final windowPadding = window.padding;
     final position = context.findPosition();
     final movedPosition = position.translate(
       position.dx,
