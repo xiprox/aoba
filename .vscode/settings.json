@@ -5,5 +5,10 @@
     }, 
     "files.watcherExclude": {
       "**/.fvm": true
+    },
+    "files.exclude": {
+      "**/*.g.dart": true,
+      "**/*.gr.dart": true,
+      "**/*.gql.dart": true,
     }
   }
