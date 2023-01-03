@@ -48,7 +48,7 @@ fragment mediaListEntry on MediaList {
 }
 
 query FetchData($userId: Int, $type: MediaType) {
-  MediaListCollection(userId: $userId, type: $type, forceSingleCompletedList: true) {
+  MediaListCollection(userId: $userId, sort: [SCORE_DESC], type: $type, forceSingleCompletedList: true) {
     lists {
       name
       isCustomList
@@ -65,7 +65,7 @@ query FetchData($userId: Int, $type: MediaType) {
         animeList {
           sectionOrder
           customLists
-          splitCompletedSectionByFormat 
+          splitCompletedSectionByFormat
         }
         mangaList {
           sectionOrder
