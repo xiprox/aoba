@@ -17,6 +17,11 @@ class AppTheme {
     final theme = ThemeData(
       useMaterial3: true,
       colorScheme: colors,
+      splashColor: colors.primary.withOpacity(0.1),
+      focusColor: colors.primary.withOpacity(0.05),
+      hoverColor: colors.primary.withOpacity(0.05),
+      highlightColor: colors.primary.withOpacity(0.05),
+      splashFactory: InkSparkle.splashFactory,
       appBarTheme: const AppBarTheme(
         titleSpacing: 8,
       ),
@@ -25,11 +30,15 @@ class AppTheme {
         color: colors.surfaceTone1,
         surfaceTintColor: colors.surfaceTint,
       ),
-      splashColor: colors.primary.withOpacity(0.1),
-      focusColor: colors.primary.withOpacity(0.05),
-      hoverColor: colors.primary.withOpacity(0.05),
-      highlightColor: colors.primary.withOpacity(0.05),
-      splashFactory: InkSparkle.splashFactory,
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+          visualDensity: VisualDensity.compact,
+          side: MaterialStateProperty.all(BorderSide(
+            color: colors.outlineVariant,
+          )),
+          foregroundColor: MaterialStateProperty.all(colors.onBackground),
+        ),
+      ),
     );
     final textTheme = GoogleFonts.rubikTextTheme(theme.textTheme);
     return theme.copyWith(
