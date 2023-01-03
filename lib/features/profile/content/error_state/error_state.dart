@@ -13,11 +13,9 @@ class ErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: FullscreenError(error: error),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: FullscreenError(error: error),
     );
   }
 }
