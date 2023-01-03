@@ -37,8 +37,9 @@ class PreferencesImpl implements Preferences {
   @override
   update(Function(Prefs) update) async {
     _isar.writeTxnSync(() {
-      update(get());
-      _isar.prefs.putSync(get());
+      final instance = get();
+      update(instance);
+      _isar.prefs.putSync(instance);
     });
   }
 }
