@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:aoba/widgets/painting/clippers/circular_reveal_clipper.dart';
 import 'package:flutter/material.dart';
@@ -12,21 +13,18 @@ const double kMaxWidthPercentOfParent = 0.8; // 80%
 const double kMaxHeightPercentOfParent = 0.7; // 70%
 
 class PopupOnPositionRoute extends PopupRoute {
+  final Offset position;
+  final Offset? triggerPosition;
+  final Widget child;
+
   PopupOnPositionRoute({
     required this.position,
+    this.triggerPosition,
     required this.child,
   });
 
-  final Offset position;
-  final Widget child;
-
   @override
   Curve get barrierCurve => Curves.fastOutSlowIn;
-
-  @override
-  Animation<double> createAnimation() {
-    return super.createAnimation();
-  }
 
   @override
   Widget buildTransitions(
@@ -38,8 +36,7 @@ class PopupOnPositionRoute extends PopupRoute {
     return ClipPath(
       clipper: CircularRevealClipper(
         fraction: animation.value,
-        centerAlignment: Alignment.topLeft,
-        centerOffset: position,
+        centerOffset: triggerPosition,
       ),
       child: child,
     );
@@ -52,7 +49,7 @@ class PopupOnPositionRoute extends PopupRoute {
   bool get barrierDismissible => true;
 
   @override
-  Color get barrierColor => Colors.black38;
+  Color get barrierColor => Colors.black26;
 
   @override
   final String barrierLabel = '';

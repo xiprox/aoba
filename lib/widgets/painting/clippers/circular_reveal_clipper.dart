@@ -6,14 +6,12 @@ import 'package:flutter/material.dart';
 @immutable
 class CircularRevealClipper extends CustomClipper<Path> {
   final double fraction;
-  final Alignment? centerAlignment;
   final Offset? centerOffset;
   final double? minRadius;
   final double? maxRadius;
 
   const CircularRevealClipper({
     required this.fraction,
-    this.centerAlignment,
     this.centerOffset,
     this.minRadius,
     this.maxRadius,
@@ -21,8 +19,7 @@ class CircularRevealClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    final Offset center = centerAlignment?.alongSize(size) ??
-        centerOffset ??
+    final Offset center = centerOffset ??
         Offset(
           size.width / 2,
           size.height / 2,
@@ -42,7 +39,6 @@ class CircularRevealClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CircularRevealClipper oldClipper) {
     return fraction != oldClipper.fraction ||
-        centerAlignment != oldClipper.centerAlignment ||
         centerOffset != oldClipper.centerOffset ||
         minRadius != oldClipper.minRadius ||
         maxRadius != oldClipper.maxRadius;
