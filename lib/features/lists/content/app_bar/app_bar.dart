@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/features/lists/data/lists_repo.dart';
 import 'package:aoba/features/lists/lists_vm.dart';
-import 'package:aoba/widgets/lists/media_list.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_builder/scroll_builder.dart';
@@ -11,6 +10,7 @@ import 'package:scroll_builder/scroll_builder.dart';
 import 'package:veee/veee.dart';
 
 import 'filter_media_type.dart';
+import 'options_action.dart';
 import 'tabs_loading_state.dart';
 
 class ListsAppBar extends ViewModelWidget<ListsViewModel> {
@@ -23,8 +23,6 @@ class ListsAppBar extends ViewModelWidget<ListsViewModel> {
     required this.tabController,
   });
 
-//+
-
   @override
   Widget build(BuildContext context, ListsViewModel vm) {
     final mediaQ = context.media;
@@ -32,23 +30,11 @@ class ListsAppBar extends ViewModelWidget<ListsViewModel> {
     final colors = context.colors;
     const expandedHeight = 188.0;
     const approximateWidthOfActions = 224.0;
-    print('${mediaQ.size.width} - $approximateWidthOfActions');
     return SliverAppBar(
       pinned: true,
       expandedHeight: expandedHeight,
       actions: [
-        IconButton(
-          onPressed: () {
-            if (vm.displayType == ListDisplayType.grid) {
-              vm.onDisplayTypeChange(ListDisplayType.listComfortable);
-            } else if (vm.displayType == ListDisplayType.listComfortable) {
-              vm.onDisplayTypeChange(ListDisplayType.listCompact);
-            } else if (vm.displayType == ListDisplayType.listCompact) {
-              vm.onDisplayTypeChange(ListDisplayType.grid);
-            }
-          },
-          icon: const Icon(Icons.tune_rounded),
-        ),
+        OptionsAction(onPress: (position) => vm.onOptionsPress(position)),
         const SizedBox(width: 4),
         const MediaTypeFilter(),
         const SizedBox(width: 8),

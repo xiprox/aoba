@@ -11,6 +11,11 @@ import 'package:veee/veee.dart';
 
 import 'data/lists_repo.dart';
 
+class OpenOptions extends ViewModelOrder {
+  final Offset triggerPosition;
+  OpenOptions({required this.triggerPosition});
+}
+
 class ListsViewModel extends ViewModel {
   final int userId;
   final Color? color;
@@ -29,7 +34,8 @@ class ListsViewModel extends ViewModel {
   Resource<ListsData> data = const Resource(loading: true);
 
   MediaType filterMediaType = MediaType.ANIME;
-  late ListDisplayType displayType = _prefs.get().lists.displayType;
+
+  late ListDisplayType optionDisplayType = _prefs.get().lists.displayType;
 
   int animeIndex = 0;
   int mangaIndex = 0;
@@ -78,9 +84,13 @@ class ListsViewModel extends ViewModel {
     fetch();
   }
 
-  void onDisplayTypeChange(ListDisplayType value) {
+  void onOptionsPress(Offset triggerPosition) {
+    order(OpenOptions(triggerPosition: triggerPosition));
+  }
+
+  void onOptionDisplayTypeChange(ListDisplayType value) {
     _prefs.update((it) => it.lists.displayType = value);
-    displayType = value;
+    optionDisplayType = value;
     notifyListeners();
   }
 

@@ -77,7 +77,7 @@ class _ListsContentState extends State<ListsContent>
       body: ResourceBuilderAnimatedSwitcher(
         child: ResourceBuilder(
           key: ValueKey(
-            widget.data.hashCode + vm.displayType.hashCode,
+            widget.data.hashCode + vm.optionDisplayType.hashCode,
           ),
           loadingBuilder: (context, data) => const LoadingState(),
           errorBuilder: (context, error, _) => ErrorState(error: error),
@@ -96,7 +96,7 @@ class _ListsContentState extends State<ListsContent>
                   onEntryPress: vm.onEntryPress,
                   canEditEntries: vm.canEditEntries,
                   onEntryEditPress: vm.onEntryEditPress,
-                  displayType: vm.displayType,
+                  displayType: vm.optionDisplayType,
                   list: list,
                 );
               }).toList(),
