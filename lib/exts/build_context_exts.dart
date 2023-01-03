@@ -5,8 +5,11 @@ extension BuildContextExts on BuildContext {
   MediaQueryData get media => MediaQuery.of(this);
   ColorScheme get colors => theme.colorScheme;
 
+  RenderBox findRenderBox() {
+    return findRenderObject() as RenderBox;
+  }
+
   Offset findPosition() {
-    final RenderBox box = findRenderObject() as RenderBox;
-    return box.localToGlobal(Offset.zero);
+    return findRenderBox().localToGlobal(Offset.zero);
   }
 }
