@@ -1,29 +1,10 @@
 
 fragment mediaListEntry on MediaList {
   id
-  mediaId
   status
   score
   progress
-  progressVolumes
-  repeat
-  priority
-  private
-  hiddenFromStatusLists
-  customLists
-  advancedScores
   notes
-  updatedAt
-  startedAt {
-    year
-    month
-    day
-  }
-  completedAt {
-    year
-    month
-    day
-  }
   media {
     id
     title {
@@ -38,12 +19,7 @@ fragment mediaListEntry on MediaList {
     status(version: 2)
     duration
     episodes
-    volumes
     chapters
-    averageScore
-    popularity
-    countryOfOrigin
-    genres
   }
 }
 
