@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:aoba/exts/build_context_exts.dart';
+import 'package:aoba/features/lists/content/app_bar/tabs.dart';
 import 'package:aoba/features/lists/data/lists_repo.dart';
 import 'package:aoba/features/lists/lists_vm.dart';
 import 'package:flextensions/flextensions.dart';
@@ -27,7 +28,6 @@ class ListsAppBar extends ViewModelWidget<ListsViewModel> {
   Widget build(BuildContext context, ListsViewModel vm) {
     final mediaQ = context.media;
     final theme = context.theme;
-    final colors = context.colors;
     const expandedHeight = 188.0;
     const approximateWidthOfActions = 224.0;
     return SliverAppBar(
@@ -93,34 +93,7 @@ class ListsAppBar extends ViewModelWidget<ListsViewModel> {
         preferredSize: const Size(double.infinity, 48),
         child: vm.data.isLoading
             ? const TabsLoadingState()
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TabBar(
-                    controller: tabController,
-                    isScrollable: true,
-                    labelPadding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 12,
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    splashBorderRadius: const BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                    indicator: UnderlineTabIndicator(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: colors.primary, width: 2),
-                    ),
-                    dividerColor: Colors.transparent,
-                    tabs: lists
-                        .map(
-                          (it) =>
-                              Text(it?.name ?? '?', key: ValueKey(it.hashCode)),
-                        )
-                        .toList(),
-                  ),
-                ],
-              ),
+            : ListsTabs(controller: tabController, lists: lists),
       ),
     );
   }
