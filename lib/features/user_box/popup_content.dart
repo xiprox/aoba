@@ -1,6 +1,6 @@
 import 'package:aoba/exts/build_context_exts.dart';
-import 'package:aoba/exts/material_exts.dart';
 import 'package:aoba/widgets/list_item_with_action/list_item_with_action.dart';
+import 'package:aoba/widgets/popup_on_position/popup_on_position_container.dart';
 import 'package:flutter/material.dart';
 
 class UserBoxPopupContent extends StatelessWidget {
@@ -20,10 +20,7 @@ class UserBoxPopupContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
-    const borderRadius = BorderRadius.all(Radius.circular(8));
-    return Material(
-      color: colors.surfaceTone1,
-      borderRadius: borderRadius,
+    return PopupOnPositionContainer(
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -31,7 +28,12 @@ class UserBoxPopupContent extends StatelessWidget {
           children: [
             ListItemWithAction(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              borderRadius: borderRadius,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+                bottomLeft: Radius.circular(4),
+                bottomRight: Radius.circular(4),
+              ),
               item: Text(
                 'Profile',
                 style: TextStyle(
@@ -52,7 +54,12 @@ class UserBoxPopupContent extends StatelessWidget {
                 'Settings',
                 style: TextStyle(color: colors.onSurface, fontSize: 16),
               ),
-              borderRadius: borderRadius,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(4),
+                topRight: Radius.circular(4),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 8),
               onPress: onSettingsPress,
             ),

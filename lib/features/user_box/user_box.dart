@@ -45,6 +45,7 @@ class UserBox extends ViewModelWidget<UserBoxViewModel>
     );
     context.router.pushNativeRoute(PopupOnPositionRoute(
       position: movedPosition,
+      triggerPosition: position,
       child: UserBoxPopupContent(
         username: vm.name ?? '?',
         onProfilePress: vm.onProfilePress,
