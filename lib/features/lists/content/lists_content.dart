@@ -77,7 +77,7 @@ class _ListsContentState extends State<ListsContent>
       body: ResourceBuilderAnimatedSwitcher(
         child: ResourceBuilder(
           key: ValueKey(
-            widget.data.hashCode + vm.optionDisplayType.hashCode,
+            widget.data.hashCode ^ vm.optionDisplayType.hashCode,
           ),
           loadingBuilder: (context, data) => const LoadingState(),
           errorBuilder: (context, error, _) => ErrorState(error: error),
