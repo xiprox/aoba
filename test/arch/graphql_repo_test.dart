@@ -18,7 +18,6 @@ void main() {
     (tester) async {
       const value = 'sometoken';
       get<Credentials>().accessToken = value;
-      // ignore: invalid_use_of_protected_member
       expect(SubjectGraphqlRepo().accessToken, value);
     },
   );
