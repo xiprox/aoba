@@ -19,12 +19,10 @@ class CredentialsImpl implements Credentials {
   }
 
   @override
-  Future clear() => _isar.clear();
+  Future clear() => _isar.writeTxn(() => _isar.clear());
 
   @override
   Future close() => _isar.close();
-
-  late final Creds _instance = _get();
 
   Creds _get() {
     final existing = _isar.creds.getSync(kCredentialsId);
@@ -38,16 +36,17 @@ class CredentialsImpl implements Credentials {
   }
 
   @override
-  String? get accessToken => _instance.accessToken;
+  String? get accessToken => _get().accessToken;
 
   @override
-  bool get isAuthenticated => _instance.accessToken != null;
+  bool get isAuthenticated => _get().accessToken != null;
 
   @override
   update(Function(Creds) update) async {
+    final instance = _get();
     _isar.writeTxnSync(() {
-      update(_instance);
-      _isar.creds.putSync(_instance);
+      update(instance);
+      _isar.creds.putSync(instance);
     });
   }
 }

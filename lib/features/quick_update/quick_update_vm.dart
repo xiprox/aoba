@@ -1,6 +1,5 @@
 import 'package:aoba/consts/consts.dart';
 import 'package:collection/collection.dart';
-import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/services/services.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +10,7 @@ import 'data/quick_update_repo.dart';
 class OpenLists extends ViewModelOrder {}
 
 class QuickUpdateViewModel extends ViewModel {
-  final _userInfo = get<UserInfo>();
+  final _db = get<Database>();
   final _repo = get<QuickUpdateRepo>();
   final _ping = get<PingService>();
 
@@ -39,7 +38,7 @@ class QuickUpdateViewModel extends ViewModel {
     );
     notifyListeners();
     entries = await _repo.getEntries(
-      userId: _userInfo.id,
+      userId: _db.userInfo.id,
       forceNetwork: forceRefresh,
     );
     notifyListeners();

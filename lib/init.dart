@@ -1,5 +1,4 @@
 import 'package:aoba/services/services.dart';
-import 'package:aoba/utils/hive_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +21,6 @@ class IsolateInit {
     bool isRootIsolate = false,
   }) async {
     if (initialized) return;
-    if (isRootIsolate) await HiveUtils.init();
     await Services.init(isRootIsolate: isRootIsolate);
     initialized = true;
   }

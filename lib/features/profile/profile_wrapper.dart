@@ -1,4 +1,3 @@
-import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/services/services.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:veee/veee.dart';
@@ -21,7 +20,7 @@ class ProfileWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelProvider<ProfileViewModel>(
       create: (_) => ProfileViewModel(
-        userId: userId ?? get<UserInfo>().id,
+        userId: userId ?? get<Database>().userInfo.id,
         color: color,
       ),
       child: const ProfilePage(),

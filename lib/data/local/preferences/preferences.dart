@@ -17,7 +17,7 @@ class PreferencesImpl implements Preferences {
   }
 
   @override
-  Future clear() => _isar.clear();
+  Future clear() => _isar.writeTxn(() => _isar.clear());
 
   @override
   Future close() => _isar.close();

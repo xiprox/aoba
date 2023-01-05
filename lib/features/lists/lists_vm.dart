@@ -1,5 +1,3 @@
-import 'package:aoba/data/local/preferences/preferences.dart';
-import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/services/services.dart';
@@ -26,7 +24,7 @@ class ListsViewModel extends ViewModel {
   });
 
   final _prefs = get<Preferences>();
-  final _userInfo = get<UserInfo>();
+  final _db = get<Database>();
   final _repo = get<ListsRepo>();
 
   final scrollController = ScrollController();
@@ -52,7 +50,8 @@ class ListsViewModel extends ViewModel {
   }
 
   bool get _isOwnLibrary {
-    return _userInfo.id == userId;
+    final value = _db.userInfo.id == userId;
+    return value;
   }
 
   String get appBarTitle {

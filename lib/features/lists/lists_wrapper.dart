@@ -1,4 +1,3 @@
-import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/services/services.dart';
 import 'package:auto_route/annotations.dart';
@@ -22,7 +21,7 @@ class ListsWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelProvider<ListsViewModel>(
       create: (_) {
-        final userInfo = get<UserInfo>();
+        final userInfo = get<Database>().userInfo;
         return ListsViewModel(
           userId: userId ?? userInfo.id,
           color: color ?? userInfo.profileColor?.fromAniListColor(),
