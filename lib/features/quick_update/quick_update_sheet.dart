@@ -4,6 +4,7 @@ import 'package:aoba/features/quick_update/quick_update_vm.dart';
 import 'package:aoba/navigation/navigation.dart';
 import 'package:aoba/widgets/expandable_sheet/expandable_sheet.dart';
 import 'package:aoba/widgets/resource_builder/resource_builder.dart';
+import 'package:aoba/widgets/resource_builder_animated_switcher/resource_builder_animated_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
@@ -50,12 +51,10 @@ class QuickUpdateSheet extends ViewModelWidget<QuickUpdateViewModel> {
           ),
           SizedBox(
             height: contentHeight,
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 0),
-              switchInCurve: Curves.fastOutSlowIn,
-              switchOutCurve: Curves.fastOutSlowIn.flipped,
+            child: ResourceBuilderAnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
               child: ResourceBuilder(
-                // TODO: fix
+                key: ValueKey(vm.entries),
                 resource: vm.entries,
                 emptyBuilder: (_) => const LoadingState(),
                 loadingBuilder: (_, data) {
