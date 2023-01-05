@@ -27,7 +27,7 @@ jobs:
         run: dart pub global activate flutter_gen
 
       - name: Run code generation
-        run: flutter pub run build_runner watch --delete-conflicting-outputs
+        run: flutter pub run build_runner build
 
       - name: Get the number of CPU cores
         uses: SimenB/github-actions-cpu-cores@v1
