@@ -1,13 +1,14 @@
 # Getting started
 
-This document assumes that you have a working Flutter (stable) environment. If you don't, [here's a link](https://docs.flutter.dev/get-started).
-
 To get the app running, you will need do a few things first.
 
 ## Flutter Version Manager and project SDK
 
-1. Install [FVM](https://fvm.app/docs/getting_started/installation)
+Aoba relies on [FVM](https://github.com/fluttertools/fvm) to ensure the use of a [specific Flutter version](../.fvm/fvm_config.json).
+
+1. [Install it](https://fvm.app/docs/getting_started/installation) if you don't already have it
 2. Run `fvm install` in project directory
+3. Any time you need to run a `flutter` command, run it with FVM: `fvm flutter doctor`.
 
 ## Change the redirect URL Scheme
 
@@ -26,4 +27,14 @@ To get the app running, you will need do a few things first.
 1. Create a copy of [anilist_consts.sample.dart](../lib/consts/anilist_consts.sample.dart) and rename it to `anilist_consts.dart`
 2. Change `clientId` to the Client ID you got from AniList when you created your app in the previous section
 
-_Note: if you are setting up CI/CD, remember that `anilist_consts.dart` is excluded from version control._
+_Note: `anilist_consts.dart` is excluded from version control._
+
+## Run code generation
+
+### MacOS/Linux
+`./run gen` or `./run gen watch`
+
+### Windows:
+`./run.bat gen` or `./run.bat gen watch`
+
+All of these scripts run build_runner under the hood.
