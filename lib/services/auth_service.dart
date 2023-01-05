@@ -13,14 +13,14 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<String?> handleAccessToken(String token) async {
-    _credentials.accessToken = token;
+    _credentials.update((it) => it.accessToken = token);
 
     final userData = await _userInfoRepo.getBasicUserInfo();
     if (userData.data != null) {
       _userInfo.saveFromBasicUserInfo(userData.data!);
       return null;
     } else {
-      _credentials.accessToken = null;
+      _credentials.update((it) => it.accessToken = null);
       return userData.error?.message ?? 'Error getting user data';
     }
   }

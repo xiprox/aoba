@@ -1,4 +1,3 @@
-import 'package:aoba/arch/graphql_repo.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
 import 'package:graphql/client.dart';
@@ -19,7 +18,7 @@ abstract class ProfileRepo {
   Future<Resource<Feed>> getFeed({required int userId, required int page});
 }
 
-class ProfileRepoImpl extends GraphqlRepo implements ProfileRepo {
+class ProfileRepoImpl implements ProfileRepo {
   @override
   Future<Resource<User>> getInfo({required int userId}) {
     return GqlRequest.query(
@@ -29,7 +28,6 @@ class ProfileRepoImpl extends GraphqlRepo implements ProfileRepo {
           'userId': userId,
         },
       ),
-      accessToken: accessToken,
       fromJson: (json) => User.fromJson(json['User']),
     );
   }
@@ -47,7 +45,6 @@ class ProfileRepoImpl extends GraphqlRepo implements ProfileRepo {
           'page': page,
         },
       ),
-      accessToken: accessToken,
       fromJson: Feed.fromJson,
     );
   }

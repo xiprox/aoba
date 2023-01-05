@@ -1,4 +1,3 @@
-import 'package:aoba/arch/graphql_repo.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
 import 'package:graphql/client.dart';
@@ -13,7 +12,7 @@ abstract class UserInfoRepo {
   Future<Resource<BasicUserInfo>> getBasicUserInfo();
 }
 
-class UserInfoRepoImpl extends GraphqlRepo implements UserInfoRepo {
+class UserInfoRepoImpl implements UserInfoRepo {
   @override
   Future<Resource<BasicUserInfo>> getBasicUserInfo() async {
     return GqlRequest.query(
@@ -21,7 +20,6 @@ class UserInfoRepoImpl extends GraphqlRepo implements UserInfoRepo {
         document: documentNodeQueryFetchBasicUserInfo,
         fetchPolicy: FetchPolicy.networkOnly,
       ),
-      accessToken: accessToken,
       fromJson: (json) => BasicUserInfo.fromJson(json['Viewer']),
     );
   }

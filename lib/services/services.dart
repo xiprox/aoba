@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:aoba/data/local/preferences/preferences.dart';
 import 'package:aoba/data/local/user_info.dart';
 import 'package:aoba/data/repo/user_info/user_info_repo.dart';
 import 'package:aoba/features/feed/data/feed_repo.dart';
@@ -44,17 +43,15 @@ class Services {
     await prefs.init();
     getIt.registerSingleton<Preferences>(prefs);
 
+    final credentials = CredentialsImpl();
+    await credentials.init();
+    getIt.registerSingleton<Credentials>(credentials);
+
     /// We rely on platform paths, which aren't supported in non-root Isolates.
     if (isRootIsolate) {
-      final credentials = CredentialsImpl();
-      await credentials.init();
-      getIt.registerSingleton<Credentials>(credentials);
-
       final userInfo = UserInfoImpl();
       await userInfo.init();
       getIt.registerSingleton<UserInfo>(userInfo);
-    } else {
-      getIt.registerSingleton<Credentials>(CredentialsInIsolate());
     }
 
     getIt.registerLazySingleton<AuthService>(() => AuthServiceImpl());

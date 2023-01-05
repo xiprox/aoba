@@ -1,4 +1,3 @@
-import 'package:aoba/arch/graphql_repo.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
 import 'package:collection/collection.dart';
@@ -19,7 +18,7 @@ abstract class QuickUpdateRepo {
       {required int mediaId, required int progress});
 }
 
-class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
+class QuickUpdateRepoImpl implements QuickUpdateRepo {
   @override
   Future<Resource<List<QuickUpdateEntry>>> getEntries({
     required int userId,
@@ -33,7 +32,6 @@ class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
         },
         fetchPolicy: forceNetwork ? FetchPolicy.networkOnly : null,
       ),
-      accessToken: accessToken,
       fromJson: (json) {
         return Query$FetchQuickUpdate$Page.fromJson(json['Page'])
             .entries
@@ -55,7 +53,6 @@ class QuickUpdateRepoImpl extends GraphqlRepo implements QuickUpdateRepo {
           'progress': progress,
         },
       ),
-      accessToken: accessToken,
       fromJson: (json) =>
           QuickUpdateResult.fromJson(json['SaveMediaListEntry']),
     );

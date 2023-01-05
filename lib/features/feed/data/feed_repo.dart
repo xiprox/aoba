@@ -1,4 +1,3 @@
-import 'package:aoba/arch/graphql_repo.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
 import 'package:graphql/client.dart';
@@ -18,7 +17,7 @@ abstract class FeedRepo {
   });
 }
 
-class FeedRepoImpl extends GraphqlRepo implements FeedRepo {
+class FeedRepoImpl implements FeedRepo {
   @override
   Future<Resource<Feed>> getFeed({
     required int page,
@@ -34,7 +33,6 @@ class FeedRepoImpl extends GraphqlRepo implements FeedRepo {
         },
         fetchPolicy: forceNetwork ? FetchPolicy.networkOnly : null,
       ),
-      accessToken: accessToken,
       fromJson: Feed.fromJson,
     );
   }

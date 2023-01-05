@@ -1,32 +1,27 @@
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/init.dart';
 import 'package:aoba/services/services.dart';
-import 'package:flextensions/flextensions.dart';
 import 'package:graphql/client.dart';
 
 class GqlRequest {
   static Future<Resource<T>> query<T>(
     QueryOptions options, {
-    required String? accessToken,
     required T Function(Map<String, dynamic> data) fromJson,
   }) async {
     final response = await Executor().execute(
-      fun2: _query,
+      fun1: _query,
       arg1: options,
-      arg2: accessToken,
     );
     return await _parseResponse<T>(response, fromJson: fromJson);
   }
 
   static Future<Resource<T>> mutation<T>(
     MutationOptions options, {
-    required String? accessToken,
     required T Function(Map<String, dynamic> data) fromJson,
   }) async {
     final response = await Executor().execute(
-      fun2: _mutation,
+      fun1: _mutation,
       arg1: options,
-      arg2: accessToken,
     );
     return await _parseResponse<T>(response, fromJson: fromJson);
   }
@@ -71,21 +66,17 @@ class GqlRequest {
 
   static Future<QueryResult> _mutation<T>(
     MutationOptions options,
-    String? accessToken,
     TypeSendPort port,
   ) async {
     if (!IsolateInit.initialized) await IsolateInit.init(isRootIsolate: false);
-    get<Credentials>().as<CredentialsInIsolate>().accessToken = accessToken;
     return client.client.mutate(options);
   }
 
   static Future<QueryResult> _query<T>(
     QueryOptions options,
-    String? accessToken,
     TypeSendPort port,
   ) async {
     if (!IsolateInit.initialized) await IsolateInit.init(isRootIsolate: false);
-    get<Credentials>().as<CredentialsInIsolate>().accessToken = accessToken;
     return client.client.query(options);
   }
 

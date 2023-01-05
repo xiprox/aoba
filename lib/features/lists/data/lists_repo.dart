@@ -1,4 +1,3 @@
-import 'package:aoba/arch/graphql_repo.dart';
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/data/remote/client/gql_request.dart';
@@ -34,7 +33,7 @@ abstract class ListsRepo {
   });
 }
 
-class ListsRepoImpl extends GraphqlRepo implements ListsRepo {
+class ListsRepoImpl implements ListsRepo {
   @override
   Future<Resource<ListsData>> getData({
     required int userId,
@@ -48,7 +47,6 @@ class ListsRepoImpl extends GraphqlRepo implements ListsRepo {
           'type': type.name,
         },
       ),
-      accessToken: accessToken,
       fromJson: (json) => ListsData.fromJson(json['MediaListCollection']),
     );
     return result.transform((data) {
