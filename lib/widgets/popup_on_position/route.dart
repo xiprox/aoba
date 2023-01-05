@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:aoba/widgets/painting/clippers/circular_reveal_clipper.dart';
 import 'package:flutter/material.dart';

@@ -56,7 +56,6 @@ class FeedPage extends ViewModelWidget<FeedViewModel>
               ),
               floating: true,
               snap: true,
-              actions: [],
             ),
             const SliverPadding(padding: EdgeInsets.only(bottom: 4)),
             ResourceBuilder(

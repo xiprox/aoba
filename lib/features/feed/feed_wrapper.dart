@@ -11,7 +11,7 @@ class FeedWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelProvider<FeedViewModel>(
       create: (_) => FeedViewModel(),
-      child: FeedPage(),
+      child: const FeedPage(),
     );
   }
 }

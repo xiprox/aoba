@@ -47,9 +47,9 @@ class ProfilePage extends ViewModelWidget<ProfileViewModel>
                     backgroundColor: theme.colorScheme.tertiary,
                     foregroundColor: theme.colorScheme.onTertiary,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: const Text('See lists'),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Text('See lists'),
                   ),
                 ),
               ),

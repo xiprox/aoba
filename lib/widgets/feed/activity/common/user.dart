@@ -1,5 +1,4 @@
 import 'package:aoba/exts/build_context_exts.dart';
-import 'package:aoba/theme/theme.dart';
 import 'package:aoba/widgets/avatar/avatar.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
