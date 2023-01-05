@@ -51,6 +51,7 @@ app.*.map.json
 *.gr.dart
 *.gql.dart
 *.graphql.dart
+*.gen.dart
 
 # Sensitive files
 lib/consts/anilist_consts.dart

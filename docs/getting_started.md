@@ -2,13 +2,14 @@
 
 To get the app running, you will need do a few things first.
 
-## Flutter Version Manager and project SDK
+## Flutter Version Manager, Flutter SDK, tools
 
-Aoba relies on [FVM](https://github.com/fluttertools/fvm) to ensure the use of a [specific Flutter version](../.fvm/fvm_config.json).
+Aoba relies on [FVM](https://github.com/fluttertools/fvm) to ensure the use of a [specific Flutter version](../.fvm/fvm_config.json), and uses `flutter_gen` to generate constants for its assets.
 
-1. [Install it](https://fvm.app/docs/getting_started/installation) if you don't already have it
+1. [Install FVM](https://fvm.app/docs/getting_started/installation) if you don't already have it
 2. Run `fvm install` in project directory
-3. Any time you need to run a `flutter` command, run it with FVM: `fvm flutter doctor`.
+3. Install [flutter_gen](https://github.com/FlutterGen/flutter_gen): `fvm dart pub global activate flutter_gen`
+4. Any time you need to run a `flutter` command, run it with FVM: `fvm flutter doctor`.
 
 ## Change the redirect URL Scheme
 

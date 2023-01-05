@@ -23,8 +23,11 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Install flutter_gen
+        run: dart pub global activate flutter_gen
+
       - name: Run code generation
-        run: flutter pub run build_runner build
+        run: ./run gen
 
       - name: Get the number of CPU cores
         uses: SimenB/github-actions-cpu-cores@v1

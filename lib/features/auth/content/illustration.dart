@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:aoba/data/assets/assets.gen.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,7 +21,7 @@ class BackgroundIllustration extends StatelessWidget {
             alignment: Alignment.center,
             transform: Matrix4.skew(0.2, -0.0)..rotateZ(350 * pi / 180),
             child: SvgPicture.asset(
-              'assets/images/clover.svg',
+              Assets.images.clover.path,
               color: colors.secondary.withOpacity(0.01),
               width: width * 1,
             ),

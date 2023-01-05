@@ -1,4 +1,5 @@
 import 'package:aoba/consts/consts.dart';
+import 'package:aoba/data/assets/assets.gen.dart';
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/material_exts.dart';
@@ -35,7 +36,7 @@ class FullscreenError extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
-                'assets/images/notlikethis.jpg',
+                Assets.images.notlikethis.path,
                 width: 100,
                 height: 100,
                 color: colors.error.manipulate(1).withOpacity(0.8),
