@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 /// animation between states.
 class ResourceBuilderAnimatedSwitcher extends StatelessWidget {
   final ResourceBuilder child;
+  final Duration duration;
+  final Curve switchInCurve;
+  final Curve? switchOutCurve;
 
   ResourceBuilderAnimatedSwitcher({
     super.key,
     required this.child,
+    this.duration = const Duration(milliseconds: 400),
+    this.switchInCurve = Curves.fastOutSlowIn,
+    this.switchOutCurve,
   }) {
     if (child.key == null) {
       throw ArgumentError(
@@ -23,9 +29,9 @@ class ResourceBuilderAnimatedSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
-      switchInCurve: Curves.fastOutSlowIn,
-      switchOutCurve: Curves.fastOutSlowIn.flipped,
+      duration: duration,
+      switchInCurve: switchInCurve,
+      switchOutCurve: switchOutCurve ?? switchInCurve.flipped,
       child: child,
     );
   }
