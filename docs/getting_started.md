@@ -4,7 +4,7 @@ To get the app running, you will need do a few things first.
 
 ## Flutter Version Manager, Flutter SDK, tools
 
-Aoba relies on [FVM](https://github.com/fluttertools/fvm) to ensure the use of a [specific Flutter version](../.fvm/fvm_config.json), and uses `flutter_gen` to generate constants for its assets.
+Aoba relies on [FVM](https://github.com/fluttertools/fvm) to use the beta channel of Flutter while avoiding messing with any other local Flutter installation, and uses `flutter_gen` to generate constants for its assets.
 
 1. [Install FVM](https://fvm.app/docs/getting_started/installation) if you don't already have it
 2. Run `fvm install` in project directory
