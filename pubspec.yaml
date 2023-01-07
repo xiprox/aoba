@@ -25,7 +25,7 @@ dependencies:
   flutter_svg: ^1.1.6
   auto_route: ^5.0.2
   sliver_tools: ^0.2.8
-  scroll_builder: ^0.0.1
+  scroll_builder: ^1.0.1
   timer_builder: ^2.0.0
   flutter_html: ^3.0.0-alpha.6
   shimmer: ^2.0.0

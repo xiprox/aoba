@@ -29,47 +29,44 @@ class ProfileAppBar extends ViewModelWidget<ProfileViewModel> {
         currentExtent: 1,
         child: ScrollBuilder(
           scrollController: vm.scrollController,
-          breakpoint: expandedHeight - 16,
-          delegate: ScrollBuilderCustomDelegate(
-            builder: (percentage, child) {
-              final backgroundCurve = Curves.easeIn.transform(percentage);
-              final infoCurve = const Interval(0, 0.7).transform(percentage);
-              return FlexibleSpaceBar(
-                background: Tint(
-                  color: colors.surfaceTone2.withOpacity(backgroundCurve),
-                  child: NetworkImageWithPlaceholder(
-                    type: ImageType.banner,
-                    url: vm.info.data?.bannerImage,
-                    color: colors.surfaceTone1,
-                    borderRadius: BorderRadius.zero,
+          threshold: expandedHeight - 16,
+          builder: (context, fraction, child) {
+            final backgroundCurve = Curves.easeIn.transform(fraction);
+            final infoCurve = const Interval(0, 0.7).transform(fraction);
+            return FlexibleSpaceBar(
+              background: Tint(
+                color: colors.surfaceTone2.withOpacity(backgroundCurve),
+                child: NetworkImageWithPlaceholder(
+                  type: ImageType.banner,
+                  url: vm.info.data?.bannerImage,
+                  color: colors.surfaceTone1,
+                  borderRadius: BorderRadius.zero,
+                ),
+              ),
+              titlePadding: EdgeInsets.zero,
+              title: Stack(
+                alignment: AlignmentDirectional.bottomStart,
+                children: [
+                  Wave(
+                    height: 12 * (1 - backgroundCurve),
+                    wavelength: 28 * 2,
+                    color: colors.background,
                   ),
-                ),
-                titlePadding: EdgeInsets.zero,
-                title: Stack(
-                  alignment: AlignmentDirectional.bottomStart,
-                  children: [
-                    Wave(
-                      height: 12 * (1 - backgroundCurve),
-                      wavelength: 28 * 2,
-                      color: colors.background,
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      start: Tween(begin: 8.0, end: 0.0).transform(infoCurve),
+                      bottom: Tween(begin: 24.0, end: 0.0).transform(infoCurve),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(
-                        start: Tween(begin: 8.0, end: 0.0).transform(infoCurve),
-                        bottom:
-                            Tween(begin: 24.0, end: 0.0).transform(infoCurve),
-                      ),
-                      child: InfoBox(
-                        scrollProgress: infoCurve,
-                        avatarUrl: vm.info.data?.avatar?.large,
-                        name: vm.info.data?.name,
-                      ),
+                    child: InfoBox(
+                      scrollProgress: infoCurve,
+                      avatarUrl: vm.info.data?.avatar?.large,
+                      name: vm.info.data?.name,
                     ),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

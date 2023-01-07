@@ -43,50 +43,48 @@ class ListsAppBar extends ViewModelWidget<ListsViewModel> {
         currentExtent: 1,
         child: ScrollBuilder(
           scrollController: vm.scrollController,
-          breakpoint: expandedHeight / 2,
-          delegate: ScrollBuilderCustomDelegate(
-            builder: (percentage, child) {
-              return Padding(
-                padding: EdgeInsetsDirectional.only(
-                  start: Tween(begin: 16.0, end: 56.0).transform(percentage),
-                  top: mediaQ.padding.top +
-                      Tween(
-                        begin: expandedHeight - 96.0,
-                        end: 14.0,
-                      ).transform(percentage),
-                ),
-                child: Row(
-                  children: [
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: Tween(
-                          begin: mediaQ.size.width,
-                          end: max(
-                            0.0,
-                            mediaQ.size.width - approximateWidthOfActions,
-                          ),
-                        ).transform(
-                          const Interval(0.0, 0.8).transform(percentage),
+          threshold: expandedHeight / 2,
+          builder: (context, fraction, child) {
+            return Padding(
+              padding: EdgeInsetsDirectional.only(
+                start: Tween(begin: 16.0, end: 56.0).transform(fraction),
+                top: mediaQ.padding.top +
+                    Tween(
+                      begin: expandedHeight - 96.0,
+                      end: 14.0,
+                    ).transform(fraction),
+              ),
+              child: Row(
+                children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: Tween(
+                        begin: mediaQ.size.width,
+                        end: max(
+                          0.0,
+                          mediaQ.size.width - approximateWidthOfActions,
                         ),
-                      ),
-                      child: Text(
-                        vm.appBarTitle,
-                        maxLines: 1,
-                        overflow: TextOverflow.fade,
-                        softWrap: false,
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontSize: Tween(
-                            begin: 28.0,
-                            end: theme.textTheme.titleLarge?.fontSize,
-                          ).transform(percentage),
-                        ),
+                      ).transform(
+                        const Interval(0.0, 0.8).transform(fraction),
                       ),
                     ),
-                  ],
-                ),
-              );
-            },
-          ),
+                    child: Text(
+                      vm.appBarTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontSize: Tween(
+                          begin: 28.0,
+                          end: theme.textTheme.titleLarge?.fontSize,
+                        ).transform(fraction),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
       bottom: PreferredSize(
