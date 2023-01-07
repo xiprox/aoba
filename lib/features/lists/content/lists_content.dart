@@ -56,7 +56,6 @@ class _ListsContentState extends State<ListsContent>
     if (widget.initialIndex != oldWidget.initialIndex ||
         widget.data != oldWidget.data) {
       tabController.removeListener(onTabChanged);
-      tabController.dispose();
       tabController = _newTabController();
     }
   }
