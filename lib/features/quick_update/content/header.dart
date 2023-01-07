@@ -32,7 +32,7 @@ class Header extends StatelessWidget {
         ),
         FlatButton(
           onPress: onSeeAllListsPress,
-          background: colors.surfaceTone2,
+          background: colors.secondary.withOpacity(0.05),
           foreground: colors.secondary,
           child: const Text('See all lists'),
         ),
