@@ -37,15 +37,16 @@ class UserBox extends ViewModelWidget<UserBoxViewModel>
   }
 
   void _onPress(BuildContext context, UserBoxViewModel vm) {
-    final windowPadding = window.padding;
+    final windowPadding = context.media.padding;
     final position = context.findPosition();
+    final positionCompensation = position.dy == 0 ? 48 : 0;
     final movedPosition = position.translate(
       position.dx,
-      position.dy + 48 - windowPadding.top,
+      position.dy + windowPadding.top + positionCompensation,
     );
     context.router.pushNativeRoute(PopupOnPositionRoute(
       position: movedPosition,
-      triggerPosition: position,
+      triggerPosition: movedPosition,
       child: UserBoxPopupContent(
         username: vm.name ?? '?',
         onProfilePress: vm.onProfilePress,
