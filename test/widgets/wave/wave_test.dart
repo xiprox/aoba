@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('Passes given color to $WavePainter', (tester) async {
     const color = Colors.yellow;
-    await tester.pumpWidget(const Wave(
+    await tester.pumpWidget(const WaveMaterial(
       color: color,
       height: 16,
       wavelength: 16,
@@ -20,7 +20,7 @@ void main() {
 
   testWidgets('Passes given wavelength to $WavePainter', (tester) async {
     const wavelength = 33.3;
-    await tester.pumpWidget(const Wave(
+    await tester.pumpWidget(const WaveMaterial(
       color: Colors.red,
       height: 16,
       wavelength: wavelength,
@@ -34,7 +34,7 @@ void main() {
 
   testWidgets('Uses given height', (tester) async {
     const height = 4.0;
-    await tester.pumpWidget(const Wave(
+    await tester.pumpWidget(const WaveMaterial(
       color: Colors.red,
       height: height,
       wavelength: 16,

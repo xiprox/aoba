@@ -47,7 +47,7 @@ class ProfileAppBar extends ViewModelWidget<ProfileViewModel> {
               title: Stack(
                 alignment: AlignmentDirectional.bottomStart,
                 children: [
-                  Wave(
+                  WaveMaterial(
                     height: 12 * (1 - backgroundCurve),
                     wavelength: 28 * 2,
                     color: colors.background,

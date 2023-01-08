@@ -1,12 +1,12 @@
 import 'package:aoba/widgets/painting/painters/wave_painter.dart';
 import 'package:flutter/material.dart';
 
-class Wave extends StatelessWidget {
+class WaveMaterial extends StatelessWidget {
   final Color color;
   final double height;
   final double wavelength;
 
-  const Wave({
+  const WaveMaterial({
     super.key,
     required this.color,
     required this.height,
