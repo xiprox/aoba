@@ -28,7 +28,7 @@ class UserBox extends ViewModelWidget<UserBoxViewModel>
     super.handleOrder(context, order, vm);
     if (order is OpenProfile) {
       context.router.navigate(
-        ProfileRoute(userId: vm.userId, color: vm.color?.fromAniListColor()),
+        ProfileRoute(userId: vm.userId),
       );
     }
     if (order is ClosePopup) {

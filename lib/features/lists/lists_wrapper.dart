@@ -1,4 +1,3 @@
-import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/services/services.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:veee/veee.dart';
@@ -24,7 +23,7 @@ class ListsWrapper extends StatelessWidget {
         final userInfo = get<Database>().userInfo;
         return ListsViewModel(
           userId: userId ?? userInfo.id,
-          color: color ?? userInfo.profileColor?.fromAniListColor(),
+          color: color,
         );
       },
       child: const ListsPage(),
