@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:aoba/exts/material_exts.dart';
 import 'package:aoba/widgets/frame_builders.dart';
+import 'package:aoba/widgets/smooth_rectangle_border/smooth_rectangle_border.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class NetworkImageWithPlaceholder extends StatelessWidget {
   final String? url;
   final ImageType type;
   final BorderRadius? borderRadius;
+  final ShapeBorder? shape;
   final double? width;
   final double? height;
   final Color? color;
@@ -25,11 +27,16 @@ class NetworkImageWithPlaceholder extends StatelessWidget {
     required this.url,
     required this.type,
     this.borderRadius,
+    this.shape,
     this.width,
     this.height,
     this.color,
     this.onPress,
-  }) : super(key: key);
+  })  : assert(
+          shape == null || borderRadius == null,
+          'Only one of shape or borderRadius can be provided.',
+        ),
+        super(key: key);
 
   factory NetworkImageWithPlaceholder.anime(
     String? url, {
@@ -89,10 +96,14 @@ class NetworkImageWithPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shape = this.shape ??
+        SmoothRectangleBorder(
+          borderRadius: borderRadius ?? _kDefaultBorderRadius,
+        );
     return LayoutBuilder(
       builder: (context, constraints) {
-        return ClipRRect(
-          borderRadius: borderRadius ?? _kDefaultBorderRadius,
+        return ClipPath(
+          clipper: ShapeBorderClipper(shape: shape),
           child: Stack(
             children: [
               _buildPlaceholder(context, constraints),
