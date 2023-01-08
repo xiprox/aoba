@@ -75,3 +75,46 @@ extension MediaStatusExts on MediaStatus {
     }
   }
 }
+
+extension MediaListStatusExts on MediaListStatus {
+  String get displayName {
+    switch (this) {
+      case MediaListStatus.COMPLETED:
+        return 'Completed';
+      case MediaListStatus.CURRENT:
+        return 'Current';
+      case MediaListStatus.PLANNING:
+        return 'Planning';
+      case MediaListStatus.DROPPED:
+        return 'Dropped';
+      case MediaListStatus.PAUSED:
+        return 'Paused';
+      case MediaListStatus.REPEATING:
+        return 'Repeating';
+      case MediaListStatus.$unknown:
+        return 'Unknown';
+    }
+  }
+
+  String get displayNameForAnime {
+    switch (this) {
+      case MediaListStatus.CURRENT:
+        return 'Watching';
+      case MediaListStatus.REPEATING:
+        return 'Re-watching';
+      default:
+        return displayName;
+    }
+  }
+
+  String get displayNameForManga {
+    switch (this) {
+      case MediaListStatus.CURRENT:
+        return 'Reading';
+      case MediaListStatus.REPEATING:
+        return 'Re-reading';
+      default:
+        return displayName;
+    }
+  }
+}
