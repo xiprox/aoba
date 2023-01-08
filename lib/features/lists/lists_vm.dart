@@ -14,6 +14,17 @@ class OpenOptions extends ViewModelOrder {
   OpenOptions({required this.triggerPosition});
 }
 
+class OpenEntryUpdate extends ViewModelOrder {
+  final MediaListEntry entry;
+  final ScoreFormat scoreFormat;
+  final Color? color;
+  const OpenEntryUpdate({
+    required this.entry,
+    required this.scoreFormat,
+    this.color,
+  });
+}
+
 class ListsViewModel extends ViewModel {
   final int userId;
   final Color? color;
@@ -97,5 +108,12 @@ class ListsViewModel extends ViewModel {
 
   void onEntryPress(MediaListEntry entry) {}
 
-  void onEntryEditPress(MediaListEntry entry) {}
+  void onEntryEditPress(MediaListEntry entry) {
+    order(OpenEntryUpdate(
+      entry: entry,
+      scoreFormat: data.data?.user?.mediaListOptions?.scoreFormat ??
+          ScoreFormat.$unknown,
+      color: entry.media?.coverImage?.color?.toColor(),
+    ));
+  }
 }

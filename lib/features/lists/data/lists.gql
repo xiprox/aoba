@@ -4,6 +4,17 @@ fragment mediaListEntry on MediaList {
   status
   score
   progress
+  startedAt {
+    year
+    month
+    day
+  }
+  completedAt {
+    year
+    month
+    day
+  }
+  repeat
   notes
   media {
     id
@@ -14,6 +25,7 @@ fragment mediaListEntry on MediaList {
       large
       color
     }
+    bannerImage
     type
     format
     status(version: 2)

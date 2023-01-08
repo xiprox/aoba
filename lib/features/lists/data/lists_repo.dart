@@ -9,6 +9,20 @@ import 'lists.gql.dart';
 typedef ListsData = Query$FetchData$MediaListCollection;
 typedef MediaList = Query$FetchData$MediaListCollection$lists;
 typedef MediaListEntry = Fragment$mediaListEntry;
+typedef MediaListEntryStartDate = Fragment$mediaListEntry$startedAt;
+typedef MediaListEntryCompleteDate = Fragment$mediaListEntry$completedAt;
+
+extension ListEntryStartDateExts on MediaListEntryStartDate {
+  DateTime? toDateTime() => year != null && month != null && day != null
+      ? DateTime(year!, month!, day!)
+      : null;
+}
+
+extension ListEntryCompleteDateExts on MediaListEntryCompleteDate {
+  DateTime? toDateTime() => year != null && month != null && day != null
+      ? DateTime(year!, month!, day!)
+      : null;
+}
 
 int _sortListNames(List<String?> order, String? a, String? b) {
   final name1 = a ?? '';

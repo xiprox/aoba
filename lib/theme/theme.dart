@@ -1,4 +1,5 @@
 import 'package:aoba/exts/material_exts.dart';
+import 'package:aoba/widgets/smooth_rectangle_border/smooth_rectangle_border.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +31,11 @@ class AppTheme {
         color: colors.surfaceTone1,
         surfaceTintColor: colors.surfaceTint,
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(0),
+        ),
+      ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
           visualDensity: VisualDensity.compact,
@@ -38,6 +44,27 @@ class AppTheme {
           )),
           foregroundColor: MaterialStateProperty.all(colors.onBackground),
         ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: colors.outline, width: 1),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 0,
+        ),
+      ),
+      menuTheme: MenuThemeData(
+          style: MenuStyle(
+        shape: MaterialStateProperty.all(
+          const SmoothRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+        ),
+      )),
+      buttonTheme: const ButtonThemeData(
+        alignedDropdown: true,
       ),
     );
     final textTheme = GoogleFonts.rubikTextTheme(theme.textTheme);
