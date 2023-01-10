@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 class ScoreInputFormField extends StatelessWidget {
   final ScoreFormat format;
   final double? initialValue;
-  final ValueChanged<double>? onChanged;
+  final ValueChanged<double>? onChange;
 
   const ScoreInputFormField({
     super.key,
     required this.format,
     this.initialValue,
-    this.onChanged,
+    this.onChange,
   });
 
   @override
@@ -22,9 +22,9 @@ class ScoreInputFormField extends StatelessWidget {
         return ScoreInputField(
           format: format,
           value: state.value ?? 0,
-          onChanged: (value) {
+          onChange: (value) {
             state.didChange(value);
-            onChanged?.call(value);
+            onChange?.call(value);
           },
         );
       },

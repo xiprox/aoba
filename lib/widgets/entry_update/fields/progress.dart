@@ -15,6 +15,7 @@ class ProgressField extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntInputFormField(
       initialValue: initialValue,
+      min: 0,
       max: max,
     );
   }

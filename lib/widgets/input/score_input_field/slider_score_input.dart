@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SliderScoreInput extends StatelessWidget {
   final double min;
   final double max;
   final double increment;
   final double value;
-  final ValueChanged<double> onChanged;
+  final ValueChanged<double> onChange;
 
   const SliderScoreInput({
     super.key,
@@ -13,8 +14,17 @@ class SliderScoreInput extends StatelessWidget {
     required this.max,
     required this.increment,
     required this.value,
-    required this.onChanged,
+    required this.onChange,
   });
+
+  void _onChange(double value) {
+    if (value == min || value == max) {
+      HapticFeedback.lightImpact();
+    } else {
+      HapticFeedback.selectionClick();
+    }
+    onChange(value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +33,7 @@ class SliderScoreInput extends StatelessWidget {
       max: max,
       divisions: max ~/ increment,
       value: value,
-      onChanged: onChanged,
+      onChanged: _onChange,
     );
   }
 }

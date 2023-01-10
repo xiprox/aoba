@@ -13,6 +13,7 @@ class RepeatsField extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntInputFormField(
       initialValue: initialValue,
+      min: 0,
     );
   }
 }

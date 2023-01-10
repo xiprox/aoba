@@ -1,4 +1,5 @@
 import 'package:aoba/data/model/aliases.dart';
+import 'package:aoba/widgets/input/date_input_field/date_input_form_field.dart';
 import 'package:flutter/material.dart';
 
 import 'fields/label.dart';
@@ -38,6 +39,7 @@ class EntryUpdateForm extends StatelessWidget {
     return Form(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const Label('Status'),
           const SizedBox(height: 8),
@@ -69,14 +71,13 @@ class EntryUpdateForm extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Label('Start Date'),
                     const SizedBox(height: 8),
-                    InputDatePickerFormField(
-                      fieldLabelText: '',
-                      firstDate: DateTime(1669, 1, 1),
-                      lastDate: DateTime(2069, 1, 1),
-                      initialDate: initialStartDate,
+                    DateInputFormField(
+                      initialValue: initialStartDate,
+                      expanded: true,
                     ),
                   ],
                 ),
@@ -85,14 +86,13 @@ class EntryUpdateForm extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Label('Finish Date'),
                     const SizedBox(height: 8),
-                    InputDatePickerFormField(
-                      fieldLabelText: '',
-                      firstDate: DateTime(1669, 1, 1),
-                      lastDate: DateTime(2069, 1, 1),
-                      initialDate: initialCompleteDate,
+                    DateInputFormField(
+                      initialValue: initialCompleteDate,
+                      expanded: true,
                     ),
                   ],
                 ),
@@ -116,6 +116,12 @@ class EntryUpdateForm extends StatelessWidget {
             initialValue: initialNotes,
             maxLines: 10,
             minLines: 1,
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 10,
+              ),
+            ),
           ),
         ],
       ),

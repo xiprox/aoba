@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 class ScoreInputField extends StatelessWidget {
   final ScoreFormat format;
   final double value;
-  final ValueChanged<double> onChanged;
+  final ValueChanged<double> onChange;
 
   const ScoreInputField({
     super.key,
     required this.format,
     required this.value,
-    required this.onChanged,
+    required this.onChange,
   });
 
   @override
@@ -25,7 +25,7 @@ class ScoreInputField extends StatelessWidget {
           max: 100,
           increment: 1,
           value: value,
-          onChanged: onChanged,
+          onChange: onChange,
         );
         break;
       case ScoreFormat.POINT_10:
@@ -34,7 +34,7 @@ class ScoreInputField extends StatelessWidget {
           max: 10,
           increment: 1,
           value: value,
-          onChanged: onChanged,
+          onChange: onChange,
         );
         break;
       case ScoreFormat.POINT_10_DECIMAL:
@@ -43,7 +43,7 @@ class ScoreInputField extends StatelessWidget {
           max: 10,
           increment: 0.5,
           value: value,
-          onChanged: onChanged,
+          onChange: onChange,
         );
         break;
       case ScoreFormat.POINT_5:
@@ -52,7 +52,7 @@ class ScoreInputField extends StatelessWidget {
           max: 5,
           increment: 1,
           value: value,
-          onChanged: onChanged,
+          onChange: onChange,
         );
         break;
       case ScoreFormat.POINT_3:
@@ -61,7 +61,7 @@ class ScoreInputField extends StatelessWidget {
           max: 3,
           increment: 1,
           value: value,
-          onChanged: onChanged,
+          onChange: onChange,
         );
         break;
       default:

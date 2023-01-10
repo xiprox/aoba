@@ -54,7 +54,7 @@ class _ScoreFieldState extends State<ScoreField> {
           child: ScoreInputFormField(
             format: widget.scoreFormat,
             initialValue: widget.initialValue,
-            onChanged: (value) => setState(() => score = value),
+            onChange: (value) => setState(() => score = value),
           ),
         ),
         AnimatedContainer(

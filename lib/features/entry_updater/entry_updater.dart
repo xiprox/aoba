@@ -24,6 +24,7 @@ class EntryUpdater {
       isScrollControlled: true,
       isDismissible: true,
       enableDrag: true,
+      useRootNavigator: true,
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height * 0.8,
       ),

@@ -12,6 +12,8 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
 
   @override
   Widget build(BuildContext context, EntryUpdaterViewModel vm) {
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
     final theme = AppTheme.override(context, vm.color);
     final colors = theme.colorScheme;
 
@@ -40,6 +42,7 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
             color: colors.surfaceVariant,
             shape: shape,
             child: CustomScrollView(
+              physics: const ClampingScrollPhysics(),
               shrinkWrap: true,
               slivers: [
                 Header(
@@ -64,6 +67,7 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
                         ),
                       ),
                     ),
+                    SizedBox(height: bottomInset),
                   ]),
                 ),
               ],
