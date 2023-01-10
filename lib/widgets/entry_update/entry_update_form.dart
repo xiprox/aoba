@@ -114,16 +114,8 @@ class EntryUpdateForm extends StatelessWidget {
           const SizedBox(height: 8),
           TextFormField(
             initialValue: initialNotes,
-            maxLines: 5,
+            maxLines: 10,
             minLines: 1,
-          ),
-          const SizedBox(height: 16),
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: FilledButton(
-              onPressed: () {},
-              child: const Text('Save'),
-            ),
           ),
         ],
       ),

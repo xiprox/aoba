@@ -33,4 +33,6 @@ class EntryUpdaterViewModel extends ViewModel {
     required this.repeats,
     required this.color,
   });
+
+  void onSavePress() {}
 }

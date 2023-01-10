@@ -1,13 +1,10 @@
-import 'package:aoba/consts/aspect_ratios.dart';
-import 'package:aoba/exts/material_exts.dart';
 import 'package:aoba/theme/theme.dart';
 import 'package:aoba/widgets/entry_update/entry_update_form.dart';
-import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
 import 'package:aoba/widgets/smooth_rectangle_border/smooth_rectangle_border.dart';
-import 'package:aoba/widgets/wave_border/wave_border.dart';
 import 'package:veee/veee.dart';
 import 'package:flutter/material.dart';
 
+import 'content/header.dart';
 import 'entry_updater_vm.dart';
 
 class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
@@ -37,63 +34,56 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
           inactiveTrackColor: colors.secondary.withOpacity(0.2),
         ),
       ),
-      child: Material(
-        color: colors.surfaceVariant,
-        shape: shape,
-        child: ListView(
-          physics: const ClampingScrollPhysics(),
-          shrinkWrap: true,
-          children: [
-            if (vm.bannerImage != null) ...[
-              LayoutBuilder(builder: (context, constraints) {
-                return NetworkImageWithPlaceholder(
-                  type: ImageType.banner,
-                  url: vm.bannerImage,
-                  color: colors.secondaryContainer.manipulate(0.9),
-                  height: constraints.maxWidth / AspectRatios.banner,
-                  width: constraints.maxWidth,
-                  shape: WaveBorder(
-                    side: const WaveSide.only(
-                      bottom: Wave(
-                        amplitude: 4,
-                        wavelength: 24,
+      child: Stack(
+        children: [
+          Material(
+            color: colors.surfaceVariant,
+            shape: shape,
+            child: CustomScrollView(
+              shrinkWrap: true,
+              slivers: [
+                Header(
+                  borderRadius: shape.borderRadius,
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: EntryUpdateForm(
+                          mediaType: vm.mediaType,
+                          initialStatus: vm.status,
+                          scoreFormat: vm.scoreFormat,
+                          initialScore: vm.score,
+                          initialProgress: vm.progress,
+                          maxPossibleProgress: vm.maxPossibleProgress,
+                          initialStartDate: vm.startedAt,
+                          initialCompleteDate: vm.completedAt,
+                          initialRepeats: vm.repeats,
+                          initialNotes: vm.notes,
+                        ),
                       ),
                     ),
-                    borderRadius: shape.borderRadius,
-                  ),
-                );
-              }),
-            ],
-            if (vm.title != null) ...[
-              SizedBox(height: vm.bannerImage == null ? 16 : 12),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  vm.title!,
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontSize: 20,
-                    color: colors.primary,
-                  ),
+                  ]),
                 ),
-              ),
-            ],
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: EntryUpdateForm(
-                mediaType: vm.mediaType,
-                initialStatus: vm.status,
-                scoreFormat: vm.scoreFormat,
-                initialScore: vm.score,
-                initialProgress: vm.progress,
-                maxPossibleProgress: vm.maxPossibleProgress,
-                initialStartDate: vm.startedAt,
-                initialCompleteDate: vm.completedAt,
-                initialRepeats: vm.repeats,
-                initialNotes: vm.notes,
+              ],
+            ),
+          ),
+          // ModalBottomSheet doesn't properly support dragging if the content
+          // is scrollable. This hacky AbsorbPointer overlaid onto the title
+          // portion of the header prevents the pointer events from reaching
+          // the scroll content and thus allows the sheet to be dragged away.
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 56),
+            child: AbsorbPointer(
+              absorbing: true,
+              child: SizedBox(
+                width: double.infinity,
+                height: 56,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
