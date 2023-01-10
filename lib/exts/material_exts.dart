@@ -20,6 +20,18 @@ extension ColorExts on Color {
   Color harmonize(Color source) {
     return Color(Blend.harmonize(value, source.value));
   }
+
+  Color lighten(double amount) {
+    final hct = Hct.fromInt(value);
+    hct.tone = min(hct.tone + amount, 100);
+    return Color(hct.toInt());
+  }
+
+  Color darken(double amount) {
+    final hct = Hct.fromInt(value);
+    hct.tone = max(hct.tone - amount, 0);
+    return Color(hct.toInt());
+  }
 }
 
 extension ColorSchemeExts on ColorScheme {
