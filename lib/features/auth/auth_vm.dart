@@ -6,7 +6,8 @@ import 'package:aoba/services/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:veee/veee.dart';
 
-final kIsPinAuthMethod = Platform.isWindows || Platform.isMacOS;
+final kIsPinAuthMethod =
+    Platform.isWindows || Platform.isMacOS || Platform.isIOS;
 
 class MoveOn extends ViewModelOrder {
   const MoveOn();
@@ -22,7 +23,7 @@ class AuthViewModel extends ViewModel {
   bool showPinInputField = false;
 
   void onAuthPress() {
-    if (Platform.isMacOS || Platform.isWindows) {
+    if (kIsPinAuthMethod) {
       showPinInputField = true;
       notifyListeners();
     }
