@@ -1,5 +1,5 @@
 import 'package:aoba/data/model/aliases.dart';
-import 'package:aoba/widgets/score_input_field/score_input_field.dart';
+import 'package:aoba/widgets/input/score_input_field/score_input_field.dart';
 import 'package:flutter/material.dart';
 
 class ScoreInputFormField extends StatelessWidget {

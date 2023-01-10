@@ -1,4 +1,4 @@
-import 'package:aoba/widgets/int_input_field/int_input_form_field.dart';
+import 'package:aoba/widgets/input/int_input_field/int_input_form_field.dart';
 import 'package:flutter/material.dart';
 
 class ProgressField extends StatelessWidget {

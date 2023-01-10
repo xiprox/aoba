@@ -1,7 +1,5 @@
 import 'package:aoba/data/model/aliases.dart';
-import 'package:aoba/exts/material_exts.dart';
-import 'package:aoba/widgets/score_input_field/slider_score_input.dart';
-import 'package:aoba/widgets/smooth_rectangle_border/smooth_rectangle_border.dart';
+import 'package:aoba/widgets/input/score_input_field/slider_score_input.dart';
 import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 

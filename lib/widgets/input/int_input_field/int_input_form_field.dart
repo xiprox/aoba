@@ -1,4 +1,4 @@
-import 'package:aoba/widgets/text/input_formatters/max_int_formatter.dart';
+import 'package:aoba/widgets/input/text/input_formatters/max_int_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
