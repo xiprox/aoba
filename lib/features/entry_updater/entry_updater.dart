@@ -29,20 +29,25 @@ class EntryUpdater {
         maxHeight: MediaQuery.of(context).size.height * 0.8,
       ),
       builder: (context) {
-        return EntryUpdaterWrapper(
-          mediaType: mediaType,
-          title: title,
-          bannerImage: bannerImage,
-          status: status,
-          scoreFormat: scoreFormat,
-          score: score,
-          progress: progress,
-          maxPossibleProgress: maxPossibleProgress,
-          startedAt: startedAt,
-          completedAt: completedAt,
-          repeats: repeats,
-          notes: notes,
-          color: color,
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: EntryUpdaterWrapper(
+            mediaType: mediaType,
+            title: title,
+            bannerImage: bannerImage,
+            status: status,
+            scoreFormat: scoreFormat,
+            score: score,
+            progress: progress,
+            maxPossibleProgress: maxPossibleProgress,
+            startedAt: startedAt,
+            completedAt: completedAt,
+            repeats: repeats,
+            notes: notes,
+            color: color,
+          ),
         );
       },
     );

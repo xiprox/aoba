@@ -12,8 +12,6 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
 
   @override
   Widget build(BuildContext context, EntryUpdaterViewModel vm) {
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
-
     final theme = AppTheme.override(context, vm.color);
     final colors = theme.colorScheme;
 
@@ -23,6 +21,7 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
         topRight: Radius.circular(16),
       ),
     );
+
     return Theme(
       data: theme.copyWith(
         colorScheme: colors.copyWith(
@@ -39,53 +38,36 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
       child: Stack(
         children: [
           Material(
-            color: colors.surfaceVariant,
             shape: shape,
-            child: CustomScrollView(
+            color: colors.surfaceVariant,
+            child: SingleChildScrollView(
               physics: const ClampingScrollPhysics(),
-              shrinkWrap: true,
-              slivers: [
-                Header(
-                  borderRadius: shape.borderRadius,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  top: Header.kHeight + 16,
+                  right: 16,
+                  bottom: 16,
                 ),
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: EntryUpdateForm(
-                          mediaType: vm.mediaType,
-                          initialStatus: vm.status,
-                          scoreFormat: vm.scoreFormat,
-                          initialScore: vm.score,
-                          initialProgress: vm.progress,
-                          maxPossibleProgress: vm.maxPossibleProgress,
-                          initialStartDate: vm.startedAt,
-                          initialCompleteDate: vm.completedAt,
-                          initialRepeats: vm.repeats,
-                          initialNotes: vm.notes,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: bottomInset),
-                  ]),
+                child: SafeArea(
+                  child: EntryUpdateForm(
+                    mediaType: vm.mediaType,
+                    initialStatus: vm.status,
+                    scoreFormat: vm.scoreFormat,
+                    initialScore: vm.score,
+                    initialProgress: vm.progress,
+                    maxPossibleProgress: vm.maxPossibleProgress,
+                    initialStartDate: vm.startedAt,
+                    initialCompleteDate: vm.completedAt,
+                    initialRepeats: vm.repeats,
+                    initialNotes: vm.notes,
+                  ),
                 ),
-              ],
-            ),
-          ),
-          // ModalBottomSheet doesn't properly support dragging if the content
-          // is scrollable. This hacky AbsorbPointer overlaid onto the title
-          // portion of the header prevents the pointer events from reaching
-          // the scroll content and thus allows the sheet to be dragged away.
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 56),
-            child: AbsorbPointer(
-              absorbing: true,
-              child: SizedBox(
-                width: double.infinity,
-                height: 56,
               ),
             ),
+          ),
+          Header(
+            borderRadius: shape.borderRadius,
           ),
         ],
       ),
