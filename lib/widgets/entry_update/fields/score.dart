@@ -1,6 +1,7 @@
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/double_exts.dart';
+import 'package:aoba/widgets/input/decoration_wrapper/input_decoration_wrapper.dart';
 import 'package:aoba/widgets/input/score_input_field/score_input_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -50,30 +51,33 @@ class _ScoreFieldState extends State<ScoreField> {
 
     return Row(
       children: [
+        InputDecorationWrapper(
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+          child: AnimatedContainer(
+            width: valueWidth,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.fastOutSlowIn,
+            child: Center(
+              child: AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 200),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: scoreColor,
+                ),
+                child: Text(
+                  scoreText,
+                  maxLines: 1,
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
         Expanded(
           child: ScoreInputFormField(
             format: widget.scoreFormat,
             initialValue: widget.initialValue,
             onChange: (value) => setState(() => score = value),
-          ),
-        ),
-        AnimatedContainer(
-          width: valueWidth,
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.fastOutSlowIn,
-          child: Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: AnimatedDefaultTextStyle(
-              duration: const Duration(milliseconds: 200),
-              style: TextStyle(
-                fontSize: 16,
-                color: scoreColor,
-              ),
-              child: Text(
-                scoreText,
-                maxLines: 1,
-              ),
-            ),
           ),
         ),
       ],
