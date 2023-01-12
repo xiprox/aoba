@@ -6,7 +6,7 @@ Aoba is a work-in-progress AniList client app.
 
 ## Who is this app for? Roadmap?
 
-My primary purposes for working on this project are fun, learning, self-satisfaction, and personal use. While I prioritize these, I do try to make sure the app is usable, so if you don't mind running alpha software with no support, please feel free to come along for the ride ([Google Play](https://play.google.com/store/apps/details?id=dev.ihsan.aoba)). I do intend to bring this app to a point where it is sufficiently capable (but likely still limited compared to the website) but give no promises.
+My primary purposes for working on this project are fun, learning, contentment, and personal use. While I prioritize these, I do try to make sure the app is usable, so if you don't mind running alpha software with no support, please feel free to come along for the ride ([Google Play](https://play.google.com/store/apps/details?id=dev.ihsan.aoba)). I do intend to bring this app to a point where it is sufficiently capable (but likely still limited compared to the website) but give no promises.
 
 ## iOS support
 
@@ -22,7 +22,7 @@ For the time being, I'm also not looking for contributions. In these initial sta
 
 ## Get in touch
 
-All that about issues and contributions said, if you have a question or otherwise something to say/suggest, I would be happy to talk over email.
+All that about issues and contributions said, if you have a question or otherwise something to say/suggest, I would be happy to talk. Email preferred.
 
 ## Getting Started & docs
 
