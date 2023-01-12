@@ -48,6 +48,7 @@ class DateInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
+    final textColor = theme.textTheme.bodySmall?.color;
     final borderRadius = theme.inputDecorationTheme.borderRadius;
 
     final label = labelGetter?.call(value) ?? value?.format(_kFormatter);
@@ -66,8 +67,7 @@ class DateInputField extends StatelessWidget {
               label ?? hint,
               style: TextStyle(
                 fontSize: 16,
-                color: theme.textTheme.bodySmall?.color
-                    ?.withOpacity(label == null ? 0.5 : 1),
+                color: textColor?.withOpacity(label == null ? 0.5 : 1),
               ),
             ),
           ),
@@ -80,11 +80,11 @@ class DateInputField extends StatelessWidget {
             child: AnimatedOpacity(
               opacity: deleteAvailable ? 1 : 0,
               duration: const Duration(milliseconds: 200),
-              child: const Padding(
-                padding: EdgeInsetsDirectional.all(12),
-                child: Opacity(
-                  opacity: 0.6,
-                  child: Icon(Icons.close_rounded),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.all(12),
+                child: Icon(
+                  Icons.close_rounded,
+                  color: textColor?.withOpacity(0.7),
                 ),
               ),
             ),

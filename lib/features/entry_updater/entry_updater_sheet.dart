@@ -28,11 +28,18 @@ class EntryUpdaterSheet extends ViewModelWidget<EntryUpdaterViewModel> {
           outline: colors.outline.withOpacity(0.5),
         ),
         textTheme: theme.textTheme.apply(
-          bodyColor: colors.onSecondaryContainer,
+          bodyColor: colors.onSurfaceVariant,
+          displayColor: colors.onSurfaceVariant,
           decorationColor: colors.secondary,
         ),
+        inputDecorationTheme: theme.inputDecorationTheme.copyWith(
+          suffixStyle: TextStyle(
+            color: colors.onSurfaceVariant.withOpacity(0.7),
+            fontSize: 16,
+          ),
+        ),
         sliderTheme: SliderThemeData(
-          inactiveTrackColor: colors.secondary.withOpacity(0.2),
+          inactiveTrackColor: colors.primary.withOpacity(0.2),
         ),
       ),
       child: Stack(

@@ -3,6 +3,7 @@ import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/double_exts.dart';
 import 'package:aoba/widgets/input/decoration_wrapper/input_decoration_wrapper.dart';
 import 'package:aoba/widgets/input/score_input_field/score_input_form_field.dart';
+import 'package:flextensions/flextensions.dart';
 import 'package:flutter/material.dart';
 
 class ScoreField extends StatefulWidget {
@@ -24,14 +25,14 @@ class _ScoreFieldState extends State<ScoreField> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colors;
+    final theme = context.theme;
+    final color = theme.textTheme.bodySmall?.color;
 
     final scoreText = score == null || score == 0
         ? 'None'
         : score!.toHumanReadableScore(widget.scoreFormat);
-    final scoreColor = score == null || score == 0
-        ? colors.onSurface.withOpacity(0.5)
-        : colors.onSurface;
+    final scoreColor =
+        score == null || score == 0 ? color?.withOpacity(0.5) : color;
 
     double valueWidth;
     switch (widget.scoreFormat) {
