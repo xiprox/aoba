@@ -1,0 +1,12 @@
+{
+  "name": "AniList",
+  "schemaPath": "lib/data/remote/gql/schema/schema.gql",
+  "extensions": {
+    "endpoints": {
+      "AniList": {
+        "url": "https://graphql.anilist.co",
+        "introspect": true
+      }
+    }
+  }
+}
