@@ -10,6 +10,14 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
+  enable-experiment:
+    - records
+    - patterns
+    - class-modifiers
+    - sealed-class
+    - macros
+    - value-class
+
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.gr.dart
