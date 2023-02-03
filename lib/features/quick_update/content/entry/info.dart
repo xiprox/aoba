@@ -1,10 +1,12 @@
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/duration_exts.dart';
+import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/widgets/action_loading_error/action_loading_error.dart';
 import 'package:aoba/widgets/media_cover_info_box/media_cover_info_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class Info extends StatelessWidget {
   final int? progress;
@@ -38,8 +40,22 @@ class Info extends StatelessWidget {
     final inkColor = colors.primary.withOpacity(0.2);
     final hoverColor = colors.primary.withOpacity(0.1);
 
-    final countdown =
-        Duration(seconds: timeUntilAiring ?? 0).toAiringCountdown();
+    final airDate = DateTime.fromMillisecondsSinceEpoch((airingAt ?? 0) * 1000);
+    final durationUntilAiring = Duration(seconds: timeUntilAiring ?? 0);
+    final countdown = durationUntilAiring.inHours < 3
+        ? durationUntilAiring.toAiringCountdown()
+        : DateFormat('E')
+            .format(airDate)
+            .substring(0, 2)
+            .append(' ')
+            .append(DateFormat.jm().format(airDate));
+
+    final lastAiredEpisode = (airingEpisode ?? 1) - 1;
+    final leftBehindEpisodes = lastAiredEpisode - (progress ?? 0);
+
+    final isAnime = mediaType == MediaType.ANIME;
+    final watchedReadLabel = isAnime ? 'Watched' : 'Read';
+    final watchedReadLabelWithEpisode = '$watchedReadLabel $progress';
 
     return MediaCoverInfoBox(
       color: colors.secondaryContainer,
@@ -50,24 +66,54 @@ class Info extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: Padding(
-              padding: const EdgeInsetsDirectional.only(start: 4),
+              padding: const EdgeInsetsDirectional.only(start: 2),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'On ${mediaType == MediaType.ANIME ? 'ep' : 'ch'} '
-                    '${progress ?? '?'}',
-                    style: TextStyle(
-                      color: colors.onSecondaryContainer,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        hasAiringInfo
+                            ? watchedReadLabelWithEpisode
+                            : watchedReadLabel,
+                        style: TextStyle(
+                          color: hasAiringInfo
+                              ? colors.onSecondaryContainer
+                              : colors.secondary,
+                          fontWeight:
+                              hasAiringInfo ? FontWeight.w500 : FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                      if (leftBehindEpisodes > 0) ...[
+                        const SizedBox(width: 2),
+                        Text(
+                          '(+$leftBehindEpisodes)',
+                          style: TextStyle(
+                            color: colors.secondary.withOpacity(0.6),
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
+                  if (!hasAiringInfo) ...[
+                    Text(
+                      '${isAnime ? 'Episode' : 'Chapter'} '
+                      '${progress ?? '?'}',
+                      style: TextStyle(
+                        color: colors.onSecondaryContainer,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
                   if (hasAiringInfo) ...[
                     Text(
-                      'Next: $countdown',
+                      countdown,
                       style: TextStyle(
-                        color: colors.onSecondaryContainer.withOpacity(0.6),
+                        color: colors.secondary.withOpacity(0.8),
                         fontSize: 12,
                       ),
                     ),
@@ -93,7 +139,7 @@ class Info extends StatelessWidget {
               child: Align(
                 alignment: AlignmentDirectional.centerEnd,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 4),
+                  padding: const EdgeInsetsDirectional.only(end: 0),
                   child: ActionLoadingError(
                     loading: loading,
                     error: error,
