@@ -6,3 +6,5 @@ typedef MediaStatus = Enum$MediaStatus;
 
 typedef ScoreFormat = Enum$ScoreFormat;
 typedef MediaListStatus = Enum$MediaListStatus;
+
+typedef FuzzyDateInput = Input$FuzzyDateInput;
