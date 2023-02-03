@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:aoba/exts/build_context_exts.dart';
-import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/mixins/snackbar_mixin.dart';
 import 'package:aoba/navigation/navigation.dart';
 import 'package:aoba/utils/anilist_utils.dart';
