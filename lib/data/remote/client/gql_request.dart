@@ -1,6 +1,7 @@
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/init.dart';
 import 'package:aoba/services/services.dart';
+import 'package:collection/collection.dart';
 import 'package:graphql/client.dart';
 
 class GqlRequest {
@@ -54,8 +55,18 @@ class GqlRequest {
   static String? _parseErrorMessage(OperationException exception) {
     if (exception.linkException != null) {
       final excp = exception.linkException;
+
       if (excp is ServerException) {
-        return excp.parsedResponse?.errors?.map((e) => e.message).join('\n');
+        final errors = excp.parsedResponse?.response['errors'] as List;
+        final first = errors.firstOrNull;
+
+        String? message;
+        if (first['message'] == 'validation') {
+          message = first['validation']?.values?.first?.first?.toString();
+        }
+
+        return message ??
+            excp.parsedResponse?.errors?.map((e) => e.message).join('\n');
       } else {
         return excp?.originalException?.toString();
       }
