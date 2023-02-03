@@ -1,30 +1,24 @@
 import 'package:aoba/data/model/aliases.dart';
+import 'package:aoba/features/entry_updater/data/model/entry_update_data.dart';
 import 'package:aoba/features/entry_updater/entry_updater_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class EntryUpdater {
   static Future show(
     BuildContext context, {
+    required int mediaId,
     MediaType mediaType = MediaType.$unknown,
-    String? title,
-    String? bannerImage,
-    MediaListStatus? status,
     ScoreFormat scoreFormat = ScoreFormat.$unknown,
-    double? score,
-    int? progress,
-    int? maxPossibleProgress,
-    DateTime? startedAt,
-    DateTime? completedAt,
-    int? repeats,
-    String? notes,
+    String? title,
+    int? maxProgress,
     Color? color,
+    required EntryUpdateData data,
   }) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       isDismissible: true,
       enableDrag: true,
-      useRootNavigator: true,
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height * 0.8,
       ),
@@ -34,19 +28,13 @@ class EntryUpdater {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: EntryUpdaterWrapper(
+            mediaId: mediaId,
             mediaType: mediaType,
             title: title,
-            bannerImage: bannerImage,
-            status: status,
             scoreFormat: scoreFormat,
-            score: score,
-            progress: progress,
-            maxPossibleProgress: maxPossibleProgress,
-            startedAt: startedAt,
-            completedAt: completedAt,
-            repeats: repeats,
-            notes: notes,
+            maxProgress: maxProgress,
             color: color,
+            data: data,
           ),
         );
       },

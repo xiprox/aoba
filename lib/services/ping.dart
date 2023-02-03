@@ -15,6 +15,7 @@ abstract class PingService<T> {
 
 enum PingType {
   quickUpdateHappened,
+  mediaListEntryUpdated,
 }
 
 class PingServiceImpl implements PingService<PingType> {

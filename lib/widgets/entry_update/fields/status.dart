@@ -8,11 +8,13 @@ import 'package:flutter/material.dart';
 class StatusField extends StatelessWidget {
   final MediaType mediaType;
   final MediaListStatus? initialValue;
+  final ValueChanged<MediaListStatus?>? onChange;
 
   const StatusField({
     super.key,
     required this.mediaType,
     this.initialValue,
+    this.onChange,
   });
 
   @override
@@ -49,7 +51,7 @@ class StatusField extends StatelessWidget {
           ),
         );
       }).toList(),
-      onChanged: (_) {},
+      onChanged: onChange,
     );
   }
 }

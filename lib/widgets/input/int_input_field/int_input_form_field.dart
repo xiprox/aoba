@@ -7,14 +7,15 @@ class IntInputFormField extends StatefulWidget {
   final int? initialValue;
   final int? min;
   final int? max;
+  final ValueChanged<int>? onChange;
 
   const IntInputFormField({
     super.key,
     this.initialValue = 0,
     this.min,
     this.max,
-  })  : assert(initialValue == null || (min == null || initialValue >= min)),
-        assert(initialValue == null || (max == null || initialValue <= max));
+    this.onChange,
+  });
 
   @override
   State<IntInputFormField> createState() => _IntInputFormFieldState();
@@ -26,10 +27,23 @@ class _IntInputFormFieldState extends State<IntInputFormField> {
   );
 
   @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() => _onChange(_controller.text));
+  }
+
+  @override
   void didUpdateWidget(covariant IntInputFormField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.initialValue != oldWidget.initialValue) {
       _controller.text = widget.initialValue?.toString() ?? '';
+    }
+  }
+
+  void _onChange(String value) {
+    final parsedValue = _parseValue(value);
+    if (parsedValue != null) {
+      widget.onChange?.call(parsedValue);
     }
   }
 

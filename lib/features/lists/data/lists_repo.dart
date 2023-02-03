@@ -44,6 +44,7 @@ abstract class ListsRepo {
   Future<Resource<ListsData>> getData({
     required int userId,
     required MediaType type,
+    bool forceNetwork,
   });
 }
 
@@ -52,6 +53,7 @@ class ListsRepoImpl implements ListsRepo {
   Future<Resource<ListsData>> getData({
     required int userId,
     required MediaType type,
+    bool forceNetwork = false,
   }) async {
     final result = await GqlRequest.query(
       QueryOptions(
@@ -60,6 +62,9 @@ class ListsRepoImpl implements ListsRepo {
           'userId': userId,
           'type': type.name,
         },
+        fetchPolicy: forceNetwork
+            ? FetchPolicy.networkOnly
+            : FetchPolicy.cacheAndNetwork,
       ),
       fromJson: (json) => ListsData.fromJson(json['MediaListCollection']),
     );

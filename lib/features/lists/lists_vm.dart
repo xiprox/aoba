@@ -1,5 +1,6 @@
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/data/model/resource.dart';
+import 'package:aoba/mixins/vm_stream_subscription_manager_mixin.dart';
 import 'package:aoba/services/services.dart';
 import 'package:aoba/widgets/lists/media_list.dart';
 import 'package:flextensions/flextensions.dart';
@@ -25,7 +26,7 @@ class OpenEntryUpdate extends ViewModelOrder {
   });
 }
 
-class ListsViewModel extends ViewModel {
+class ListsViewModel extends ViewModel with StreamSubscriptionManagerMixin {
   final int userId;
   final Color? color;
 
@@ -37,6 +38,7 @@ class ListsViewModel extends ViewModel {
   final _prefs = get<Preferences>();
   final _db = get<Database>();
   final _repo = get<ListsRepo>();
+  final _ping = get<PingService>();
 
   final scrollController = ScrollController();
 
@@ -53,11 +55,21 @@ class ListsViewModel extends ViewModel {
   void onCreate() {
     super.onCreate();
     fetch();
+
+    manage(_ping.listen(PingType.mediaListEntryUpdated, onListEntryUpdated));
   }
 
-  void fetch() async {
-    data = await _repo.getData(userId: userId, type: filterMediaType);
+  void fetch({bool forceNetwork = false}) async {
+    data = await _repo.getData(
+      userId: userId,
+      type: filterMediaType,
+      forceNetwork: forceNetwork,
+    );
     notifyListeners();
+  }
+
+  void onListEntryUpdated() {
+    fetch(forceNetwork: true);
   }
 
   bool get _isOwnLibrary {

@@ -1,12 +1,12 @@
 import 'package:aoba/data/model/aliases.dart';
+import 'package:aoba/features/entry_updater/data/model/entry_update_data.dart';
 import 'package:aoba/features/entry_updater/entry_updater.dart';
-import 'package:aoba/features/entry_updater/entry_updater_wrapper.dart';
 import 'package:aoba/features/lists/content/lists_content.dart';
 import 'package:aoba/navigation/navigation.dart';
 import 'package:aoba/theme/theme.dart';
 import 'package:aoba/widgets/popup_on_position/route.dart';
-import 'package:veee/veee.dart';
 import 'package:flutter/material.dart';
+import 'package:veee/veee.dart';
 
 import 'content/options/popup_content.dart';
 import 'data/lists_repo.dart';
@@ -48,21 +48,27 @@ class ListsPage extends ViewModelWidget<ListsViewModel> {
     ListsViewModel vm,
   ) {
     final entry = order.entry;
+    final mediaId = entry.media?.id;
+    if (mediaId == null) {
+      return;
+    }
     EntryUpdater.show(
       context,
+      mediaId: mediaId,
       mediaType: entry.media?.type ?? MediaType.$unknown,
       title: entry.media?.title?.userPreferred,
-      bannerImage: entry.media?.bannerImage,
-      status: entry.status,
+      maxProgress: entry.media?.episodes ?? entry.media?.chapters,
       scoreFormat: order.scoreFormat,
-      score: entry.score,
-      progress: entry.progress,
-      maxPossibleProgress: entry.media?.episodes ?? entry.media?.chapters,
-      startedAt: entry.startedAt?.toDateTime(),
-      completedAt: entry.completedAt?.toDateTime(),
-      repeats: entry.repeat,
-      notes: entry.notes,
       color: order.color,
+      data: EntryUpdateData(
+        status: entry.status,
+        score: entry.score,
+        progress: entry.progress,
+        startedAt: entry.startedAt?.toDateTime(),
+        completedAt: entry.completedAt?.toDateTime(),
+        repeats: entry.repeat,
+        notes: entry.notes,
+      ),
     );
   }
 

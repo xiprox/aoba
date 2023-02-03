@@ -1,60 +1,43 @@
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/features/entry_updater/entry_updater_sheet.dart';
-import 'package:veee/veee.dart';
 import 'package:flutter/material.dart';
+import 'package:veee/veee.dart';
 
+import 'data/model/entry_update_data.dart';
 import 'entry_updater_vm.dart';
 
 class EntryUpdaterWrapper extends StatelessWidget {
+  final int mediaId;
   final MediaType mediaType;
   final String? title;
-  final String? bannerImage;
-  final MediaListStatus? status;
   final ScoreFormat scoreFormat;
-  final double? score;
-  final int? progress;
-  final int? maxPossibleProgress;
-  final DateTime? startedAt;
-  final DateTime? completedAt;
-  final int? repeats;
-  final String? notes;
-
+  final int? maxProgress;
   final Color? color;
+
+  final EntryUpdateData data;
 
   const EntryUpdaterWrapper({
     super.key,
+    required this.mediaId,
     required this.mediaType,
     required this.title,
-    required this.bannerImage,
-    required this.status,
     required this.scoreFormat,
-    required this.score,
-    required this.progress,
-    required this.maxPossibleProgress,
-    required this.startedAt,
-    required this.completedAt,
-    required this.repeats,
-    required this.notes,
+    required this.maxProgress,
     required this.color,
+    required this.data,
   });
 
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<EntryUpdaterViewModel>(
       create: (_) => EntryUpdaterViewModel(
+        mediaId: mediaId,
         mediaType: mediaType,
         title: title,
-        bannerImage: bannerImage,
-        status: status,
         scoreFormat: scoreFormat,
-        score: score,
-        progress: progress,
-        maxPossibleProgress: maxPossibleProgress,
-        startedAt: startedAt,
-        completedAt: completedAt,
-        notes: notes,
-        repeats: repeats,
+        maxProgress: maxProgress,
         color: color,
+        initialFormData: data,
       ),
       child: const EntryUpdaterSheet(),
     );

@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class RepeatsField extends StatelessWidget {
   final int? initialValue;
+  final ValueChanged<int>? onChange;
 
   const RepeatsField({
     super.key,
     this.initialValue,
+    this.onChange,
   });
 
   @override
@@ -14,6 +16,7 @@ class RepeatsField extends StatelessWidget {
     return IntInputFormField(
       initialValue: initialValue,
       min: 0,
+      onChange: onChange,
     );
   }
 }

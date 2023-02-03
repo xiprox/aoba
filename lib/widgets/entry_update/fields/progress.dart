@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class ProgressField extends StatelessWidget {
   final int? initialValue;
   final int? max;
+  final ValueChanged<int>? onChange;
 
   const ProgressField({
     super.key,
     this.initialValue,
     this.max,
+    this.onChange,
   });
 
   @override
@@ -17,6 +19,7 @@ class ProgressField extends StatelessWidget {
       initialValue: initialValue,
       min: 0,
       max: max,
+      onChange: onChange,
     );
   }
 }
