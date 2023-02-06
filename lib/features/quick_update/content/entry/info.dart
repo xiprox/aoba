@@ -1,7 +1,6 @@
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/exts/build_context_exts.dart';
 import 'package:aoba/exts/duration_exts.dart';
-import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/widgets/action_loading_error/action_loading_error.dart';
 import 'package:aoba/widgets/media_cover_info_box/media_cover_info_box.dart';
 import 'package:flutter/material.dart';
@@ -44,11 +43,7 @@ class Info extends StatelessWidget {
     final durationUntilAiring = Duration(seconds: timeUntilAiring ?? 0);
     final countdown = durationUntilAiring.inHours < 3
         ? durationUntilAiring.toAiringCountdown()
-        : DateFormat('E')
-            .format(airDate)
-            .substring(0, 2)
-            .append(' ')
-            .append(DateFormat.jm().format(airDate));
+        : DateFormat('E h:mm a').format(airDate);
 
     final lastAiredEpisode = (airingEpisode ?? 1) - 1;
     final leftBehindEpisodes = lastAiredEpisode - (progress ?? 0);
