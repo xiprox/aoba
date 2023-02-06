@@ -50,17 +50,13 @@ class MediaListView extends StatelessWidget {
       // +1 for the spacing between the last column and the right edge.
       final totalSpacingPerRow = spacing * (columns + 1);
 
-      // The optimal width to perefctly fit columns into available width.
+      // The optimal width to perfectly fit columns into available width.
       final optimalColumnWidth =
           (availableWidth - totalSpacingPerRow) / columns;
 
       final coverHeight = optimalColumnWidth / AspectRatios.mediaCover;
 
-      // The info section is overlaid onto the cover and translated up so that
-      // the image is visible behind the wave.
-      const infoBoxTopPadding = -Info.kWaveHeight;
-      const infoBoxHeight = Info.kTotalHeight + infoBoxTopPadding;
-
+      const infoBoxHeight = Info.kTotalHeight;
       final finalTileHeight = coverHeight + infoBoxHeight;
 
       return GridView.builder(

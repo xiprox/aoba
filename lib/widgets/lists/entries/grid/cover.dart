@@ -1,4 +1,5 @@
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
+import 'package:aoba/widgets/smooth_rectangle_border/smooth_rectangle_border.dart';
 import 'package:flutter/material.dart';
 
 class CoverImage extends StatelessWidget {
@@ -21,12 +22,13 @@ class CoverImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shape = SmoothRectangleBorder(borderRadius: BorderRadius.all(radius));
     return Stack(
       children: [
         NetworkImageWithPlaceholder(
           url: url,
           color: color,
-          borderRadius: BorderRadius.vertical(top: radius),
+          shape: shape,
           height: height,
           type: type,
         ),
@@ -34,7 +36,7 @@ class CoverImage extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.vertical(top: radius),
+              customBorder: shape,
               onTap: onPress,
               child: Container(),
             ),
