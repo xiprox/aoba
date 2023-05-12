@@ -4,4 +4,8 @@ extension DateTimeExts on DateTime {
   FuzzyDateInput toFuzzyDateInput() {
     return FuzzyDateInput(year: year, month: month, day: day);
   }
+
+  Duration diffFromNow() {
+    return difference(DateTime.now());
+  }
 }
