@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:aoba/data/model/resource.dart';
 import 'package:aoba/init.dart';
 import 'package:aoba/services/services.dart';
@@ -9,10 +11,7 @@ class GqlRequest {
     QueryOptions options, {
     required T Function(Map<String, dynamic> data) fromJson,
   }) async {
-    final response = await Executor().execute(
-      fun1: _query,
-      arg1: options,
-    );
+    final response = await Isolate.run(() => _query(options));
     return await _parseResponse<T>(response, fromJson: fromJson);
   }
 
@@ -20,10 +19,7 @@ class GqlRequest {
     MutationOptions options, {
     required T Function(Map<String, dynamic> data) fromJson,
   }) async {
-    final response = await Executor().execute(
-      fun1: _mutation,
-      arg1: options,
-    );
+    final response = await Isolate.run(() => _mutation(options));
     return await _parseResponse<T>(response, fromJson: fromJson);
   }
 
@@ -32,10 +28,8 @@ class GqlRequest {
     required T Function(Map<String, dynamic> data) fromJson,
   }) async {
     if (response.data != null) {
-      final deserialized = await Executor().execute(
-        fun2: _deserialize<T>,
-        arg1: fromJson,
-        arg2: response.data!,
+      final deserialized = await Isolate.run(
+        () => _deserialize<T>(fromJson, response.data!),
       );
       return Resource(data: deserialized);
     } else if (response.exception != null) {
@@ -75,27 +69,18 @@ class GqlRequest {
     }
   }
 
-  static Future<QueryResult> _mutation<T>(
-    MutationOptions options,
-    TypeSendPort port,
-  ) async {
+  static Future<QueryResult> _mutation<T>(MutationOptions options) async {
     if (!IsolateInit.initialized) await IsolateInit.init(isRootIsolate: false);
     return client.client.mutate(options);
   }
 
-  static Future<QueryResult> _query<T>(
-    QueryOptions options,
-    TypeSendPort port,
-  ) async {
+  static Future<QueryResult> _query<T>(QueryOptions options) async {
     if (!IsolateInit.initialized) await IsolateInit.init(isRootIsolate: false);
     return client.client.query(options);
   }
 
   static T _deserialize<T>(
-    T Function(Map<String, dynamic>) fromJson,
-    Map<String, dynamic> json,
-    TypeSendPort port,
-  ) {
+      T Function(Map<String, dynamic>) fromJson, Map<String, dynamic> json) {
     return fromJson(json);
   }
 }

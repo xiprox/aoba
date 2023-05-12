@@ -1,4 +1,3 @@
-
 import 'package:aoba/widgets/shimmer/shimmer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +7,10 @@ class LoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
+      children: [
         ShimmerCircle(8),
         SizedBox(width: 8),
         ShimmerCircle(8),

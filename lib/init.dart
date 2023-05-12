@@ -1,12 +1,11 @@
 import 'package:aoba/services/services.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
 import 'licenses.dart';
 
 Future init() async {
-  await Executor().warmUp(log: kDebugMode);
+  WidgetsFlutterBinding.ensureInitialized();
   await IsolateInit.init(isRootIsolate: true);
   Licenses.init();
   return runApp(const App());

@@ -13,6 +13,7 @@ import 'exported_services.dart';
 export 'exported_services.dart';
 
 final get = GetIt.instance.get;
+final getIt = GetIt.instance.get;
 
 Logger get log => get<Logger>();
 
@@ -64,7 +65,7 @@ class Services {
     getIt.registerFactory<ListsRepo>(() => ListsRepoImpl());
     getIt.registerFactory<EntryUpdaterRepo>(() => EntryUpdaterRepoImpl());
 
-    getIt.registerSingleton(AppRouter(authGuard: AuthGuard()));
+    getIt.registerSingleton(AppRouter());
   }
 
   static Future _initTesting() async {

@@ -6,43 +6,44 @@ publish_to: 'none'
 version: 0.0.1+4
 
 environment:
-  sdk: ">=2.17.5 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   # Architecture
-  get_it: ^7.2.0
+  get_it: ^7.6.0
   veee: ^0.10.0
-  worker_manager: ^4.4.0
   # Network
-  graphql: ^5.1.1
+  graphql: ^5.1.3
   # Data & storage
-  isar: ^3.0.5
-  isar_flutter_libs: ^3.0.5
+  isar: 3.0.5
+  isar_flutter_libs: 3.0.5
   # Widgets & UI
-  google_fonts: ^3.0.1
-  flutter_svg: ^1.1.6
-  auto_route: ^5.0.2
-  sliver_tools: ^0.2.8
+  google_fonts: ^4.0.4
+  flutter_svg: ^2.0.5
+  auto_route: ^7.1.0
+  sliver_tools: ^0.2.10
   scroll_builder: ^1.0.1
   timer_builder: ^2.0.0
   flutter_html: ^3.0.0-alpha.6
   shimmer: ^2.0.0
-  intl: ^0.18.0
+  intl: ^0.18.1
+  # OS / Platform
+  path_provider: ^2.0.15
   # Util
   vector_math: ^2.1.4
-  material_color_utilities: ^0.2.0
+  material_color_utilities: ^0.5.0
   stringr: ^1.0.0
   date_time_format: ^2.0.1
   duration: ^3.0.12
-  json_annotation: ^4.7.0
-  collection: ^1.16.0
-  flextensions: ^0.1.0
-  url_launcher: ^6.1.6
+  json_annotation: ^4.8.1
+  collection: ^1.17.1
+  flextensions: ^0.2.0
+  url_launcher: ^6.1.11
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
   # Test
   flutter_test:
     sdk: flutter
@@ -50,19 +51,19 @@ dev_dependencies:
     sdk: flutter
   mocktail: ^0.3.0
   # Generators
-  flutter_gen_runner: ^5.1.0
-  build_runner: ^2.3.2
-  json_serializable: ^6.5.4
-  auto_route_generator: ^5.0.2
-  isar_generator: ^3.0.5
-  graphql_codegen: ^0.11.2
-  code_builder: ^4.3.0
+  flutter_gen_runner: ^5.3.1
+  build_runner: ^2.4.2
+  json_serializable: ^6.6.2
+  auto_route_generator: ^7.0.0
+  isar_generator: 3.0.5
+  graphql_codegen: ^0.12.2
+  code_builder: ^4.4.0
   # Packaging
-  msix: ^3.7.0
+  msix: ^3.12.1
 
 dependency_overrides:
-  material_color_utilities: ^0.2.0
-  intl: ^0.18.0
+  material_color_utilities: ^0.5.0
+  intl: ^0.18.1
 
 flutter:
   uses-material-design: true

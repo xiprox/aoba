@@ -11,33 +11,32 @@ import 'package:aoba/features/redirect/redirect_wrapper.dart';
 
 part 'router.gr.dart';
 
-@MaterialAutoRouter(
-  replaceInRouteName: 'Wrapper,Route',
-  routes: [
+@AutoRouterConfig(
+  replaceInRouteName: 'Page|Wrapper,Route',
+)
+class AppRouter extends _$AppRouter {
+  @override
+  final List<AutoRoute> routes = [
     AutoRoute(
-      initial: true,
       path: '/',
-      guards: [AuthGuard],
-      page: HomeWrapper,
+      guards: [AuthGuard()],
+      page: HomeRoute.page,
     ),
     AutoRoute(
       path: '/login',
-      page: AuthWrapper,
+      page: AuthRoute.page,
     ),
     AutoRoute(
       path: '/profile/:id',
-      page: ProfileWrapper,
+      page: ProfileRoute.page,
     ),
     AutoRoute(
       path: '/lists/:userId',
-      page: ListsWrapper,
+      page: ListsRoute.page,
     ),
     AutoRoute(
       path: '/redirect',
-      page: RedirectWrapper,
+      page: RedirectRoute.page,
     ),
-  ],
-)
-class AppRouter extends _$AppRouter {
-  AppRouter({required super.authGuard});
+  ];
 }

@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 import 'lists_page.dart';
 import 'lists_vm.dart';
 
+@RoutePage()
 class ListsWrapper extends StatelessWidget {
   final int? userId;
   final Color? color;
 
   const ListsWrapper({
     super.key,
-    @PathParam('userId') this.userId,
-    @QueryParam('color') this.color,
+    @pathParam this.userId,
+    this.color,
   });
 
   @override

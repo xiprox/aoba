@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'profile_page.dart';
 import 'profile_vm.dart';
 
+@RoutePage()
 class ProfileWrapper extends StatelessWidget {
   final int? userId;
   final Color? color;
@@ -13,7 +14,7 @@ class ProfileWrapper extends StatelessWidget {
   const ProfileWrapper({
     super.key,
     @PathParam('id') this.userId,
-    @QueryParam('color') this.color,
+    this.color,
   });
 
   @override
