@@ -1,11 +1,12 @@
 import 'package:aoba/data/model/aliases.dart';
 import 'package:aoba/exts/build_context_exts.dart';
+import 'package:aoba/exts/date_time_exts.dart';
 import 'package:aoba/exts/duration_exts.dart';
 import 'package:aoba/widgets/action_loading_error/action_loading_error.dart';
 import 'package:aoba/widgets/media_cover_info_box/media_cover_info_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
+import 'package:timer_builder/timer_builder.dart';
 
 class Info extends StatelessWidget {
   final int? progress;
@@ -39,11 +40,8 @@ class Info extends StatelessWidget {
     final inkColor = colors.primary.withOpacity(0.2);
     final hoverColor = colors.primary.withOpacity(0.1);
 
-    final airDate = DateTime.fromMillisecondsSinceEpoch((airingAt ?? 0) * 1000);
-    final durationUntilAiring = Duration(seconds: timeUntilAiring ?? 0);
-    final countdown = durationUntilAiring.inHours < 3
-        ? durationUntilAiring.toAiringCountdown()
-        : DateFormat('E h:mm a').format(airDate);
+    final countdown = Duration(seconds: timeUntilAiring ?? 0);
+    final airingMoment = DateTime.now().add(countdown);
 
     final lastAiredEpisode = (airingEpisode ?? 1) - 1;
     final leftBehindEpisodes = lastAiredEpisode - (progress ?? 0);
@@ -105,12 +103,31 @@ class Info extends StatelessWidget {
                     ),
                   ],
                   if (hasAiringInfo) ...[
-                    Text(
-                      countdown,
-                      style: TextStyle(
-                        color: colors.secondary.withOpacity(0.8),
-                        fontSize: 12,
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.upcoming_outlined,
+                          size: 14,
+                          color: colors.secondary.withOpacity(0.8),
+                        ),
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: TimerBuilder.periodic(
+                            countdown.refreshPeriod(),
+                            builder: (context) {
+                              final diff = airingMoment.diffFromNow();
+                              final aired = diff.inSeconds <= 0;
+                              return Text(
+                                aired ? 'Aired!' : diff.toAiringCountdown(),
+                                style: TextStyle(
+                                  color: colors.secondary.withOpacity(0.8),
+                                  fontSize: 12,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ],
