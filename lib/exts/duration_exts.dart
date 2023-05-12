@@ -46,4 +46,18 @@ extension DurationExts on Duration {
       locale: const CustomDurationLocale(),
     );
   }
+
+  /// In what period intervals should a countdown for this duration be
+  /// refreshed.
+  Duration refreshPeriod() {
+    if (inMinutes < 1) {
+      return const Duration(seconds: 1);
+    } else if (inHours < 1) {
+      return const Duration(minutes: 1);
+    } else if (inDays < 1) {
+      return const Duration(minutes: 20);
+    } else {
+      return const Duration(days: 1000);
+    }
+  }
 }
