@@ -53,7 +53,7 @@ class TextActivityTile extends StatelessWidget {
                 ),
                 Html(
                   data: content,
-                  onLinkTap: (link, _, __, ___) => launchUrlString(link ?? '#'),
+                  onLinkTap: (link, _, __) => launchUrlString(link ?? '#'),
                   style: {
                     'body': Style(
                       fontSize: FontSize(14),
