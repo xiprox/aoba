@@ -64,9 +64,9 @@ _Note: `anilist_consts.dart` is excluded from version control._
 ## Run code generation
 
 ### MacOS/Linux
-`./run gen` or `./run gen watch`
+`./do gen` or `./do gen watch`
 
 ### Windows:
-`./run.bat gen` or `./run.bat gen watch`
+`./do.bat gen` or `./do.bat gen watch`
 
 All of these scripts run build_runner under the hood.
