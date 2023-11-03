@@ -29,11 +29,11 @@ class Header extends ViewModelWidget<EntryUpdaterViewModel> {
             ? null
             : Text(
                 vm.title!,
-                overflow: TextOverflow.fade,
+                maxLines: 2,
                 style: theme.textTheme.titleLarge?.copyWith(
-                  fontSize: 20,
-                  color: colors.onSecondary,
-                ),
+                    fontSize: 16,
+                    color: colors.onSecondary,
+                    fontWeight: FontWeight.w500),
               ),
         leading: IconButton(
           icon: const Icon(Icons.close),
