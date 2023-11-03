@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Runs code generation. Use: "./do gen" or "./do gen watch" in project dir.
 if [[ $1 == "gen" ]]; then
