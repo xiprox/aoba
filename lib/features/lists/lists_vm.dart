@@ -111,6 +111,7 @@ class ListsViewModel extends ViewModel with StreamSubscriptionManagerMixin {
   }
 
   void onOptionDisplayTypeChange(ListDisplayType value) {
+    HapticFeedback.lightImpact();
     _prefs.update((it) => it.lists.displayType = value);
     optionDisplayType = value;
     notifyListeners();
