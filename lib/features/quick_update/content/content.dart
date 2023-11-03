@@ -3,7 +3,6 @@ import 'package:aoba/data/model/extensions.dart';
 import 'package:aoba/exts/string_exts.dart';
 import 'package:aoba/features/quick_update/quick_update_vm.dart';
 import 'package:aoba/widgets/network_image_with_placeholder/network_image_with_placeholder.dart';
-import 'package:aoba/widgets/physics/scroll_physics/specific_extent_page_scroll_physics.dart';
 import 'package:flutter/material.dart';
 import 'package:veee/veee.dart';
 
@@ -20,9 +19,6 @@ class Content extends ViewModelWidget<QuickUpdateViewModel> {
     final entries = vm.entries.data ?? [];
     return ListView.separated(
       controller: vm.scrollController,
-      physics: const SpecificExtentPageScrollPhysics(
-        extent: QuickUpdateEntryTile.kDesiredWidth + _kTileSpacing,
-      ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       scrollDirection: Axis.horizontal,
       itemCount: entries.length,
