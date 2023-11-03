@@ -9,15 +9,16 @@ import 'redirect_vm.dart';
 class RedirectWrapper extends StatelessWidget {
   final String? token;
 
-  const RedirectWrapper({super.key, this.token});
+  const RedirectWrapper({
+    super.key,
+    @QueryParam('access_token') this.token,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<RedirectViewModel>(
       create: (_) {
-        return RedirectViewModel(
-          token: context.routeData.queryParams.getString('access_token'),
-        );
+        return RedirectViewModel(token: token);
       },
       child: const RedirectPage(),
     );

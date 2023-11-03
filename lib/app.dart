@@ -21,9 +21,7 @@ class App extends StatelessWidget {
           theme: AppTheme.light(profileColor),
           darkTheme: AppTheme.dark(profileColor),
           routerDelegate: router.delegate(),
-          routeInformationParser: CustomRouteInfoParser(
-            router.defaultRouteParser(),
-          ),
+          routeInformationParser: CustomRouteInfoParser(router.matcher),
           debugShowCheckedModeBanner: false,
         );
       },
