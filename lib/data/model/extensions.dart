@@ -118,3 +118,202 @@ extension MediaListStatusExts on MediaListStatus {
     }
   }
 }
+
+extension MediaListSortExts on MediaListSort {
+  String get displayName {
+    switch (this) {
+      case MediaListSort.ADDED_TIME:
+        return 'Last Added';
+      case MediaListSort.ADDED_TIME_DESC:
+        return 'Last Added (Desc)';
+      case MediaListSort.FINISHED_ON:
+        return 'Finished On';
+      case MediaListSort.FINISHED_ON_DESC:
+        return 'Finished On (Desc)';
+      case MediaListSort.MEDIA_ID:
+        return 'Media ID';
+      case MediaListSort.MEDIA_ID_DESC:
+        return 'Media ID (Desc)';
+      case MediaListSort.MEDIA_POPULARITY:
+        return 'Popularity';
+      case MediaListSort.MEDIA_POPULARITY_DESC:
+        return 'Populairty (Desc)';
+      case MediaListSort.MEDIA_TITLE_ENGLISH:
+        return 'Title';
+      case MediaListSort.MEDIA_TITLE_ENGLISH_DESC:
+        return 'Title (Desc)';
+      case MediaListSort.MEDIA_TITLE_NATIVE:
+        return 'Title';
+      case MediaListSort.MEDIA_TITLE_NATIVE_DESC:
+        return 'Title (Desc)';
+      case MediaListSort.MEDIA_TITLE_ROMAJI:
+        return 'Title';
+      case MediaListSort.MEDIA_TITLE_ROMAJI_DESC:
+        return 'Title (Desc)';
+      case MediaListSort.PRIORITY:
+        return 'Priority';
+      case MediaListSort.PRIORITY_DESC:
+        return 'Priority (Desc)';
+      case MediaListSort.PROGRESS:
+        return 'Progress';
+      case MediaListSort.PROGRESS_DESC:
+        return 'Progress (Desc)';
+      case MediaListSort.PROGRESS_VOLUMES:
+        return 'Progress (Volumes)';
+      case MediaListSort.PROGRESS_VOLUMES_DESC:
+        return 'Progress (Volumes, Desc)';
+      case MediaListSort.REPEAT:
+        return 'Repeat';
+      case MediaListSort.REPEAT_DESC:
+        return 'Repeat (Desc)';
+      case MediaListSort.SCORE:
+        return 'Score';
+      case MediaListSort.SCORE_DESC:
+        return 'Score (Desc)';
+      case MediaListSort.STARTED_ON:
+        return 'Started On';
+      case MediaListSort.STARTED_ON_DESC:
+        return 'Started On (Desc)';
+      case MediaListSort.STATUS:
+        return 'Status';
+      case MediaListSort.STATUS_DESC:
+        return 'Status (Desc)';
+      case MediaListSort.UPDATED_TIME:
+        return 'Last Updated';
+      case MediaListSort.UPDATED_TIME_DESC:
+        return 'Last Updated (Desc)';
+      case MediaListSort.$unknown:
+        return 'Unknown';
+    }
+  }
+
+  bool get desc => name.contains('_DESC');
+
+  MediaListSort withoutOrder() {
+    switch (this) {
+      case MediaListSort.ADDED_TIME:
+      case MediaListSort.ADDED_TIME_DESC:
+        return MediaListSort.ADDED_TIME;
+      case MediaListSort.FINISHED_ON:
+      case MediaListSort.FINISHED_ON_DESC:
+        return MediaListSort.FINISHED_ON;
+      case MediaListSort.MEDIA_ID:
+      case MediaListSort.MEDIA_ID_DESC:
+        return MediaListSort.MEDIA_ID;
+      case MediaListSort.MEDIA_POPULARITY:
+      case MediaListSort.MEDIA_POPULARITY_DESC:
+        return MediaListSort.MEDIA_POPULARITY;
+      case MediaListSort.MEDIA_TITLE_ENGLISH:
+      case MediaListSort.MEDIA_TITLE_ENGLISH_DESC:
+        return MediaListSort.MEDIA_TITLE_ENGLISH;
+      case MediaListSort.MEDIA_TITLE_NATIVE:
+      case MediaListSort.MEDIA_TITLE_NATIVE_DESC:
+        return MediaListSort.MEDIA_TITLE_NATIVE;
+      case MediaListSort.MEDIA_TITLE_ROMAJI:
+      case MediaListSort.MEDIA_TITLE_ROMAJI_DESC:
+        return MediaListSort.MEDIA_TITLE_ROMAJI;
+      case MediaListSort.PRIORITY:
+      case MediaListSort.PRIORITY_DESC:
+        return MediaListSort.PRIORITY;
+      case MediaListSort.PROGRESS:
+      case MediaListSort.PROGRESS_DESC:
+        return MediaListSort.PROGRESS;
+      case MediaListSort.PROGRESS_VOLUMES:
+      case MediaListSort.PROGRESS_VOLUMES_DESC:
+        return MediaListSort.PROGRESS_VOLUMES;
+      case MediaListSort.REPEAT:
+      case MediaListSort.REPEAT_DESC:
+        return MediaListSort.REPEAT;
+      case MediaListSort.SCORE:
+      case MediaListSort.SCORE_DESC:
+        return MediaListSort.SCORE;
+      case MediaListSort.STARTED_ON:
+      case MediaListSort.STARTED_ON_DESC:
+        return MediaListSort.STARTED_ON;
+      case MediaListSort.STATUS:
+      case MediaListSort.STATUS_DESC:
+        return MediaListSort.STATUS;
+      case MediaListSort.UPDATED_TIME:
+      case MediaListSort.UPDATED_TIME_DESC:
+        return MediaListSort.UPDATED_TIME;
+      case MediaListSort.$unknown:
+        return this;
+    }
+  }
+
+  MediaListSort withOrder({required bool descending}) {
+    switch (this) {
+      case MediaListSort.ADDED_TIME:
+      case MediaListSort.ADDED_TIME_DESC:
+        return descending
+            ? MediaListSort.ADDED_TIME_DESC
+            : MediaListSort.ADDED_TIME;
+      case MediaListSort.FINISHED_ON:
+      case MediaListSort.FINISHED_ON_DESC:
+        return descending
+            ? MediaListSort.FINISHED_ON_DESC
+            : MediaListSort.FINISHED_ON;
+      case MediaListSort.MEDIA_ID:
+      case MediaListSort.MEDIA_ID_DESC:
+        return descending
+            ? MediaListSort.MEDIA_ID_DESC
+            : MediaListSort.MEDIA_ID;
+      case MediaListSort.MEDIA_POPULARITY:
+      case MediaListSort.MEDIA_POPULARITY_DESC:
+        return descending
+            ? MediaListSort.MEDIA_POPULARITY_DESC
+            : MediaListSort.MEDIA_POPULARITY;
+      case MediaListSort.MEDIA_TITLE_ENGLISH:
+      case MediaListSort.MEDIA_TITLE_ENGLISH_DESC:
+        return descending
+            ? MediaListSort.MEDIA_TITLE_ENGLISH_DESC
+            : MediaListSort.MEDIA_TITLE_ENGLISH;
+      case MediaListSort.MEDIA_TITLE_NATIVE:
+      case MediaListSort.MEDIA_TITLE_NATIVE_DESC:
+        return descending
+            ? MediaListSort.MEDIA_TITLE_NATIVE_DESC
+            : MediaListSort.MEDIA_TITLE_NATIVE;
+      case MediaListSort.MEDIA_TITLE_ROMAJI:
+      case MediaListSort.MEDIA_TITLE_ROMAJI_DESC:
+        return descending
+            ? MediaListSort.MEDIA_TITLE_ROMAJI_DESC
+            : MediaListSort.MEDIA_TITLE_ROMAJI;
+      case MediaListSort.PRIORITY:
+      case MediaListSort.PRIORITY_DESC:
+        return descending
+            ? MediaListSort.PRIORITY_DESC
+            : MediaListSort.PRIORITY;
+      case MediaListSort.PROGRESS:
+      case MediaListSort.PROGRESS_DESC:
+        return descending
+            ? MediaListSort.PROGRESS_DESC
+            : MediaListSort.PROGRESS;
+      case MediaListSort.PROGRESS_VOLUMES:
+      case MediaListSort.PROGRESS_VOLUMES_DESC:
+        return descending
+            ? MediaListSort.PROGRESS_VOLUMES_DESC
+            : MediaListSort.PROGRESS_VOLUMES;
+      case MediaListSort.REPEAT:
+      case MediaListSort.REPEAT_DESC:
+        return descending ? MediaListSort.REPEAT_DESC : MediaListSort.REPEAT;
+      case MediaListSort.SCORE:
+      case MediaListSort.SCORE_DESC:
+        return descending ? MediaListSort.SCORE_DESC : MediaListSort.SCORE;
+      case MediaListSort.STARTED_ON:
+      case MediaListSort.STARTED_ON_DESC:
+        return descending
+            ? MediaListSort.STARTED_ON_DESC
+            : MediaListSort.STARTED_ON;
+      case MediaListSort.STATUS:
+      case MediaListSort.STATUS_DESC:
+        return descending ? MediaListSort.STATUS_DESC : MediaListSort.STATUS;
+      case MediaListSort.UPDATED_TIME:
+      case MediaListSort.UPDATED_TIME_DESC:
+        return descending
+            ? MediaListSort.UPDATED_TIME_DESC
+            : MediaListSort.UPDATED_TIME;
+      case MediaListSort.$unknown:
+        return this;
+    }
+  }
+}

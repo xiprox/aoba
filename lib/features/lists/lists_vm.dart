@@ -47,6 +47,7 @@ class ListsViewModel extends ViewModel with StreamSubscriptionManagerMixin {
   MediaType filterMediaType = MediaType.ANIME;
 
   late ListDisplayType optionDisplayType = _prefs.get().lists.displayType;
+  late MediaListSort optionSort = _prefs.get().lists.sort;
 
   int animeIndex = 0;
   int mangaIndex = 0;
@@ -63,6 +64,7 @@ class ListsViewModel extends ViewModel with StreamSubscriptionManagerMixin {
     data = await _repo.getData(
       userId: userId,
       type: filterMediaType,
+      sort: [optionSort],
       forceNetwork: forceNetwork,
     );
     notifyListeners();
@@ -115,6 +117,30 @@ class ListsViewModel extends ViewModel with StreamSubscriptionManagerMixin {
     _prefs.update((it) => it.lists.displayType = value);
     optionDisplayType = value;
     notifyListeners();
+  }
+
+  MediaListSort get titleSortOption {
+    final language = data.data?.user?.options?.titleLanguage;
+    switch (language) {
+      case UserTitleLanguage.ENGLISH:
+      case UserTitleLanguage.ENGLISH_STYLISED:
+        return MediaListSort.MEDIA_TITLE_ENGLISH;
+      case UserTitleLanguage.NATIVE:
+      case UserTitleLanguage.NATIVE_STYLISED:
+        return MediaListSort.MEDIA_TITLE_NATIVE;
+      case UserTitleLanguage.ROMAJI:
+      case UserTitleLanguage.ROMAJI_STYLISED:
+      default:
+        return MediaListSort.MEDIA_TITLE_ROMAJI;
+    }
+  }
+
+  void onOptionSortChange(MediaListSort value) {
+    _prefs.update((it) => it.lists.sort = value);
+    optionSort = value;
+    data = const Resource(loading: true);
+    notifyListeners();
+    fetch();
   }
 
   bool get canEditEntries => _isOwnLibrary;

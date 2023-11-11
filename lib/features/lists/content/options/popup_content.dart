@@ -3,6 +3,7 @@ import 'package:aoba/widgets/popup_on_position/popup_on_position_container.dart'
 import 'package:flutter/material.dart';
 
 import 'display_type_option.dart';
+import 'sort_option.dart';
 
 class ListsOptionsPopupContent extends StatelessWidget {
   static const kWidth = 240.0;
@@ -30,6 +31,12 @@ class ListsOptionsPopupContent extends StatelessWidget {
                   DisplayTypeOption(
                     value: vm.optionDisplayType,
                     onChange: vm.onOptionDisplayTypeChange,
+                  ),
+                  const SizedBox(height: 16),
+                  SortOption(
+                    titleSortOption: vm.titleSortOption,
+                    value: vm.optionSort,
+                    onChange: vm.onOptionSortChange,
                   ),
                   const SizedBox(height: 16),
                   Material(

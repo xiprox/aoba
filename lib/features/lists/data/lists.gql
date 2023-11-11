@@ -35,8 +35,8 @@ fragment mediaListEntry on MediaList {
   }
 }
 
-query FetchData($userId: Int, $type: MediaType) {
-  MediaListCollection(userId: $userId, sort: [SCORE_DESC], type: $type, forceSingleCompletedList: true) {
+query FetchData($userId: Int, $type: MediaType, $sort: [MediaListSort]) {
+  MediaListCollection(userId: $userId, sort: $sort, type: $type, forceSingleCompletedList: true) {
     lists {
       name
       isCustomList
@@ -47,6 +47,9 @@ query FetchData($userId: Int, $type: MediaType) {
     }
     user {
       name
+      options {
+        titleLanguage 
+      }
       mediaListOptions {
         scoreFormat
         rowOrder

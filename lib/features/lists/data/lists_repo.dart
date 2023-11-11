@@ -44,6 +44,7 @@ abstract class ListsRepo {
   Future<Resource<ListsData>> getData({
     required int userId,
     required MediaType type,
+    List<MediaListSort>? sort,
     bool forceNetwork,
   });
 }
@@ -53,6 +54,7 @@ class ListsRepoImpl implements ListsRepo {
   Future<Resource<ListsData>> getData({
     required int userId,
     required MediaType type,
+    List<MediaListSort>? sort,
     bool forceNetwork = false,
   }) async {
     final result = await GqlRequest.query(
@@ -61,6 +63,7 @@ class ListsRepoImpl implements ListsRepo {
         variables: {
           'userId': userId,
           'type': type.name,
+          'sort': sort?.map((it) => it.name).toList(),
         },
         fetchPolicy: forceNetwork
             ? FetchPolicy.networkOnly
